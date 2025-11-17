@@ -22,7 +22,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 
 public class Lobby extends JFrame {
-
+	//제발
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel titleTestLabel;
