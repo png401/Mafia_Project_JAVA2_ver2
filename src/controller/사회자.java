@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Player;
@@ -11,9 +13,11 @@ public class 사회자 {
 	private static 사회자 매니저;
 	
 	IState gameState = null;
-	RoleFactory roleFactory = null;
+	RoleFactory roleFactory = new RoleFactory();
 	
 	public List <Player> players = new ArrayList<>();
+	public Map<Integer, Player> playersById = new HashMap<>();
+	public Map<String, Player> playersByNickname = new HashMap<>();
 	public List <Player> ghosts = new ArrayList<>();
 	
 	public int dayCount=0;
@@ -27,17 +31,9 @@ public class 사회자 {
 		}
 		return 매니저;
 	}
-	
-	public int getKilledID() {
-		return killedID;
-	}
 
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;
-	}
-
-	public int getHealedID() {
-		return healedID;
 	}
 
 	public void setHealedID(int healedID) {
@@ -47,6 +43,20 @@ public class 사회자 {
 	private 사회자() {
 		매니저 = this;
 		roleFactory = new RoleFactory();
+	}
+	
+	public void addPlayer(Player p) {
+		players.add(p);
+		playersById.put(p.id, p);
+		playersByNickname.put(p.nickname, p);
+	}
+	
+	public Player getPlayerById(int id) {
+		return playersById.get(id);
+	}
+	
+	public Player getPlayerByNickname(String nickname) {
+		return playersByNickname.get(nickname);
 	}
 	
 	public void set_state(IState state) {
@@ -97,6 +107,7 @@ public class 사회자 {
 		return null;
 	}
 	
+	// 수정중~
 	public void start() {
 		init_game();
 		Scanner sc = new Scanner(System.in);
@@ -108,6 +119,7 @@ public class 사회자 {
 //        	
 //        	set_state(new 토론());
 //        	this.gameState.execute(매니저);
+//        	//Server.execute(Player player);
 //        	
 //        	set_state(new 투표());
 //        	this.gameState.execute(매니저);
