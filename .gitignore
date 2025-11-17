@@ -15,10 +15,8 @@ build/
 ### Java ###
 # Compiled class file
 *.class
-
-# Eclipse project files
-/.classpath
-.project
+*.project
+*.classpath
 
 # Log file
 *.log
