@@ -13,10 +13,6 @@ public class Player {
 		this.id = id;
 	}
 
-	public String getPlayer(int ID) {
-		return nickname;
-	}
-
 	public String getRole() {
 		return role;
 	}
