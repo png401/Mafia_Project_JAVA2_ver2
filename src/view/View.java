@@ -9,8 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import model.Player;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -30,9 +34,10 @@ public class View extends JFrame {
 	private JTextField skillField;
 	private JList playerList;
 	private JButton skillButton;
-	
-	private DefaultListModel<String> enteredPlayer;
 	private JLabel roleName;
+	
+	private DefaultListModel<String> enteredPlayer;	
+	public List <Player> players;
 
 	/**
 	 * Launch the application.
@@ -89,12 +94,12 @@ public class View extends JFrame {
 		
 		enterButton = new JButton("ENTER");
 		enterButton.setBounds(697, 508, 93, 21);
-		contentPane.add(enterButton);
-		
-		playerList = new JList<String>();
+		contentPane.add(enterButton);		
+		 
+		playerList = new JList<Player>();
 		playerList.setBounds(817, 10, 137, 323);
-		playerList.setVisibleRowCount(6);		
-				
+		playerList.setVisibleRowCount(6);
+						
 		DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
 		playerList.setCellRenderer(centerRenderer);
@@ -122,8 +127,14 @@ public class View extends JFrame {
 
 	}
 
-	public void setPlayers(DefaultListModel<String> enteredPlayer) {
+	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
 		this.enteredPlayer = enteredPlayer;
-		playerList.setModel(enteredPlayer);		
+			
 	}
+	
+	public void setPlayers(List <Player> players) {
+		this.players = players;
+		playerList.setModel((ListModel) players);	
+	}
+
 }

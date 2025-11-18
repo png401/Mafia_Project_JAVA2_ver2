@@ -34,6 +34,8 @@ public class Lobby extends JFrame {
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
 	
 	public boolean gameStart = false;
+	
+	private View view;
 
 	/**
 	 * Launch the application.
@@ -81,9 +83,9 @@ public class Lobby extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub	
 				gameStart = true;
-				View view = new View();
-				view.setVisible(true);
-				view.setPlayers(enteredPlayer);
+				setView(new View());
+				getView().setVisible(true);
+				getView().setPlayersModel(enteredPlayer);
 				dispose();
 				
 			}
@@ -135,7 +137,19 @@ public class Lobby extends JFrame {
 	}
 
 	public List<String> getEnteredPlayer() {
-		return (List<String>) enteredPlayer;
+		List<String> playerNicknames = null;
+		for (int i = 0; i < enteredPlayer.capacity(); i++) {
+			playerNicknames.add(enteredPlayer.get(i));
+		}
+		return playerNicknames;
+	}
+
+	public View getView() {
+		return view;
+	}
+
+	public void setView(View view) {
+		this.view = view;
 	}
 		
 }
