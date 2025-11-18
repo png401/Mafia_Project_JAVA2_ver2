@@ -10,10 +10,8 @@ import java.nio.charset.StandardCharsets;
 
 import model.Player;
 
-// 주 역할: 담당 클라이언트의 말을 듣고 networkBrain에게 전달
-// networkBrain가 메세지 보내라고 시키면 담당 클라이언트에게 채팅 보냄
 public class ServerThread extends Thread {
-	private Player player; // 각자 본인의 플레이어는 가지고 있게 바꿨습니다.
+	private Player player;
     private Socket socket;
     private CommandManager networkBrain;
     private PrintWriter pw;
@@ -37,18 +35,17 @@ public class ServerThread extends Thread {
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)) {
             this.pw = pw;
 
-            // networkBrain에게 새로운 클라이언트(나) 연결된 거 알리기
+            // 새로운 플레이어에게 닉네임을 받아오기
             networkBrain.handleNewConnection(this);
 
             String request="";
-            // 클라이언트 연결이 끊어지면 readLine()이 null 반환
             while ((request = bf.readLine()) != null) {
-            	networkBrain.processMessage(this, request); // 받은 메세지를 networkBrain에게 전달
+            	networkBrain.processMessage(this, request);
             }
         } catch (IOException e) {
         	log("클라이언트 연결 오류");
         } finally {
-        	networkBrain.handleDisconnect(this); // 클라이언트 연결 해제 시 networkBrain에게 알리기
+        	networkBrain.handleDisconnect(this); // 클라이언트 연결 해제 시 리스트에서 제거
         }
     }
 
@@ -60,11 +57,8 @@ public class ServerThread extends Thread {
             log("PrintWriter 초기화 안 됨");
         }
     }
-    
-    // networkBrain가 사용
-    // nickname 관련 메소드들 삭제.
 
     private void log(String log) {
-        System.out.println("[Thread " + this.threadId() + "] " + log);
+        System.out.println("[Thread " + this.getId() + "] " + log);
     }
 }
