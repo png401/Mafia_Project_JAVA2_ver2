@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Player;
@@ -11,9 +13,11 @@ public class 사회자 {
 	private static 사회자 매니저;
 	
 	IState gameState = null;
-	RoleFactory roleFactory = null;
+	RoleFactory roleFactory = new RoleFactory();
 	
 	public List <Player> players = new ArrayList<>();
+	public Map<Integer, Player> playersById = new HashMap<>();
+	public Map<String, Player> playersByNickname = new HashMap<>();
 	public List <Player> ghosts = new ArrayList<>();
 	
 	public int dayCount=0;
@@ -27,26 +31,23 @@ public class 사회자 {
 		}
 		return 매니저;
 	}
-	
-	public int getKilledID() {
-		return killedID;
-	}
-
-	public void setKilledID(int killedID) {
-		this.killedID = killedID;
-	}
-
-	public int getHealedID() {
-		return healedID;
-	}
-
-	public void setHealedID(int healedID) {
-		this.healedID = healedID;
-	}
 
 	private 사회자() {
 		매니저 = this;
-		roleFactory = new RoleFactory();
+	}
+	
+	public void addPlayer(Player p) {
+		players.add(p);
+		playersById.put(p.id, p);
+		playersByNickname.put(p.nickname, p);
+	}
+	
+	public Player getPlayerById(int id) {
+		return playersById.get(id);
+	}
+	
+	public Player getPlayerByNickname(String nickname) {
+		return playersByNickname.get(nickname);
 	}
 	
 	public void set_state(IState state) {
@@ -57,8 +58,21 @@ public class 사회자 {
 	}
 	
 	public void init_game() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=====마피아 게임 시작=====");
+		System.out.println("플레이어 수 입력: ");
+		int n = sc.nextInt();
+		sc.nextLine();
 		
-       
+		for(int i=0; i<n; i++) {
+			System.out.println((i+1)+"번 플레이어 닉네임: ");
+			String nickname = sc.nextLine();
+			
+			Player p = new Player(nickname, i+1);
+			addPlayer(p);
+		}
+		
+		roleFactory.randomRole(players);
 	}
 	
 	public void notifyAll(String message) {
@@ -101,23 +115,33 @@ public class 사회자 {
 		init_game();
 		Scanner sc = new Scanner(System.in);
 		
-//        while(true) {
-//        	set_state(new 밤());//처음 상태: 밤
-//        	this.gameState.execute(매니저);
-//        	checkEnd();
-//        	
-//        	set_state(new 토론());
-//        	this.gameState.execute(매니저);
-//        	
-//        	set_state(new 투표());
-//        	this.gameState.execute(매니저);
-//        	checkEnd();
-//        }
-        
-	}
-	
-	public IState getState() {
-		return gameState;
+        while(true) {
+        	this.set_state(new 밤());
+        	this.gameState.execute(매니저);
+        	checkEnd();
+        	
+        	//밤의 결과를 날릴 부분
+        	if(killedID == healedID) {
+        		System.out.println("[결과] 의사가 보호. 아무도 안 죽음.");
+        		return;
+        	}
+        	
+        	Player target = 매니저.getPlayerById(killedID);
+        	
+        	if(target != null && target.is_alive) {
+        		target.is_alive = false;
+        		매니저.ghosts.add(target);
+        		System.out.println("[결과] "+target.nickname+"이 사망함.");
+        	}
+        	
+        	this.set_state(new 토론());
+        	this.gameState.execute(매니저);
+        	//Server.execute(Player player);
+        	
+        	this.set_state(new 투표());
+        	this.gameState.execute(매니저);
+        	checkEnd();
+        }
 	}
 	
 }
