@@ -32,17 +32,8 @@ public class 사회자 {
 		return 매니저;
 	}
 
-	public void setKilledID(int killedID) {
-		this.killedID = killedID;
-	}
-
-	public void setHealedID(int healedID) {
-		this.healedID = healedID;
-	}
-
 	private 사회자() {
 		매니저 = this;
-		roleFactory = new RoleFactory();
 	}
 	
 	public void addPlayer(Player p) {
@@ -67,8 +58,21 @@ public class 사회자 {
 	}
 	
 	public void init_game() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("=====마피아 게임 시작=====");
+		System.out.println("플레이어 수 입력: ");
+		int n = sc.nextInt();
+		sc.nextLine();
 		
-       
+		for(int i=0; i<n; i++) {
+			System.out.println((i+1)+"번 플레이어 닉네임: ");
+			String nickname = sc.nextLine();
+			
+			Player p = new Player(nickname, i+1);
+			addPlayer(p);
+		}
+		
+		roleFactory.randomRole(players);
 	}
 	
 	public void notifyAll(String message) {
@@ -107,29 +111,37 @@ public class 사회자 {
 		return null;
 	}
 	
-	// 수정중~
 	public void start() {
 		init_game();
 		Scanner sc = new Scanner(System.in);
 		
-//        while(true) {
-//        	set_state(new 밤());//처음 상태: 밤
-//        	this.gameState.execute(매니저);
-//        	checkEnd();
-//        	
-//        	set_state(new 토론());
-//        	this.gameState.execute(매니저);
-//        	//Server.execute(Player player);
-//        	
-//        	set_state(new 투표());
-//        	this.gameState.execute(매니저);
-//        	checkEnd();
-//        }
-        
-	}
-	
-	public IState getState() {
-		return gameState;
+        while(true) {
+        	this.set_state(new 밤());
+        	this.gameState.execute(매니저);
+        	checkEnd();
+        	
+        	//밤의 결과를 날릴 부분
+        	if(killedID == healedID) {
+        		System.out.println("[결과] 의사가 보호. 아무도 안 죽음.");
+        		return;
+        	}
+        	
+        	Player target = 매니저.getPlayerById(killedID);
+        	
+        	if(target != null && target.is_alive) {
+        		target.is_alive = false;
+        		매니저.ghosts.add(target);
+        		System.out.println("[결과] "+target.nickname+"이 사망함.");
+        	}
+        	
+        	this.set_state(new 토론());
+        	this.gameState.execute(매니저);
+        	//Server.execute(Player player);
+        	
+        	this.set_state(new 투표());
+        	this.gameState.execute(매니저);
+        	checkEnd();
+        }
 	}
 	
 }
