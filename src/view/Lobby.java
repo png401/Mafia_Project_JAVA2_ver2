@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.ClientManager;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -36,6 +38,7 @@ public class Lobby extends JFrame {
 	public boolean gameStart = false;
 	
 	private View view;
+	ClientManager clientManager = new ClientManager();
 
 	/**
 	 * Launch the application.
@@ -86,6 +89,7 @@ public class Lobby extends JFrame {
 				setView(new View());
 				getView().setVisible(true);
 				getView().setPlayersModel(enteredPlayer);
+				clientManager.sendMessage("start");
 				dispose();
 				
 			}

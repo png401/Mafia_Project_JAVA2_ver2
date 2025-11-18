@@ -85,10 +85,10 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextField input = (JTextField) e.getSource(); //�Է� �޾Ƽ�
-				chatArea.append(input.getText() + '\n'); //chatArea�� ���̰�
-				chatArea.setCaretPosition(chatArea.getDocument().getLength()); //�� �Ʒ��� ��ũ��
-				input.setText(""); //inputField�� ����
+				JTextField input = (JTextField) e.getSource(); 
+				chatArea.append(input.getText() + '\n'); 
+				chatArea.setCaretPosition(chatArea.getDocument().getLength()); 
+				input.setText(""); 
 			}
 		}); 
 		

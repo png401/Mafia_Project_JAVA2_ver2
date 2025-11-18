@@ -70,6 +70,8 @@ public class 사회자 {
 		System.out.println("=====마피아 게임 시작=====");
 	
 		lobby = new Lobby();
+		
+		//여기부터는 start 메세지를 받은 후에 실행	
 		List<String> playersNickname = lobby.getEnteredPlayer();
 		
 		for (String nickname : playersNickname) {
@@ -78,7 +80,7 @@ public class 사회자 {
 		}
 		
 		roleFactory.randomRole(players);
-		
+			
 		view = lobby.getView();
 		view.setPlayers(players);
 		
