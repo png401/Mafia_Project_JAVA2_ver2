@@ -1,5 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows
+## IntelliJ
+.iml
+
 
 ### Java ###
 # Compiled class file
