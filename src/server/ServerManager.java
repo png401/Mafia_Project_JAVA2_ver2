@@ -22,6 +22,7 @@ public class ServerManager {
 			serverSocket = new ServerSocket();
 
 			String hostAddress = InetAddress.getLocalHost().getHostAddress(); // 이건 서버의 주소
+			System.out.println("server의 addr: "+hostAddress);
 			serverSocket.bind(new InetSocketAddress(hostAddress, PORT));
 			consoleLog(hostAddress + ":" + PORT); // 서버 주소,포트번호 출력
 

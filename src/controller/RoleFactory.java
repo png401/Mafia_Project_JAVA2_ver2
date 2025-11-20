@@ -28,33 +28,33 @@ public class RoleFactory {
 		//의사, 경찰 1로 고정, 마피아는 4-1, 5-2, 6-2
 		List <String> roles = new ArrayList<>();
 		int n = players.size();
-		
+
 		//n나누기3 반올림하면 마피아수
 		int numMafia = (int)Math.round(n/3.0);
-		
+
 		for(int i=0; i<numMafia; i++) {
 			roles.add("마피아");
 		}
-		
+
 		roles.add("의사");
 		roles.add("경찰");
-		
+
 		//나머지 시민
 		int numCitizen = n - roles.size();
 		for(int i=0; i<numCitizen; i++) {
 			roles.add("시민");
 		}
-		
+
 		//직업 랜덤 섞기
 		//역할 리스트 roles를 완전히 뒤섞음. 피셔-예이츠 알고리즘?
 		Collections.shuffle(roles);
-		
+
 		//플레이어들에게 역할 배정 스킬 배정
 		for(int i=0; i<n; i++) {
 			Player p = players.get(i);
 			String role = roles.get(i);//섞인 역할 배분
 			p.setRole(role);
-			
+
 			switch(role) {
 			case "마피아":
 				p.skill = new Kill();
@@ -68,9 +68,9 @@ public class RoleFactory {
 			default:
 				p.skill = null;
 			}
-			
-		}		
-		
+
+		}
+
 	}
-	
+
 }
