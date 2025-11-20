@@ -3,9 +3,9 @@ package model;
 public class Inspect implements ISkill{
 
 	@Override
-	public int skill(int id) {
+	public void skill(Player self, int targetId) {
 		// TODO Auto-generated method stub
-		return 0;
+		self.setNightTargetId(targetId);
 	}
 
 }

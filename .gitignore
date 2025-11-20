@@ -1,22 +1,16 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows
-
-### IntelliJ ###
-# IntelliJ project files
+# IntelliJ
 .idea/
 *.iml
-out/
 
-### Gradle ###
-# Gradle build output and cache
-.gradle/
-build/
 
-### Java ###
+### Java #
 # Compiled class file
+bin/
 *.class
-*.project
-*.classpath
+/.classpath
+.project
 
 # Log file
 *.log

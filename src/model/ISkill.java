@@ -1,7 +1,9 @@
 package model;
 
+import controller.밤;
+
 public interface ISkill {
 	
 	
-	public int skill(int id);
+	public void skill(Player self, int targetId);
 }

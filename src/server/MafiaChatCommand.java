@@ -17,7 +17,7 @@ public class MafiaChatCommand implements ICommand{
 		// TODO Auto-generated method stub
 		// 밤 상태에만 채팅 가능
 		if(currentState instanceof 밤) {			
-			if(sender.getPlayer().getRole().equals("MIFIA")) {
+			if(sender.getPlayer().getRole().equals("MAFIA")) {
 				networkBrain.broadcastToMafia(sender.getPlayer().nickname + ": " + payload);
 			}
 		}

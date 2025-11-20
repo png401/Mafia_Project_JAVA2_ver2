@@ -2,10 +2,10 @@ package model;
 
 public class Heal implements ISkill{
 
-	@Override
-	public int skill(int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+@Override
+public void skill(Player self, int targetId) {
+	// TODO Auto-generated method stub
+	self.setNightTargetId(targetId);
+}
 	
 }

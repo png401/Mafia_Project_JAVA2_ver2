@@ -1,4 +1,5 @@
 package view;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,10 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import model.Player;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.SwingConstants;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class View extends JFrame {
 
@@ -24,12 +34,16 @@ public class View extends JFrame {
 	private JTextField skillField;
 	private JList playerList;
 	private JButton skillButton;
-	
-	//List<Player> players;
+	private JLabel roleName;
+	private JLabel roleImage;
+
+	private DefaultListModel<String> enteredPlayer;
+	public List <Player> players;
 
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,13 +55,12 @@ public class View extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
 	public View() {
-		//this.players = players;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
@@ -73,19 +86,25 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextField input = (JTextField) e.getSource(); //�Է� �޾Ƽ�
-				chatArea.append(input.getText() + '\n'); //chatArea�� ���̰�
-				chatArea.setCaretPosition(chatArea.getDocument().getLength()); //�� �Ʒ��� ��ũ��
-				input.setText(""); //inputField�� ����
+				JTextField input = (JTextField) e.getSource();
+				chatArea.append(input.getText() + '\n');
+				chatArea.setCaretPosition(chatArea.getDocument().getLength());
+				input.setText("");
 			}
 		}); 
 		
 		enterButton = new JButton("ENTER");
 		enterButton.setBounds(697, 508, 93, 21);
 		contentPane.add(enterButton);
+
+		playerList = new JList<Player>();
+		playerList.setBounds(817, 10, 137, 323);
+		playerList.setVisibleRowCount(6);
+
+		DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
+		playerList.setCellRenderer(centerRenderer);
 		
-		playerList = new JList();
-		playerList.setBounds(817, 10, 137, 481);
 		contentPane.add(playerList);
 		
 		skillField = new JTextField();
@@ -96,6 +115,29 @@ public class View extends JFrame {
 		skillButton = new JButton("skill name");
 		skillButton.setBounds(906, 508, 48, 21);
 		contentPane.add(skillButton);
+	}
+
+	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
+		this.enteredPlayer = enteredPlayer;
 
 	}
+
+	public void setPlayers(List <Player> players) {
+		this.players = players;
+		playerList.setModel((ListModel) players);
+	}
+
+	//사용자의 role에 따라 다르게 나와야함
+	public void setRoleView(String role) {
+		roleImage = new JLabel();
+		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/" + role + ".png")));
+		roleImage.setBounds(817, 343, 127, 127);
+		contentPane.add(roleImage);
+
+		roleName = new JLabel(role);
+		roleName.setHorizontalAlignment(JLabel.CENTER);
+		roleName.setBounds(817, 480, 127, 15);
+		contentPane.add(roleName);
+	}
+
 }

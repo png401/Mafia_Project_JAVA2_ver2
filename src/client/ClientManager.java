@@ -1,64 +1,63 @@
 package client;
-import java.io.IOException;
 
-//뷰와 클라이언트 사이의 중재자 역할
+import java.io.IOException;
+import view.Lobby;
+
 public class ClientManager {
 
     private ClientThread clientThread;
-    // 뷰를 업데이트할 수 있도록 하는 기능이 필요함.
-    public ClientManager() {
-        // this.view = view;
-    }
+    private Lobby lobby;
 
-    //서버 연결 시도하기
-    public void connect(String host, int port) {
+    public ClientManager() {
+        // 서버 연결
         try {
-            this.clientThread = new ClientThread(host, port, this);
-            this.clientThread.start();
+            clientThread = new ClientThread("10.20.107.60", 50023, this);
+            clientThread.start();
         } catch (IOException e) {
-            // 뷰에 연결 실패 메세지도 필요할까요?
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
 
-    //뷰에서 받은 메세지(스킬 사용, 투표 등)을 서버에 전달
+    // 로비 생성 시 자신의 로비와 연결
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
+
+
+    // 서버로 메세지 전송
     public void sendMessage(String message) {
         if (clientThread != null) {
             clientThread.sendMessage(message);
         } else {
-        	//뷰에도 표시?
             System.err.println("서버에 연결되지 않았습니다.");
         }
     }
 
-    //InputThread가 서버로부터 메세지 수신 시...
+    // 서버에게서 받은 메세지 처리
     public void handleMessage(String message) {
-        // TODO: 서버와 약속된 프로토콜에 따라 메시지를 파싱해야 합니다.
-        // (예: "CHAT:P1:안녕하세요", "NOTICE:밤이 되었습니다", "VOTE_RESULT:P3")
+        System.out.println("[Client 수신]: " + message);
 
-        System.out.println("서버로부터 메시지 수신: " + message);
+        if (lobby == null) return;
 
-        // --- View 업데이트 예시 ---
-        // if (message.startsWith("CHAT:")) {
-        //     String[] parts = message.split(":", 3);
-        //     view.appendChatMessage(parts[1], parts[2]); // (보낸사람, 메시지)
-        // } else if (message.startsWith("NOTICE:")) {
-        //     String notice = message.substring(7);
-        //     view.showNotice(notice); // 공지사항 표시
-        // } else if (message.startsWith("GAME_START:")) {
-        //     String role = message.split(":")[1];
-        //     view.showRole(role); // 직업 표시
-        // } else if (message.startsWith("PLAYER_DIED:")) {
-        //     String playerName = message.split(":")[1];
-        //     view.updatePlayerListAsDead(playerName); // 사망 처리
-        // }
-        // ... 기타 등등 (투표 결과, 스킬 결과, 게임 종료 등)
+        // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
+        if (message.startsWith("Join:")) {
+            String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
+            // 로비 화면의 리스트에 닉네임 추가
+            lobby.newPlayerEntered(nickname);
+        }
+        // Case 2: 게임 시작 (서버가 "Start:"를 보냄)
+        else if (message.startsWith("Start:")) {
+            // 로비 화면을 게임 화면으로 전환
+            lobby.start();
+        }
+        // Case 3: 채팅 메시지 등 그 외 처리
+        else {
+            // 예: lobby.appendChat(message); 와 같이 구현 가능
+        }
     }
 
-    //서버 연결 종료 시? 혹은 죽었을 때? 아예 채팅도 못 치게?
+    // 연결 종료 시 처리
     public void onDisconnected() {
-        // 서버 연결 끊겼다고 뷰에도 표시하기
-    	// 뷰 버튼 비활성화하기 해야 함!
-        System.err.println("서버와 연결이 끊겼습니다.");
+        System.out.println("서버와의 연결이 종료되었습니다.");
     }
 }
