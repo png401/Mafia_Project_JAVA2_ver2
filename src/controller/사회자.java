@@ -72,6 +72,7 @@ public class 사회자 {
 		return newPlayer;
 	}
 	
+	//Start 받으면
 	public void init_game() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("=====마피아 게임 시작=====");
@@ -88,13 +89,8 @@ public class 사회자 {
 		}
 
 		System.out.println("=====마피아 게임 시작=====");		
-		
-		//여기부터는 start 메세지를 받은 후에 실행			
+			
 		roleFactory.randomRole(players);
-
-		view = lobby.getView();
-		view.setPlayers(players);
-
 	}
 	
 	public void notifyAll(String message) {
