@@ -34,16 +34,16 @@ public class RoleFactory {
 		int numMafia = (int)Math.round(n/3.0);
 
 		for(int i=0; i<numMafia; i++) {
-			roles.add("마피아");			
+			roles.add("mafia");			
 		}
 
-		roles.add("의사");
-		roles.add("경찰");
+		roles.add("doctor");
+		roles.add("police");
 
 		//나머지 시민
 		int numCitizen = n - roles.size();
 		for(int i=0; i<numCitizen; i++) {
-			roles.add("시민");
+			roles.add("citizen");
 		}
 
 		//직업 랜덤 섞기
@@ -57,13 +57,13 @@ public class RoleFactory {
 			p.setRole(role);
 
 			switch(role) {
-			case "마피아":
+			case "mafia":
 				p.skill = new Kill();
 				break;
-			case "의사":
+			case "doctor":
 				p.skill = new Heal();
 				break;
-			case "경찰":
+			case "police":
 				p.skill = new Inspect();
 				break;
 			default:

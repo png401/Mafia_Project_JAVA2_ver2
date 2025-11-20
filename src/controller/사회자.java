@@ -17,7 +17,7 @@ public class 사회자 {
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
 	
-	public List<Lobby> lobbyList;
+	public List<Lobby> lobbyList = new ArrayList<>() ;
 	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
@@ -81,15 +81,18 @@ public class 사회자 {
 			
 		roleFactory.randomRole(players);
 		for (Player player : players) {
-			for (Lobby lobby : lobbyList) {
-				if(lobby.getClientManager().getMyName() == player.nickname) {
+			//System.out.println(player.role);
+		}
+		
+		for (Player player : players) {
+			for (Lobby lobby : lobbyList) {				
+				if(lobby.getClientManager().getMyName().equals(player.nickname)){
 					lobby.getView().setRoleView(player.getRole());
+					System.out.println("직업 배정 완료");
 				}
 				
 			}
-		}
-		//각 클라이언트들에게 player 객체를 mapping 해줘야함
-		
+		}		
 	}
 	
 	public void notifyAll(String message) {
