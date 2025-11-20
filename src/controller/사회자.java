@@ -65,20 +65,17 @@ public class 사회자 {
 		System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
 		}
 	}
+		
+	public Player createNewPlayer(String nickname) {
+		Player newPlayer = roleFactory.createPlayer(nickname, players.size()+1);
+		addPlayer(newPlayer);
+		return newPlayer;
+	}
 	
 	public void init_game() {
-		System.out.println("=====마피아 게임 시작=====");
-
-		lobby = new Lobby();
+		System.out.println("=====마피아 게임 시작=====");		
 		
-		//여기부터는 start 메세지를 받은 후에 실행
-		List<String> playersNickname = lobby.getEnteredPlayer();
-
-		for (String nickname : playersNickname) {
-			Player p = new Player(nickname, playersNickname.indexOf(nickname)+1);
-			addPlayer(p);
-		}
-		
+		//여기부터는 start 메세지를 받은 후에 실행			
 		roleFactory.randomRole(players);
 
 		view = lobby.getView();
