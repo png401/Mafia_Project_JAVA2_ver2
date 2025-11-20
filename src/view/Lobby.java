@@ -89,7 +89,7 @@ public class Lobby extends JFrame {
 				setView(new View());
 				getView().setVisible(true);
 				getView().setPlayersModel(enteredPlayer);
-				clientManager.sendMessage("start");
+				clientManager.sendMessage("start"); //시작 메세지 전송
 				dispose();
 				
 			}
