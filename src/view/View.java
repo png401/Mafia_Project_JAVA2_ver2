@@ -9,8 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import model.Player;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -30,9 +34,11 @@ public class View extends JFrame {
 	private JTextField skillField;
 	private JList playerList;
 	private JButton skillButton;
-	
-	private DefaultListModel<String> enteredPlayer;
 	private JLabel roleName;
+	private JLabel roleImage;
+	
+	private DefaultListModel<String> enteredPlayer;	
+	public List <Player> players;
 
 	/**
 	 * Launch the application.
@@ -80,21 +86,21 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextField input = (JTextField) e.getSource(); //�Է� �޾Ƽ�
-				chatArea.append(input.getText() + '\n'); //chatArea�� ���̰�
-				chatArea.setCaretPosition(chatArea.getDocument().getLength()); //�� �Ʒ��� ��ũ��
-				input.setText(""); //inputField�� ����
+				JTextField input = (JTextField) e.getSource(); 
+				chatArea.append(input.getText() + '\n'); 
+				chatArea.setCaretPosition(chatArea.getDocument().getLength()); 
+				input.setText(""); 
 			}
 		}); 
 		
 		enterButton = new JButton("ENTER");
 		enterButton.setBounds(697, 508, 93, 21);
-		contentPane.add(enterButton);
-		
-		playerList = new JList<String>();
+		contentPane.add(enterButton);		
+		 
+		playerList = new JList<Player>();
 		playerList.setBounds(817, 10, 137, 323);
-		playerList.setVisibleRowCount(6);		
-				
+		playerList.setVisibleRowCount(6);
+						
 		DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
 		playerList.setCellRenderer(centerRenderer);
@@ -108,22 +114,30 @@ public class View extends JFrame {
 		
 		skillButton = new JButton("skill name");
 		skillButton.setBounds(906, 508, 48, 21);
-		contentPane.add(skillButton);
-		
-		JLabel roleImage = new JLabel("New label");
-		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/mafia.png")));
+		contentPane.add(skillButton);	
+	}
+
+	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
+		this.enteredPlayer = enteredPlayer;
+			
+	}
+	
+	public void setPlayers(List <Player> players) {
+		this.players = players;
+		playerList.setModel((ListModel) players);	
+	}
+	
+	//사용자의 role에 따라 다르게 나와야함 
+	public void setRoleView(String role) {
+		roleImage = new JLabel();		
+		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/" + role + ".png")));
 		roleImage.setBounds(817, 343, 127, 127);
 		contentPane.add(roleImage);
 		
-		roleName = new JLabel("Mafia");
+		roleName = new JLabel(role);
 		roleName.setHorizontalAlignment(JLabel.CENTER);
 		roleName.setBounds(817, 480, 127, 15);
 		contentPane.add(roleName);
-
 	}
-
-	public void setPlayers(DefaultListModel<String> enteredPlayer) {
-		this.enteredPlayer = enteredPlayer;
-		playerList.setModel(enteredPlayer);		
-	}
+	
 }

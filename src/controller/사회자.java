@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import model.Player;
+import view.Lobby;
+import view.View;
 
 public class 사회자 {
 	//사회자 객체 하나만 있어야 되니까 싱글톤 생성해봤음
@@ -15,6 +17,9 @@ public class 사회자 {
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
 	
+	Lobby lobby;
+	View view;
+
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
 	public Map<String, Player> playersByNickname = new HashMap<>();
@@ -32,7 +37,7 @@ public class 사회자 {
 		return 매니저;
 	}
 
-	private 사회자() {
+	public 사회자() {
 		매니저 = this;
 	}
 	
@@ -49,7 +54,11 @@ public class 사회자 {
 	public Player getPlayerByNickname(String nickname) {
 		return playersByNickname.get(nickname);
 	}
-	
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
 	public void set_state(IState state) {
 		this.gameState = state;
 		if(state!=null) {
@@ -58,21 +67,23 @@ public class 사회자 {
 	}
 	
 	public void init_game() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("=====마피아 게임 시작=====");
-		System.out.println("플레이어 수 입력: ");
-		int n = sc.nextInt();
-		sc.nextLine();
+
+		lobby = new Lobby();
 		
-		for(int i=0; i<n; i++) {
-			System.out.println((i+1)+"번 플레이어 닉네임: ");
-			String nickname = sc.nextLine();
-			
-			Player p = new Player(nickname, i+1);
+		//여기부터는 start 메세지를 받은 후에 실행
+		List<String> playersNickname = lobby.getEnteredPlayer();
+
+		for (String nickname : playersNickname) {
+			Player p = new Player(nickname, playersNickname.indexOf(nickname)+1);
 			addPlayer(p);
 		}
 		
 		roleFactory.randomRole(players);
+
+		view = lobby.getView();
+		view.setPlayers(players);
+
 	}
 	
 	public void notifyAll(String message) {
@@ -143,7 +154,12 @@ public class 사회자 {
         	checkEnd();
         }
 	}
-	
+
+	public IState getState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 	
