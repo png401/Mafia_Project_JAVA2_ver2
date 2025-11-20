@@ -57,8 +57,8 @@ public class CommandManager {
         if (command != null) {
             command.execute(sender, payload, logicBrain.getState());
         } else {
-            // Join, Message, Mafia_message가 아닌 Start 명령어일 시
-            // 모든 클라이언트에게 게임이 시작되었다고 알려주기.
+            // Start 명령어일 시 모든 클라이언트에게 게임이 시작되었다고 알려주기.
+            logicBrain.init_game();
             broadcastAll("Start:");
         }
     }
