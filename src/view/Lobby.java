@@ -37,8 +37,7 @@ public class Lobby extends JFrame {
 			
 	private View view;
 	ClientManager clientManager = new ClientManager();
-	clientManager.connect("10.20.107.60", 50023);
-
+	
 	/**
 	 * Launch the application.
 	 */
