@@ -8,18 +8,16 @@ public class ClientManager {
     // 뷰를 업데이트할 수 있도록 하는 기능이 필요함.
     public ClientManager() {
         // this.view = view;
-    }
-
-    //서버 연결 시도하기
-    public void connect(String host, int port) {
-        try {
-            this.clientThread = new ClientThread(host, port, this);
+    	try {
+            this.clientThread = new ClientThread("10.20.107.60", 50023, this);
             this.clientThread.start();
         } catch (IOException e) {
             // 뷰에 연결 실패 메세지도 필요할까요?
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
+
+    
 
     //뷰에서 받은 메세지(스킬 사용, 투표 등)을 서버에 전달
     public void sendMessage(String message) {

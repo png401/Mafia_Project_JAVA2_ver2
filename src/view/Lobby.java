@@ -37,11 +37,12 @@ public class Lobby extends JFrame {
 			
 	private View view;
 	ClientManager clientManager = new ClientManager();
+	clientManager.connect("10.20.107.60", 50023);
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,7 +53,7 @@ public class Lobby extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -130,16 +131,9 @@ public class Lobby extends JFrame {
 		noticeTextLabel.setBounds(359, 158, 112, 15);
 		contentPane.add(noticeTextLabel);
 
-	}
-
-	public List<String> getEnteredPlayer() {
-		List<String> playerNicknames = null;
-		for (int i = 0; i < enteredPlayer.capacity(); i++) {
-			playerNicknames.add(enteredPlayer.get(i));
-		}
-		return playerNicknames;
-	}
-
+	}	
+	
+	//view getter setter는 왜 있는거임? 
 	public View getView() {
 		return view;
 	}
@@ -163,8 +157,5 @@ public class Lobby extends JFrame {
 		getView().setVisible(true);				
 		dispose();
 	}		
-	
-	
-		
-		
+			
 }
