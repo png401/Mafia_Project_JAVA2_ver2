@@ -9,6 +9,7 @@ public class Test {
 		lobby.setVisible(true);
 		
 		사회자 사회자 = new 사회자();
+		사회자.setLobby(lobby);
 	}
 
 }
