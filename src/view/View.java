@@ -35,6 +35,7 @@ public class View extends JFrame {
 	private JList playerList;
 	private JButton skillButton;
 	private JLabel roleName;
+	private JLabel roleImage;
 	
 	private DefaultListModel<String> enteredPlayer;	
 	public List <Player> players;
@@ -113,18 +114,7 @@ public class View extends JFrame {
 		
 		skillButton = new JButton("skill name");
 		skillButton.setBounds(906, 508, 48, 21);
-		contentPane.add(skillButton);
-		
-		JLabel roleImage = new JLabel("New label");
-		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/mafia.png")));
-		roleImage.setBounds(817, 343, 127, 127);
-		contentPane.add(roleImage);
-		
-		roleName = new JLabel("Mafia");
-		roleName.setHorizontalAlignment(JLabel.CENTER);
-		roleName.setBounds(817, 480, 127, 15);
-		contentPane.add(roleName);
-
+		contentPane.add(skillButton);	
 	}
 
 	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
@@ -136,5 +126,18 @@ public class View extends JFrame {
 		this.players = players;
 		playerList.setModel((ListModel) players);	
 	}
-
+	
+	//사용자의 role에 따라 다르게 나와야함 
+	public void setRoleView(String role) {
+		roleImage = new JLabel();		
+		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/" + role + ".png")));
+		roleImage.setBounds(817, 343, 127, 127);
+		contentPane.add(roleImage);
+		
+		roleName = new JLabel(role);
+		roleName.setHorizontalAlignment(JLabel.CENTER);
+		roleName.setBounds(817, 480, 127, 15);
+		contentPane.add(roleName);
+	}
+	
 }
