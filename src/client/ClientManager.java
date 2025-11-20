@@ -7,6 +7,11 @@ public class ClientManager {
 
     private ClientThread clientThread;
     private Lobby lobby;
+    
+    public ClientManager(Lobby lobby) {
+    	this();
+    	this.lobby = lobby;
+    }
 
     public ClientManager() {
         // 서버 연결
@@ -37,13 +42,14 @@ public class ClientManager {
     public void handleMessage(String message) {
         System.out.println("[Client 수신]: " + message);
 
-        if (lobby == null) return;
+        //if (lobby == null) return;
 
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
         if (message.startsWith("Join:")) {
             String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
             // 로비 화면의 리스트에 닉네임 추가
             lobby.newPlayerEntered(nickname);
+            System.out.println("view 함수 호출");
         }
         // Case 2: 게임 시작 (서버가 "Start:"를 보냄)
         else if (message.startsWith("Start:")) {
