@@ -69,10 +69,7 @@ public class RoleFactory {
 				p.skill = null;
 			}
 			
-		}
-		
-		
-		
+		}		
 		
 	}
 	
