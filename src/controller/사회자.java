@@ -9,8 +9,6 @@ import java.util.Scanner;
 import model.Player;
 
 public class 사회자 {
-	//사회자 객체 하나만 있어야 되니까 싱글톤 생성해봤음
-	private static 사회자 매니저;
 	
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
@@ -21,20 +19,6 @@ public class 사회자 {
 	public List <Player> ghosts = new ArrayList<>();
 	
 	public int dayCount=0;
-	
-	private int killedID=0;
-	private int healedID=0;
-	
-	public static 사회자 getInstance() {
-		if(매니저 == null) {
-			매니저 = new 사회자();
-		}
-		return 매니저;
-	}
-
-	private 사회자() {
-		매니저 = this;
-	}
 	
 	public void addPlayer(Player p) {
 		players.add(p);
@@ -116,30 +100,16 @@ public class 사회자 {
 		Scanner sc = new Scanner(System.in);
 		
         while(true) {
-        	this.set_state(new 밤());
-        	this.gameState.execute(매니저);
+        	set_state(new 밤());
+        	gameState.execute(this);
         	checkEnd();
         	
-        	//밤의 결과를 날릴 부분
-        	if(killedID == healedID) {
-        		System.out.println("[결과] 의사가 보호. 아무도 안 죽음.");
-        		return;
-        	}
-        	
-        	Player target = 매니저.getPlayerById(killedID);
-        	
-        	if(target != null && target.is_alive) {
-        		target.is_alive = false;
-        		매니저.ghosts.add(target);
-        		System.out.println("[결과] "+target.nickname+"이 사망함.");
-        	}
-        	
-        	this.set_state(new 토론());
-        	this.gameState.execute(매니저);
+        	set_state(new 토론());
+        	gameState.execute(this);
         	//Server.execute(Player player);
         	
-        	this.set_state(new 투표());
-        	this.gameState.execute(매니저);
+        	set_state(new 투표());
+        	gameState.execute(this);
         	checkEnd();
         }
 	}

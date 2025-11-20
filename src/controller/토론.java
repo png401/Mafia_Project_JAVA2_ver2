@@ -1,17 +1,16 @@
 package controller;
 
 public class 토론 implements IState{
-
+	
 	@Override
 	public void limitTime(int time) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void execute(사회자 manager) {
+	public void execute(사회자 매니저) {
 		System.out.println("\n==============================");
-        System.out.println("DAY " + manager.dayCount + " - 낮 / 토론");
+        System.out.println("DAY " + 매니저.dayCount + " - 낮 / 토론");
         System.out.println("==============================");
 
         // TODO: 실제로는 소켓 채팅 or 콘솔 입력 등
