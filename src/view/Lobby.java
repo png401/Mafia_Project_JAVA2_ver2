@@ -34,9 +34,7 @@ public class Lobby extends JFrame {
 	private JLabel noticeTextLabel;
 	
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
-	
-	public boolean gameStart = false;
-	
+			
 	private View view;
 	ClientManager clientManager = new ClientManager();
 
@@ -79,17 +77,15 @@ public class Lobby extends JFrame {
 		contentPane.add(startButton);
 		startButton.setEnabled(false);
 		
-		//시작하기 버튼 누르면 View 띄우고 Lobby는 닫기
+		//시작하기 버튼 누르면
 		startButton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub	
-				gameStart = true;
+			public void actionPerformed(ActionEvent e) {				
+				//Start 시퀀스 시작
+				clientManager.sendMessage("Start:"); 
 				setView(new View());
-				getView().setVisible(true);
-				getView().setPlayersModel(enteredPlayer);
-				clientManager.sendMessage("start");
+				getView().setVisible(true);				
 				dispose();
 				
 			}
@@ -121,16 +117,12 @@ public class Lobby extends JFrame {
 		//닉네임 입력받기
 		nicknameInputField.addActionListener(new ActionListener() { 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			public void actionPerformed(ActionEvent e) {				
 				JTextField nicknameField = (JTextField) e.getSource(); 	
-				String nickname = nicknameField.getText();				
-				enteredPlayer.addElement(nickname);
+				String nickname = nicknameField.getText();
 				nicknameField.setText("");
-				
-				if(enteredPlayer.getSize() >= 4) {
-					startButton.setEnabled(true);
-				}						
+				//Join 시퀀스 시작 
+				clientManager.sendMessage("Join:" + nickname);						
 			}
 		});
 				
@@ -155,5 +147,24 @@ public class Lobby extends JFrame {
 	public void setView(View view) {
 		this.view = view;
 	}
+	
+	//Join 시퀀스의 끝
+	public void newPlayerEntered(String nickname) {
+		enteredPlayer.addElement(nickname);
+		
+		if(enteredPlayer.getSize() >= 4) {
+			startButton.setEnabled(true);
+		}
+	}
+	
+	//Start 시퀀스의 끝
+	public void start() {
+		setView(new View());
+		getView().setVisible(true);				
+		dispose();
+	}		
+	
+	
+		
 		
 }

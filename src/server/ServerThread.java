@@ -35,7 +35,7 @@ public class ServerThread extends Thread {
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true)) {
             this.pw = pw;
 
-            // 새로운 플레이어에게 닉네임을 받아오기
+            // 새로운 플레이어의 스레드를 등록
             networkBrain.handleNewConnection(this);
 
             String request="";
