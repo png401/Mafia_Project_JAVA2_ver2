@@ -41,7 +41,7 @@ public class View extends JFrame {
 	public List <Player> players;
 
 	/**
-	 * Launch the application.
+	 * Lobby에서 View를 만들 예정
 	 */
 	/*
 	public static void main(String[] args) {
