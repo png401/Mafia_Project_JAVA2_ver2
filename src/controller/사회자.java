@@ -73,7 +73,6 @@ public class 사회자 {
 	}
 	
 	public void init_game() {
-<<<<<<< HEAD
 		Scanner sc = new Scanner(System.in);
 		System.out.println("=====마피아 게임 시작=====");
 		System.out.print("플레이어 수 입력: ");
@@ -87,9 +86,8 @@ public class 사회자 {
 			Player p = new Player(nickname, i+1);
 			addPlayer(p);
 		}
-=======
+
 		System.out.println("=====마피아 게임 시작=====");		
->>>>>>> a212138d3e48ab4dbb2cde51b13f68abb3347343
 		
 		//여기부터는 start 메세지를 받은 후에 실행			
 		roleFactory.randomRole(players);
@@ -169,20 +167,12 @@ public class 사회자 {
         	dayCount++;
         }
 	}
-<<<<<<< HEAD
-	
+
 	public IState getState() {
 		return gameState;
 	}
 	
-=======
 
-	public IState getState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
->>>>>>> a212138d3e48ab4dbb2cde51b13f68abb3347343
 }
 
 	
