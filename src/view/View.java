@@ -36,8 +36,8 @@ public class View extends JFrame {
 	private JButton skillButton;
 	private JLabel roleName;
 	private JLabel roleImage;
-	
-	private DefaultListModel<String> enteredPlayer;	
+
+	private DefaultListModel<String> enteredPlayer;
 	public List <Player> players;
 
 	/**
@@ -59,8 +59,8 @@ public class View extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */	
-	public View() {		
+	 */
+	public View() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
@@ -86,21 +86,21 @@ public class View extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextField input = (JTextField) e.getSource(); 
-				chatArea.append(input.getText() + '\n'); 
-				chatArea.setCaretPosition(chatArea.getDocument().getLength()); 
-				input.setText(""); 
+				JTextField input = (JTextField) e.getSource();
+				chatArea.append(input.getText() + '\n');
+				chatArea.setCaretPosition(chatArea.getDocument().getLength());
+				input.setText("");
 			}
 		}); 
 		
 		enterButton = new JButton("ENTER");
 		enterButton.setBounds(697, 508, 93, 21);
-		contentPane.add(enterButton);		
-		 
+		contentPane.add(enterButton);
+
 		playerList = new JList<Player>();
 		playerList.setBounds(817, 10, 137, 323);
 		playerList.setVisibleRowCount(6);
-						
+
 		DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
 		playerList.setCellRenderer(centerRenderer);
@@ -114,30 +114,30 @@ public class View extends JFrame {
 		
 		skillButton = new JButton("skill name");
 		skillButton.setBounds(906, 508, 48, 21);
-		contentPane.add(skillButton);	
+		contentPane.add(skillButton);
 	}
 
 	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
 		this.enteredPlayer = enteredPlayer;
-			
+
 	}
-	
+
 	public void setPlayers(List <Player> players) {
 		this.players = players;
-		playerList.setModel((ListModel) players);	
+		playerList.setModel((ListModel) players);
 	}
-	
-	//사용자의 role에 따라 다르게 나와야함 
+
+	//사용자의 role에 따라 다르게 나와야함
 	public void setRoleView(String role) {
-		roleImage = new JLabel();		
+		roleImage = new JLabel();
 		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/" + role + ".png")));
 		roleImage.setBounds(817, 343, 127, 127);
 		contentPane.add(roleImage);
-		
+
 		roleName = new JLabel(role);
 		roleName.setHorizontalAlignment(JLabel.CENTER);
 		roleName.setBounds(817, 480, 127, 15);
 		contentPane.add(roleName);
 	}
-	
+
 }

@@ -9,7 +9,7 @@ public class Player {
 	
 	//이 플레이어가 밤에 지목한 타겟id
 	private int nightTargetId;
-	
+
 	public Player(String nickname, int id) {
 		// TODO Auto-generated constructor stub
 		this.nickname = nickname;
@@ -32,6 +32,6 @@ public class Player {
 		this.nightTargetId = nightTargetId;
 	}
 
-	
+
 	
 }
