@@ -18,7 +18,7 @@ public class 사회자 {
 	public Map<String, Player> playersByNickname = new HashMap<>();
 	public List <Player> ghosts = new ArrayList<>();
 	
-	public int dayCount=0;
+	public int dayCount=1;
 	
 	public void addPlayer(Player p) {
 		players.add(p);
@@ -37,19 +37,19 @@ public class 사회자 {
 	public void set_state(IState state) {
 		this.gameState = state;
 		if(state!=null) {
-		System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
+		System.out.println("=========="+dayCount+": "+this.gameState.getClass().getSimpleName()+"==========");
 		}
 	}
 	
 	public void init_game() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("=====마피아 게임 시작=====");
-		System.out.println("플레이어 수 입력: ");
+		System.out.print("플레이어 수 입력: ");
 		int n = sc.nextInt();
 		sc.nextLine();
 		
 		for(int i=0; i<n; i++) {
-			System.out.println((i+1)+"번 플레이어 닉네임: ");
+			System.out.print((i+1)+"번 플레이어 닉네임: ");
 			String nickname = sc.nextLine();
 			
 			Player p = new Player(nickname, i+1);
@@ -111,7 +111,13 @@ public class 사회자 {
         	set_state(new 투표());
         	gameState.execute(this);
         	checkEnd();
+        	
+        	dayCount++;
         }
+	}
+	
+	public IState getState() {
+		return gameState;
 	}
 	
 }

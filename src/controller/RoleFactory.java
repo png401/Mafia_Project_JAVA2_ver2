@@ -46,7 +46,7 @@ public class RoleFactory {
 		}
 		
 		//직업 랜덤 섞기
-		//역할 리스트 roles를 완전히 뒤섞음. 피셔-예이츠 알고리즘?
+		//역할 리스트 roles를 완전히 뒤섞음.
 		Collections.shuffle(roles);
 		
 		//플레이어들에게 역할 배정 스킬 배정

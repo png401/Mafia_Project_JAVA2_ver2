@@ -26,7 +26,7 @@ public class 밤 implements IState{
 	}
 
 	public void execute(사회자 매니저) {
-		
+		System.out.println("------------밤이 되었습니다.-------------");
 		for(Player p : 매니저.players) {
 			//죽었음 행동 불가
 			if(!p.is_alive) continue;

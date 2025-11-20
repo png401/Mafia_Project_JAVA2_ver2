@@ -17,7 +17,7 @@ public class ServerManager {
 		ServerSocket serverSocket = null;
 		
 		// 두 개의 브레인을 가짐
-		사회자 logicBrain = 사회자.getInstance(); // 일단 new로 객체 생성했음 -> 싱글톤으로 변경 시 수정할 예정
+		사회자 logicBrain = new 사회자(); // 일단 new로 객체 생성했음 -> 싱글톤으로 변경 시 수정할 예정
 		CommandManager networkBrain = new CommandManager(logicBrain);
 		
 		try {
