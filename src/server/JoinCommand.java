@@ -18,7 +18,7 @@ public class JoinCommand implements ICommand{
 	public void execute(ServerThread sender, String payload, IState currentState) {
 		// TODO Auto-generated method stub
 
-		// Player 객체 생성은 서버에서 하기 쉽지 않네요...
+		// Player 객체를 사회자한테 받아서 Lobby에 닉네임을 broadcast하기
 		//Player newPlayer = logicBrain.createNewPlayer(payload);
 		//sender.setPlayer(newPlayer);
 		
