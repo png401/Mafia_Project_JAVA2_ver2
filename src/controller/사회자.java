@@ -17,9 +17,8 @@ public class 사회자 {
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
 	
-	Lobby lobby;
-	View view;
-
+	public List<Lobby> lobbyList;
+	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
 	public Map<String, Player> playersByNickname = new HashMap<>();
@@ -39,6 +38,10 @@ public class 사회자 {
 
 	public 사회자() {
 		매니저 = this;
+	}
+	
+	public void setLobby(Lobby newLobby) {
+		this.lobbyList.add(newLobby); 
 	}
 	
 	public void addPlayer(Player p) {
@@ -77,6 +80,16 @@ public class 사회자 {
 		System.out.println("=====마피아 게임 시작=====");		
 			
 		roleFactory.randomRole(players);
+		for (Player player : players) {
+			for (Lobby lobby : lobbyList) {
+				if(lobby.getClientManager().getMyName() == player.nickname) {
+					lobby.getView().setRoleView(player.getRole());
+				}
+				
+			}
+		}
+		//각 클라이언트들에게 player 객체를 mapping 해줘야함
+		
 	}
 	
 	public void notifyAll(String message) {

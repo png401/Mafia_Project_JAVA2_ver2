@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import model.Player;
 
 public class ServerThread extends Thread {
-	private Player player;
+	//private Player player;
     private Socket socket;
     private CommandManager networkBrain;
     private PrintWriter pw;
@@ -21,13 +21,14 @@ public class ServerThread extends Thread {
         this.networkBrain = cm;
     }
     
+    /*
     // 서버가 플레이어의 역할, 생사여부 등을 확인할 때 사용하기 위해 만들었습니다.
     public void setPlayer(Player player) { // 사회자한테 받은 플레이어 등록.
     	this.player=player;
     }
     public Player getPlayer() {
     	return this.player;
-    }
+    }*/
 
     @Override
     public void run() {

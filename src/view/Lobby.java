@@ -36,7 +36,7 @@ public class Lobby extends JFrame {
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
 			
 	private View view;
-	ClientManager clientManager = new ClientManager(this);
+	private ClientManager clientManager = new ClientManager(this);
 	
 	/**
 	 * Launch the application.
@@ -53,6 +53,10 @@ public class Lobby extends JFrame {
 			}
 		});
 	}*/
+
+	public ClientManager getClientManager() {
+		return clientManager;
+	}
 
 	/**
 	 * Create the frame.

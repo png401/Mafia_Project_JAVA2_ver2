@@ -1,14 +1,27 @@
 package client;
 
 import java.io.IOException;
+
+import model.Player;
 import view.Lobby;
 
 public class ClientManager {
 
     private ClientThread clientThread;
     private Lobby lobby;
+    private String myName;
     
-    public ClientManager(Lobby lobby) {
+    public String getMyName() {
+		return myName;
+	}
+
+	private Player me; 
+        
+	public void setMe(Player me) {
+		this.me = me;
+	}
+
+	public ClientManager(Lobby lobby) {
     	this();
     	this.lobby = lobby;
     }
@@ -47,6 +60,7 @@ public class ClientManager {
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
         if (message.startsWith("Join:")) {
             String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
+            this.myName = nickname;
             // 로비 화면의 리스트에 닉네임 추가
             lobby.newPlayerEntered(nickname);
             System.out.println("view 함수 호출");

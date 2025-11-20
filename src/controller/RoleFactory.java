@@ -14,6 +14,7 @@ import model.ISkill;
 import model.Inspect;
 import model.Kill;
 import model.Player;
+import server.ServerThread;
 
 public class RoleFactory {
 	
@@ -33,7 +34,7 @@ public class RoleFactory {
 		int numMafia = (int)Math.round(n/3.0);
 
 		for(int i=0; i<numMafia; i++) {
-			roles.add("마피아");
+			roles.add("마피아");			
 		}
 
 		roles.add("의사");
@@ -67,8 +68,8 @@ public class RoleFactory {
 				break;
 			default:
 				p.skill = null;
-			}
-
+			}			
+			
 		}
 
 	}

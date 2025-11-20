@@ -128,7 +128,7 @@ public class View extends JFrame {
 	}
 
 	//사용자의 role에 따라 다르게 나와야함
-	public void setRoleView(String role) {
+	public void setRoleView(String role) {                     
 		roleImage = new JLabel();
 		roleImage.setIcon(new ImageIcon(View.class.getResource("/image/" + role + ".png")));
 		roleImage.setBounds(817, 343, 127, 127);
