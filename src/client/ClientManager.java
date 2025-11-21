@@ -31,7 +31,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.66.57", 50023, this);
+            clientThread = new ClientThread("10.240.90.33", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -42,6 +42,11 @@ public class ClientManager {
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
+    
+    public void setMyName(String nickname) {
+    	this.myName = myName;    	
+    	사회자.setLobby(lobby);
+    }
 
 
     // 서버로 메세지 전송
@@ -50,13 +55,6 @@ public class ClientManager {
             clientThread.sendMessage(message);
         } else {
             System.err.println("서버에 연결되지 않았습니다.");
-        }
-        
-        //Join: 이면 내 이름으로 저장
-        if (message.startsWith("Join:")) {
-            String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
-            this.myName = nickname;            	
-    		사회자.setLobby(lobby);
         }
     }
 

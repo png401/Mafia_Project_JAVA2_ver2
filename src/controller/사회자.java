@@ -79,7 +79,6 @@ public class 사회자 {
 	//Start 받으면
 	public void init_game() {
 		System.out.println("=====마피아 게임 시작=====");
-		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
 			
 		roleFactory.randomRole(players);		
 		
@@ -91,8 +90,7 @@ public class 사회자 {
 				if(lobby.getClientManager().getMyName().equals(player.nickname)){
 					lobby.getView().setRoleView(player.getRole());
 					System.out.println("직업 배정 완료");
-				}
-				
+				}				
 			}
 		}		
 	}
