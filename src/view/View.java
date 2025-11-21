@@ -138,6 +138,8 @@ public class View extends JFrame {
 		roleName.setHorizontalAlignment(JLabel.CENTER);
 		roleName.setBounds(817, 480, 127, 15);
 		contentPane.add(roleName);
+		
+		contentPane.repaint();
 	}
 
 }

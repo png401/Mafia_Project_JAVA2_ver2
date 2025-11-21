@@ -2,6 +2,7 @@ package client;
 
 import java.io.IOException;
 
+import controller.사회자;
 import model.Player;
 import view.Lobby;
 
@@ -10,6 +11,7 @@ public class ClientManager {
     private ClientThread clientThread;
     private Lobby lobby;
     private String myName;
+    private 사회자 사회자 = controller.사회자.getInstance();	
     
     public String getMyName() {
 		return myName;
@@ -29,7 +31,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.20.107.60", 50023, this);
+            clientThread = new ClientThread("10.240.66.57", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -49,6 +51,13 @@ public class ClientManager {
         } else {
             System.err.println("서버에 연결되지 않았습니다.");
         }
+        
+        //Join: 이면 내 이름으로 저장
+        if (message.startsWith("Join:")) {
+            String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
+            this.myName = nickname;            	
+    		사회자.setLobby(lobby);
+        }
     }
 
     // 서버에게서 받은 메세지 처리
@@ -60,7 +69,7 @@ public class ClientManager {
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
         if (message.startsWith("Join:")) {
             String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
-            this.myName = nickname;
+            
             // 로비 화면의 리스트에 닉네임 추가
             lobby.newPlayerEntered(nickname);
             System.out.println("view 함수 호출");

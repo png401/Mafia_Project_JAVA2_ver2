@@ -12,7 +12,8 @@ import view.View;
 
 public class 사회자 {
 	//사회자 객체 하나만 있어야 되니까 싱글톤 생성해봤음
-	private static 사회자 매니저;
+	private static 사회자 매니저;	
+	private 사회자() {}; 
 	
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
@@ -29,19 +30,19 @@ public class 사회자 {
 	private int killedID=0;
 	private int healedID=0;
 	
-	public static 사회자 getInstance() {
+	public static synchronized 사회자 getInstance() {
 		if(매니저 == null) {
 			매니저 = new 사회자();
 		}
 		return 매니저;
 	}
-
-	public 사회자() {
-		매니저 = this;
-	}
 	
 	public void setLobby(Lobby newLobby) {
 		this.lobbyList.add(newLobby); 
+		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
+		System.out.println("로비 추가");
+		System.out.println("추가된 로비의 ClientManager"+newLobby.getClientManager());
+		System.out.println("추가된 myName "+ newLobby.getClientManager().getMyName());
 	}
 	
 	public void addPlayer(Player p) {
@@ -77,15 +78,16 @@ public class 사회자 {
 	
 	//Start 받으면
 	public void init_game() {
-		System.out.println("=====마피아 게임 시작=====");		
+		System.out.println("=====마피아 게임 시작=====");
+		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
 			
-		roleFactory.randomRole(players);
-		for (Player player : players) {
-			//System.out.println(player.role);
-		}
+		roleFactory.randomRole(players);		
 		
 		for (Player player : players) {
-			for (Lobby lobby : lobbyList) {				
+			for (Lobby lobby : lobbyList) {		
+				System.out.println(lobby.getClientManager().getMyName());
+				System.out.println(player.nickname);
+				
 				if(lobby.getClientManager().getMyName().equals(player.nickname)){
 					lobby.getView().setRoleView(player.getRole());
 					System.out.println("직업 배정 완료");
