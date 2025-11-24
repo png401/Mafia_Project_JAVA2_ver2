@@ -7,8 +7,6 @@ public class Test {
 		// TODO Auto-generated method stub
 		Lobby lobby = new Lobby();
 		lobby.setVisible(true);
-		
-
 	}
 
 }

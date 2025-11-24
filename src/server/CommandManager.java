@@ -47,6 +47,7 @@ public class CommandManager {
         String[] tokens = rawMessage.split(":", 2);
         String commandKey = tokens[0]; // "Start", "Join", "Message", "Mafia_message" 중 하나
         String payload; // 유저가 보낸 메세지(실제 내용)
+        
         if (tokens.length > 1) {
             payload = tokens[1];
         } else {

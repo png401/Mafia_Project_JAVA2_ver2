@@ -89,11 +89,7 @@ public class Lobby extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				//Start 시퀀스 시작
-				clientManager.sendMessage("Start:"); 
-//				setView(new View());
-//				getView().setVisible(true);
-//				dispose();
-				
+				clientManager.sendMessage("Start:");
 			}
 		});
 						
@@ -127,7 +123,10 @@ public class Lobby extends JFrame {
 				JTextField nicknameField = (JTextField) e.getSource(); 	
 				String nickname = nicknameField.getText();
 				nicknameField.setText("");
-				//Join 시퀀스 시작 
+
+				clientManager.setMyName(nickname);
+
+				//Join 시퀀스 시작
 				clientManager.sendMessage("Join:" + nickname);						
 			}
 		});

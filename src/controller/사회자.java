@@ -12,7 +12,7 @@ import view.View;
 
 public class 사회자 {
 	//사회자 객체 하나만 있어야 되니까 싱글톤 생성해봤음
-	private static 사회자 매니저 = null;
+	private static 사회자 매니저;
 	private 사회자() {};
 	
 	IState gameState = null;
@@ -39,9 +39,9 @@ public class 사회자 {
 	
 	public void setLobby(Lobby newLobby) {
 		this.lobbyList.add(newLobby); 
-		System.out.println("로비 추가");
-		System.out.println("추가된 로비의 ClientManager: "+newLobby.getClientManager());
 		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
+		System.out.println("로비 추가");
+		System.out.println("추가된 로비의 ClientManager"+newLobby.getClientManager());
 		System.out.println("추가된 myName "+ newLobby.getClientManager().getMyName());
 	}
 	
@@ -79,31 +79,20 @@ public class 사회자 {
 	//Start 받으면
 	public void init_game() {
 		System.out.println("=====마피아 게임 시작=====");
-		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
 			
 		roleFactory.randomRole(players);
-		for (Player player : players) {
-			System.out.println(player.getRole());
-		}
-		System.out.println("player 역할 출력 완료.");
-
-		for(Lobby lobby : lobbyList) {
-			System.out.println("들어왔니!!!!");
-			System.out.println(lobby.getClientManager());
-		}
-
+		
 		for (Player player : players) {
 			for (Lobby lobby : lobbyList) {
 				System.out.println(lobby.getClientManager().getMyName());
 				System.out.println(player.nickname);
+
 				if(lobby.getClientManager().getMyName().equals(player.nickname)){
-					System.out.println("if문 위다!");
 					lobby.getView().setRoleView(player.getRole());
 					System.out.println("직업 배정 완료");
 				}
-				
 			}
-		}
+		}		
 	}
 	
 	public void notifyAll(String message) {
