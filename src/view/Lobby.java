@@ -36,7 +36,7 @@ public class Lobby extends JFrame {
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
 			
 	private View view;
-	private ClientManager clientManager = new ClientManager(this);
+	private ClientManager clientManager;
 	
 	/**
 	 * Launch the application.
@@ -62,6 +62,8 @@ public class Lobby extends JFrame {
 	 * Create the frame.
 	 */
 	public Lobby() {
+		this.clientManager = new ClientManager(this);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
 		contentPane = new JPanel();
@@ -87,11 +89,7 @@ public class Lobby extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				//Start 시퀀스 시작
-				clientManager.sendMessage("Start:"); 
-				setView(new View());
-				getView().setVisible(true);				
-				dispose();
-				
+				clientManager.sendMessage("Start:");
 			}
 		});
 						
@@ -125,7 +123,10 @@ public class Lobby extends JFrame {
 				JTextField nicknameField = (JTextField) e.getSource(); 	
 				String nickname = nicknameField.getText();
 				nicknameField.setText("");
-				//Join 시퀀스 시작 
+
+				clientManager.setMyName(nickname);
+
+				//Join 시퀀스 시작
 				clientManager.sendMessage("Join:" + nickname);						
 			}
 		});

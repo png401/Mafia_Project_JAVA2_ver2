@@ -7,9 +7,6 @@ public class Test {
 		// TODO Auto-generated method stub
 		Lobby lobby = new Lobby();
 		lobby.setVisible(true);
-		
-		사회자 사회자 = new 사회자();	
-		사회자.setLobby(lobby);
 	}
 
 }
