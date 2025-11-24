@@ -11,8 +11,8 @@ public class ClientManager {
     private ClientThread clientThread;
     private Lobby lobby;
     private String myName;
-    private 사회자 사회자 = controller.사회자.getInstance();	
-    
+    private 사회자 사회자 = controller.사회자.getInstance();
+
     public String getMyName() {
 		return myName;
 	}
@@ -42,9 +42,9 @@ public class ClientManager {
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
-    
+
     public void setMyName(String nickname) {
-    	this.myName = myName;    	
+    	this.myName = myName;
     	사회자.setLobby(lobby);
     }
 
@@ -67,7 +67,7 @@ public class ClientManager {
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
         if (message.startsWith("Join:")) {
             String nickname = message.substring(5); // "Join:" 제거하고 닉네임만 추출
-            
+
             // 로비 화면의 리스트에 닉네임 추가
             lobby.newPlayerEntered(nickname);
             System.out.println("view 함수 호출");

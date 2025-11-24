@@ -63,7 +63,7 @@ public class Lobby extends JFrame {
 	 */
 	public Lobby() {
 		this.clientManager = new ClientManager(this);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
 		contentPane = new JPanel();
@@ -89,7 +89,7 @@ public class Lobby extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				//Start 시퀀스 시작
-				clientManager.sendMessage("Start:"); 					
+				clientManager.sendMessage("Start:");
 			}
 		});
 						
@@ -123,10 +123,10 @@ public class Lobby extends JFrame {
 				JTextField nicknameField = (JTextField) e.getSource(); 	
 				String nickname = nicknameField.getText();
 				nicknameField.setText("");
-				
+
 				clientManager.setMyName(nickname);
-				
-				//Join 시퀀스 시작 
+
+				//Join 시퀀스 시작
 				clientManager.sendMessage("Join:" + nickname);						
 			}
 		});
