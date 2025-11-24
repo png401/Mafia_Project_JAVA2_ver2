@@ -87,13 +87,13 @@ public class 밤 implements IState{
 			int target = p.getNightTargetId();
 
 			String role = p.getRole();
-			if("마피아".equals(role)) {
+			if("mafia".equals(role)) {
 				mafiaTargetId = target;
 			}
-			else if("의사".equals(role)) {
+			else if("doctor".equals(role)) {
 				doctorTargetId = target;
 			}
-			else if("경찰".equals(role)) {
+			else if("police".equals(role)) {
 				policeTargetId = target;
 			}
 		}
