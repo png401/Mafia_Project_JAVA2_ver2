@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import client.ClientManager;
 import model.Player;
 import server.ServerThread;
-import view.Lobby;
-import view.View;
 
 public class 사회자 {
 	//사회자 객체 하나만 있어야 되니까 싱글톤 생성해봤음
@@ -19,10 +16,6 @@ public class 사회자 {
 	
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
-	
-	//public List<Lobby> lobbyList = new ArrayList<>() ;
-
-	public List<ClientManager> clientManagerList = new ArrayList<>();
 	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
@@ -39,21 +32,6 @@ public class 사회자 {
 			매니저 = new 사회자();
 		}
 		return 매니저;
-	}
-	
-	/*public void addLobby(Lobby newLobby) {
-		System.out.println(newLobby);
-		this.lobbyList.add(newLobby); 
-
-		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
-		System.out.println("로비 추가");
-		System.out.println("추가된 로비의 ClientManager"+newLobby.getClientManager());
-		System.out.println("추가된 myName "+ newLobby.getClientManager().getMyName());
-	}*/
-	
-	public void addClientManager(ClientManager clientManager) {
-		clientManagerList.add(clientManager);
-		System.out.println("addClientManager 후 list size:"+clientManagerList.size()); //디버그용
 	}
 	
 	public void addPlayer(Player p) {
@@ -80,6 +58,11 @@ public class 사회자 {
 		System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
 		}
 	}
+	
+	public IState getState() {
+		// TODO Auto-generated method stub
+		return this.gameState;
+	}
 		
 	public Player createNewPlayer(String nickname) {
 		Player newPlayer = roleFactory.createPlayer(nickname, players.size()+1);
@@ -95,23 +78,9 @@ public class 사회자 {
 		
 		for(Player player : players) {
 			ServerThread thread = player.getServerThread();
-			thread.sendMessage("ROLE:"+player.getRole());
+			thread.sendMessage("Role:"+player.getRole());
+			thread.sendMessage("Skill:"+player.getSkillName());
 		}
-		
-		/*
-		for (Player player : players) {
-			System.out.println("로비 전");
-			for (Lobby lobby : lobbyList) {
-				System.out.println("로비 후");
-				System.out.println(lobby.getClientManager().getMyName());
-				System.out.println(player.nickname);
-
-				if(lobby.getClientManager().getMyName().equals(player.nickname)){
-					lobby.getView().setRoleView(player.getRole());
-					System.out.println("직업 배정 완료");
-				}
-			}
-		}*/		
 	}
 	
 	public void notifyAll(String message) {
@@ -181,11 +150,6 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();
         }
-	}
-
-	public IState getState() {
-		// TODO Auto-generated method stub
-		return this.gameState;
 	}
 
 }

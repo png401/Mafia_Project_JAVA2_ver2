@@ -39,31 +39,9 @@ public class Lobby extends JFrame {
 	private ClientManager clientManager;
 
 	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Lobby frame = new Lobby();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/*public ClientManager getClientManager() {
-		return clientManager;
-	}*/
-
-	/**
 	 * Create the frame.
 	 */
 	public Lobby() {
-		//this.clientManager = new ClientManager(this);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
 		contentPane = new JPanel();
@@ -125,10 +103,6 @@ public class Lobby extends JFrame {
 				String nickname = nicknameField.getText();
 				nicknameField.setText("");
 
-				System.out.println("setMyName호출");
-				clientManager.setMyName(nickname);
-				System.out.println("setMyName실행");
-
 				//Join 시퀀스 시작
 				clientManager.sendMessage("Join:" + nickname);						
 			}
@@ -166,7 +140,6 @@ public class Lobby extends JFrame {
 	public void start() {
 		setView(new View());
 		getView().setVisible(true);	
-		clientManager.setView(view);
 		dispose();
 	}		
 
