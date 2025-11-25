@@ -80,12 +80,13 @@ public class ClientManager {
             // 로비 화면을 게임 화면으로 전환
             lobby.start();
         }
-        // Case 3: 직업 배정 (사회자가 "Role:직업"을 보냄)
-        else if(message.startsWith("Role:")) {
+        // Case 3: 직업 배정 (사회자가 "Role:직업"을 보냄)        
+        else if (message.startsWith("ROLE:")) {
         	String role = message.substring(5);
-        	view.setRoleView(role);
+        	System.out.println("내 역할: "+role);
+        	lobby.getView().setRoleView(role);
         }
-        // Case 3: 채팅 메시지 등 그 외 처리
+        // Case 4: 채팅 메시지 등 그 외 처리
         else {
             // 예: lobby.appendChat(message); 와 같이 구현 가능
         }

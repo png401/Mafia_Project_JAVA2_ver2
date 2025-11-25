@@ -19,11 +19,12 @@ public class JoinCommand implements ICommand{
 		// TODO Auto-generated method stub
 
 		// Player 객체를 사회자한테 받아서 Lobby에 닉네임을 broadcast하기
-		//Player newPlayer = logicBrain.createNewPlayer(payload);
-		//sender.setPlayer(newPlayer);
+		Player newPlayer = logicBrain.createNewPlayer(payload);
+		sender.setPlayer(newPlayer);
+		newPlayer.setServerThread(sender);
 		
 		logicBrain.createNewPlayer(payload);
-		logicBrain.connectByNickname(payload, sender);
+
 		networkBrain.broadcastAll("Join:"+payload); // 여기서 payload 플레이어의 닉네임
 	}
 
