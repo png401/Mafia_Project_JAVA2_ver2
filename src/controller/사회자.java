@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import model.Player;
+import server.ServerThread;
 import view.Lobby;
 import view.View;
 
@@ -18,7 +19,7 @@ public class 사회자 {
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
 	
-	public List<Lobby> lobbyList = new ArrayList<>() ;
+	//public List<Lobby> lobbyList = new ArrayList<>() ;
 	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
@@ -37,8 +38,8 @@ public class 사회자 {
 		return 매니저;
 	}
 	
-	public void setLobby(Lobby newLobby) {
-		this.lobbyList.add(newLobby); 
+	public void addLobby(Lobby newLobby) {
+		//this.lobbyList.add(newLobby); 
 		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
 		System.out.println("로비 추가");
 		System.out.println("추가된 로비의 ClientManager"+newLobby.getClientManager());
@@ -82,8 +83,16 @@ public class 사회자 {
 			
 		roleFactory.randomRole(players);
 		
+		for(Player player : players) {
+			ServerThread thread = player.getServerThread();
+			thread.sendMessage("ROLE:"+player.getRole());
+		}
+		
+		/*
 		for (Player player : players) {
+			System.out.println("로비 전");
 			for (Lobby lobby : lobbyList) {
+				System.out.println("로비 후");
 				System.out.println(lobby.getClientManager().getMyName());
 				System.out.println(player.nickname);
 
@@ -92,7 +101,7 @@ public class 사회자 {
 					System.out.println("직업 배정 완료");
 				}
 			}
-		}		
+		}*/		
 	}
 	
 	public void notifyAll(String message) {
@@ -107,7 +116,7 @@ public class 사회자 {
 		for(Player p : players) {
 			if(p.is_alive == false) continue;//죽은 애 쓰루
 			
-			if("마피아".equals(p.getRole())) 생존마피아++;
+			if("mafia".equals(p.getRole())) 생존마피아++;
 			else 생존시민++;
 		}
 		
@@ -166,7 +175,7 @@ public class 사회자 {
 
 	public IState getState() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.gameState;
 	}
 
 }

@@ -60,8 +60,8 @@ public class CommandManager {
             command.execute(sender, payload, logicBrain.getState());
         } else {
             // Start 명령어일 시 모든 클라이언트에게 게임이 시작되었다고 알려주기.
+        	broadcastAll("Start:");
             logicBrain.init_game();
-            broadcastAll("Start:");
         }
     }
 

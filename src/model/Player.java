@@ -1,11 +1,15 @@
 package model;
 
+import server.ServerThread;
+
 public class Player {
 	public String nickname;
 	public int id;
 	private String role;
 	public boolean is_alive = true;
 	public ISkill skill = null;
+	
+	private transient ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id
 	private int nightTargetId;
@@ -32,6 +36,14 @@ public class Player {
 		this.nightTargetId = nightTargetId;
 	}
 
+	public ServerThread getServerThread() {
+		// TODO Auto-generated method stub
+		return serverThread;
+	}
+	
+	public void setServerThread(ServerThread serverThread) {
+        this.serverThread = serverThread;
+    }
 
 	
 }
