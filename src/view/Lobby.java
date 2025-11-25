@@ -32,12 +32,12 @@ public class Lobby extends JFrame {
 	private JList<String> playerList;
 	private JTextField nicknameInputField;
 	private JLabel noticeTextLabel;
-	
+
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
-			
+
 	private View view;
 	private ClientManager clientManager;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,15 +54,15 @@ public class Lobby extends JFrame {
 		});
 	}*/
 
-	public ClientManager getClientManager() {
+	/*public ClientManager getClientManager() {
 		return clientManager;
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
 	public Lobby() {
-		this.clientManager = new ClientManager(this);
+		//this.clientManager = new ClientManager(this);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 580);
@@ -70,52 +70,53 @@ public class Lobby extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		titleTextLabel = new JLabel("마피아 게임 프로젝트");
 		titleTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleTextLabel.setFont(new Font("굴림", Font.PLAIN, 80));
 		titleTextLabel.setBounds(0, 43, 966, 102);
 		contentPane.add(titleTextLabel);
-		
+
 		startButton = new JButton("시작하기");
 		startButton.setFont(new Font("굴림", Font.PLAIN, 50));
 		startButton.setBounds(312, 395, 334, 102);
 		contentPane.add(startButton);
-		startButton.setEnabled(false);
-		
-		//시작하기 버튼 누르면
-		startButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {				
-				//Start 시퀀스 시작
-				clientManager.sendMessage("Start:");
-			}
-		});
-						
+		startButton.setEnabled(false);		
+
 		playerTextLabel = new JLabel("입장한 플레이어");
 		playerTextLabel.setFont(new Font("굴림", Font.PLAIN, 30));
 		playerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		playerTextLabel.setBounds(312, 186, 334, 49);
 		contentPane.add(playerTextLabel);
-										
+
 		playerList = new JList<String>();
 		playerList.setBackground(new Color(192, 192, 192));
 		playerList.setBounds(182, 237, 596, 135);
 		playerList.setVisibleRowCount(6);
 		playerList.setModel(enteredPlayer);
-		
+
 		DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
 		playerList.setCellRenderer(centerRenderer);
-		
+
 		contentPane.add(playerList);
-		
+
 		nicknameInputField = new JTextField();
 		nicknameInputField.setBounds(483, 155, 106, 21);
 		contentPane.add(nicknameInputField);
 		nicknameInputField.setColumns(10);
-		
+
+		noticeTextLabel = new JLabel("닉네임을 입력하세요");
+		noticeTextLabel.setBounds(359, 158, 112, 15);
+		contentPane.add(noticeTextLabel);
+
+	}	
+
+	public Lobby(ClientManager clientManager) {
+		// TODO Auto-generated constructor stub
+		this();
+		this.clientManager = clientManager;
+
 		//닉네임 입력받기
 		nicknameInputField.addActionListener(new ActionListener() { 			
 			@Override
@@ -130,13 +131,18 @@ public class Lobby extends JFrame {
 				clientManager.sendMessage("Join:" + nickname);						
 			}
 		});
-				
-		noticeTextLabel = new JLabel("닉네임을 입력하세요");
-		noticeTextLabel.setBounds(359, 158, 112, 15);
-		contentPane.add(noticeTextLabel);
 
-	}	
-	
+		//시작하기 버튼 누르면
+		startButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				//Start 시퀀스 시작
+				clientManager.sendMessage("Start:");
+			}
+		});
+	}
+
 	//view getter setter는 왜 있는거임? 
 	public View getView() {
 		return view;
@@ -145,21 +151,21 @@ public class Lobby extends JFrame {
 	public void setView(View view) {
 		this.view = view;
 	}
-	
+
 	//Join 시퀀스의 끝
 	public void newPlayerEntered(String nickname) {
 		enteredPlayer.addElement(nickname);
-		
+
 		if(enteredPlayer.getSize() >= 4) {
 			startButton.setEnabled(true);
 		}
 	}
-	
+
 	//Start 시퀀스의 끝
 	public void start() {
 		setView(new View());
 		getView().setVisible(true);				
 		dispose();
 	}		
-			
+
 }

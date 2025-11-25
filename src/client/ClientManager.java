@@ -5,6 +5,7 @@ import java.io.IOException;
 import controller.사회자;
 import model.Player;
 import view.Lobby;
+import view.View;
 
 public class ClientManager {
 
@@ -23,10 +24,16 @@ public class ClientManager {
 		this.me = me;
 	}
 
-	public ClientManager(Lobby lobby) {
+	/*public ClientManager(Lobby lobby) {
     	this();
     	this.lobby = lobby;
-    }
+		System.out.println("ClientM :" + this.lobby);
+
+	}*/
+	
+	public void setLobby(Lobby lobby) {
+		this.lobby = lobby;		
+	}
 
     public ClientManager() {
         // 서버 연결
@@ -37,15 +44,10 @@ public class ClientManager {
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
-
-    // 로비 생성 시 자신의 로비와 연결
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
-    }
-
+    
     public void setMyName(String nickname) {
-    	this.myName = myName;
-    	사회자.setLobby(lobby);
+    	this.myName = nickname;
+    	사회자.addClientManager(this);
     }
 
 
@@ -87,4 +89,5 @@ public class ClientManager {
     public void onDisconnected() {
         System.out.println("서버와의 연결이 종료되었습니다.");
     }
+		
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import client.ClientManager;
 import model.Player;
 import view.Lobby;
 import view.View;
@@ -18,7 +19,8 @@ public class 사회자 {
 	IState gameState = null;
 	RoleFactory roleFactory = new RoleFactory();
 	
-	public List<Lobby> lobbyList = new ArrayList<>() ;
+	//public List<Lobby> lobbyList = new ArrayList<>() ;
+	public List<ClientManager> clientManagerList = new ArrayList<>();
 	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
@@ -37,12 +39,17 @@ public class 사회자 {
 		return 매니저;
 	}
 	
-	public void setLobby(Lobby newLobby) {
+	/*public void addLobby(Lobby newLobby) {
+		System.out.println(newLobby);
 		this.lobbyList.add(newLobby); 
 		System.out.println("사회자 인스턴스 ID=" + System.identityHashCode(this));
 		System.out.println("로비 추가");
 		System.out.println("추가된 로비의 ClientManager"+newLobby.getClientManager());
 		System.out.println("추가된 myName "+ newLobby.getClientManager().getMyName());
+	}*/
+	
+	public void addClientManager(ClientManager clientManager) {
+		clientManagerList.add(clientManager);
 	}
 	
 	public void addPlayer(Player p) {
@@ -83,13 +90,10 @@ public class 사회자 {
 		roleFactory.randomRole(players);
 		
 		for (Player player : players) {
-			for (Lobby lobby : lobbyList) {
-				System.out.println(lobby.getClientManager().getMyName());
-				System.out.println(player.nickname);
-
-				if(lobby.getClientManager().getMyName().equals(player.nickname)){
-					lobby.getView().setRoleView(player.getRole());
-					System.out.println("직업 배정 완료");
+			System.out.println("!");
+			for (ClientManager clientManager : clientManagerList) {
+				if(clientManager.getMyName().equals(player.nickname)){
+					//어떻게 화면에 보여주지.....소켓으로 메시지를 보내?
 				}
 			}
 		}		
