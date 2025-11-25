@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import client.ClientManager;
 import model.Player;
+import server.ServerThread;
 import view.Lobby;
 import view.View;
 
@@ -21,6 +22,7 @@ public class 사회자 {
 	
 	//public List<Lobby> lobbyList = new ArrayList<>() ;
 	public List<ClientManager> clientManagerList = new ArrayList<>();
+	private Map<String, ServerThread> connectionByNickname = new HashMap<>();
 	
 	public List <Player> players = new ArrayList<>();
 	public Map<Integer, Player> playersById = new HashMap<>();
@@ -48,8 +50,17 @@ public class 사회자 {
 		System.out.println("추가된 myName "+ newLobby.getClientManager().getMyName());
 	}*/
 	
+	public void connectByNickname(String nickname, ServerThread serverThread) {
+		connectionByNickname.put(nickname, serverThread);
+	}
+	
+	public ServerThread getServerThreadByNickname(String nickname) {
+		return connectionByNickname.get(nickname);
+	}
+	
 	public void addClientManager(ClientManager clientManager) {
 		clientManagerList.add(clientManager);
+		System.out.println("addClientManager 후 list size:"+clientManagerList.size()); //디버그용
 	}
 	
 	public void addPlayer(Player p) {
@@ -89,14 +100,20 @@ public class 사회자 {
 			
 		roleFactory.randomRole(players);
 		
-		for (Player player : players) {
-			System.out.println("!");
+		/*for (Player player : players) {	
+			System.out.println("전");//디버그용
+			System.out.println(clientManagerList.size());//디버그용
 			for (ClientManager clientManager : clientManagerList) {
+				System.out.println("후");//디버그용
 				if(clientManager.getMyName().equals(player.nickname)){
-					//어떻게 화면에 보여주지.....소켓으로 메시지를 보내?
+					clientManager.getView().setRoleView(player.getRole());
 				}
 			}
-		}		
+		}*/		
+		
+		for (Player player : players) {
+			connectionByNickname.get(player.nickname).sendMessage("Role:"+player.getRole());
+		}
 	}
 	
 	public void notifyAll(String message) {

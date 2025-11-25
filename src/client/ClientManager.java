@@ -11,6 +11,7 @@ public class ClientManager {
 
     private ClientThread clientThread;
     private Lobby lobby;
+    private View view;
     private String myName;
     private 사회자 사회자 = controller.사회자.getInstance();
 
@@ -38,7 +39,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.103.105", 50023, this);
+            clientThread = new ClientThread("10.240.73.203", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -79,6 +80,11 @@ public class ClientManager {
             // 로비 화면을 게임 화면으로 전환
             lobby.start();
         }
+        // Case 3: 직업 배정 (사회자가 "Role:직업"을 보냄)
+        else if(message.startsWith("Role:")) {
+        	String role = message.substring(5);
+        	view.setRoleView(role);
+        }
         // Case 3: 채팅 메시지 등 그 외 처리
         else {
             // 예: lobby.appendChat(message); 와 같이 구현 가능
@@ -89,5 +95,15 @@ public class ClientManager {
     public void onDisconnected() {
         System.out.println("서버와의 연결이 종료되었습니다.");
     }
+
+	public void setView(View view) {
+		// TODO Auto-generated method stub
+		this.view = view;
+	}
+
+	public View getView() {
+		// TODO Auto-generated method stub
+		return view;
+	}
 		
 }

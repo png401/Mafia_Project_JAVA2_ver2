@@ -23,7 +23,7 @@ public class JoinCommand implements ICommand{
 		//sender.setPlayer(newPlayer);
 		
 		logicBrain.createNewPlayer(payload);
-		
+		logicBrain.connectByNickname(payload, sender);
 		networkBrain.broadcastAll("Join:"+payload); // 여기서 payload 플레이어의 닉네임
 	}
 

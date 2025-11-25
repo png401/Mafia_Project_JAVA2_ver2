@@ -143,7 +143,6 @@ public class Lobby extends JFrame {
 		});
 	}
 
-	//view getter setter는 왜 있는거임? 
 	public View getView() {
 		return view;
 	}
@@ -164,7 +163,8 @@ public class Lobby extends JFrame {
 	//Start 시퀀스의 끝
 	public void start() {
 		setView(new View());
-		getView().setVisible(true);				
+		getView().setVisible(true);	
+		clientManager.setView(view);
 		dispose();
 	}		
 
