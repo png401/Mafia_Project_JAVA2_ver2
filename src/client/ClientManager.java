@@ -15,7 +15,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.73.203", 50023, this);
+            clientThread = new ClientThread("192.168.220.1", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -32,7 +32,7 @@ public class ClientManager {
     }
 
     // 서버에게서 받은 메세지 처리
-    public void handleMessage(String message) {
+    public void handleMessage(String message) throws IOException {
         System.out.println("[Client 수신]: " + message);
 
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)

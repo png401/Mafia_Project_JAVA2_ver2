@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -35,7 +36,7 @@ public class Lobby extends JFrame {
 
 	private DefaultListModel<String> enteredPlayer = new DefaultListModel<String>();
 
-	private View view;
+	private View2 view;
 	private ClientManager clientManager;
 
 	/**
@@ -119,11 +120,11 @@ public class Lobby extends JFrame {
 		});
 	}
 
-	public View getView() {
+	public View2 getView() {
 		return view;
 	}
 
-	public void setView(View view) {
+	public void setView(View2 view) {
 		this.view = view;
 	}
 
@@ -137,8 +138,8 @@ public class Lobby extends JFrame {
 	}
 
 	//Start 시퀀스의 끝
-	public void start() {
-		setView(new View());
+	public void start() throws IOException {
+		setView(new View2());
 		getView().setVisible(true);	
 		dispose();
 	}		
