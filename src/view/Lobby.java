@@ -123,8 +123,10 @@ public class Lobby extends JFrame {
 				JTextField nicknameField = (JTextField) e.getSource(); 	
 				String nickname = nicknameField.getText();
 				nicknameField.setText("");
-
+				System.out.println("setMyName 호출완료");
 				clientManager.setMyName(nickname);
+
+
 
 				//Join 시퀀스 시작
 				clientManager.sendMessage("Join:" + nickname);						

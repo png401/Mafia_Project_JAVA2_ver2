@@ -31,21 +31,17 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.90.33", 50023, this);
+            clientThread = new ClientThread("10.240.103.105", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
 
-    // 로비 생성 시 자신의 로비와 연결
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
-    }
-
     public void setMyName(String nickname) {
-    	this.myName = myName;
-    	사회자.setLobby(lobby);
+    	this.myName = nickname;
+    	사회자.addLobby(lobby);
+        System.out.println("setMyName 실행 완료");
     }
 
 
