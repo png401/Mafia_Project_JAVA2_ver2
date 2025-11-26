@@ -11,7 +11,7 @@ public class ClientManager {
     private ClientThread clientThread;
     private Lobby lobby;
     private String myName;
-    private 사회자 사회자 = controller.사회자.getInstance();
+    //private 사회자 사회자 = controller.사회자.getInstance();
 
     public String getMyName() {
 		return myName;
@@ -23,6 +23,7 @@ public class ClientManager {
 		this.me = me;
 	}
 
+
 	public ClientManager(Lobby lobby) {
     	this();
     	this.lobby = lobby;
@@ -31,17 +32,22 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.103.105", 50023, this);
+            clientThread = new ClientThread("10.240.61.93", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
 
+    // 로비 생성 시 자신의 로비와 연결
+    /*
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }*/
+
     public void setMyName(String nickname) {
     	this.myName = nickname;
-    	사회자.addLobby(lobby);
-        System.out.println("setMyName 실행 완료");
+    	//사회자.addLobby(lobby);
     }
 
 
@@ -73,6 +79,13 @@ public class ClientManager {
             // 로비 화면을 게임 화면으로 전환
             lobby.start();
         }
+
+        else if (message.startsWith("ROLE:")) {
+        	String role = message.substring(5);
+        	System.out.println("내 역할: "+role);
+        	lobby.getView().setRoleView(role);
+        }
+
         // Case 3: 채팅 메시지 등 그 외 처리
         else {
             // 예: lobby.appendChat(message); 와 같이 구현 가능
