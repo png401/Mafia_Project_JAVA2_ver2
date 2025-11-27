@@ -2,6 +2,8 @@ package client;
 
 import java.io.IOException;
 
+import javax.swing.DefaultListModel;
+
 import view.Lobby;
 
 public class ClientManager {
@@ -15,7 +17,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("192.168.220.1", 50023, this);
+            clientThread = new ClientThread("10.240.5.13", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -58,6 +60,18 @@ public class ClientManager {
         	String skill = message.substring(6);
         	System.out.println("내 역할: "+skill);
         	lobby.getView().setSkillButton(skill);
+        }
+        //Case 4: playerList 처리
+        else if (message.startsWith("Players:")) {
+        	String playersMessage = message.substring(8);
+        	String[] playersMessageSplit = playersMessage.split(";");
+        	
+        	DefaultListModel<String> players = new DefaultListModel<String>();
+        	for (String string : playersMessageSplit) {
+				players.addElement(string);
+			}
+        	
+        	lobby.getView().setPlayersModel(players);
         }
         // Case 4: 채팅 메시지 등 그 외 처리
         else {

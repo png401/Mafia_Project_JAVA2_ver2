@@ -49,25 +49,17 @@ public class View2 extends JFrame {
    private JLabel roleName;
    private JLabel roleImage;
 
-   private DefaultListModel<String> enteredPlayer;
-   public List <Player> players;
-   
-   
-   /**
-    * Create the frame.
-    */
-   public static void main(String [] args)  throws IOException {
-	   new View2().setVisible(true);
-   }
-   public View2()  throws IOException{
+   private DefaultListModel<String> players;
+         
+   public View2() throws IOException{
       
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      //setBounds(100, 100, 980, 580);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);      
       ///////////////////////////////////
       //-- 크기세팅하고 화면 중앙에 배치하도록 세팅.
       setSize(980,580);
       setLocationRelativeTo(null);
       ///////////////////////////////////
+      
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
@@ -102,12 +94,12 @@ public class View2 extends JFrame {
       centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
       playerList.setCellRenderer(centerRenderer);
       
-      contentPane.add(playerList);      
+      contentPane.add(playerList); 
+      
       skillField = new JTextField();
       skillField.setBounds(817, 508, 42, 21);
       contentPane.add(skillField);
-      skillField.setColumns(10);
-      
+      skillField.setColumns(10);      
            
       /////////////////////////////////////////////////////////////////////   
   
@@ -115,14 +107,9 @@ public class View2 extends JFrame {
    }
    
 
-   public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
-      this.enteredPlayer = enteredPlayer;
-
-   }
-
-   public void setPlayers(List <Player> players) {
+   public void setPlayersModel(DefaultListModel<String> players) {
       this.players = players;
-      playerList.setModel((ListModel) players);
+      playerList.setModel(players);
    }
 
    //사용자의 role에 따라 다르게 나와야함. 예외처리는 throws로 .
@@ -134,8 +121,7 @@ public class View2 extends JFrame {
 
       /////////////////////////////////////////////////
       img= ImageIO.read(View2.class.getResource("/image/"+role +".png"));
-      bgPanel.setSourceImage(img);   // 이미지 교체  반영하기! 
-      
+      bgPanel.setSourceImage(img); // 이미지 교체 반영하기!       
       
       roleName = new JLabel(role);
       roleName.setHorizontalAlignment(JLabel.CENTER);
@@ -183,7 +169,7 @@ public class View2 extends JFrame {
 	          }
 	      };
 	      overlay.setLayout(null);
-	      overlay.setBounds(0,0,778, 481); //      
+	      overlay.setBounds(0,0,778, 481);   
 	      overlay.setForeground(new Color(192, 192, 192));      
 	      overlay.setOpaque(false);
 	      overlay.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -192,6 +178,7 @@ public class View2 extends JFrame {
 	      overlay.add(chatAreaScroll);
 	      contentPane.add(bgPanel);
    }
+   
    ////////////////////////////////////////////////////////////////
    static class ImagePanel extends JPanel {
        private BufferedImage srcImage;
@@ -205,7 +192,7 @@ public class View2 extends JFrame {
        
        public void setSourceImage(BufferedImage img) {
            this.srcImage = img;
-           this.scaledCache = null;             // 캐시 무효화
+           this.scaledCache = null; // 캐시 무효화
            this.lastSize.setSize(0,0);
            revalidate();
            repaint();

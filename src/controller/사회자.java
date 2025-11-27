@@ -80,7 +80,17 @@ public class 사회자 {
 			ServerThread thread = player.getServerThread();
 			thread.sendMessage("Role:"+player.getRole());
 			thread.sendMessage("Skill:"+player.getSkillName());
+			thread.sendMessage("Players:"+playersMessage());
 		}
+		
+	}
+	
+	public String playersMessage() {
+		String playerList = "";
+		for (Player player : players) {
+			playerList = playerList + player.id +" " + player.nickname + ";";
+		}
+		return playerList;
 	}
 	
 	public void notifyAll(String message) {
