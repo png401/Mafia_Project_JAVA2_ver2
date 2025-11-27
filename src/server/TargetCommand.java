@@ -2,6 +2,7 @@ package server;
 
 import controller.IState;
 import controller.사회자;
+import model.Player;
 
 public class TargetCommand implements ICommand {
     private CommandManager networkBrain;
@@ -17,7 +18,13 @@ public class TargetCommand implements ICommand {
     public void execute(ServerThread sender, String payload, IState currentState) {
         // TODO Auto-generated method stub
         int targetId = Integer.parseInt(payload);
-        sender.getPlayer().setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
+        System.out.println("서버가 받은 타켓:"+targetId);
+
+        // 디버깅용
+        Player p = sender.getPlayer();
+        System.out.println("[TargetCommand] 수정 중인 Player 객체 주소: " + System.identityHashCode(p));
+
+        p.setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
 //        count++;
 //        
 //        if(count == logicBrain.get) {
