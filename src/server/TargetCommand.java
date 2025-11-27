@@ -2,6 +2,7 @@ package server;
 
 import controller.IState;
 import controller.사회자;
+import model.Player;
 
 public class TargetCommand implements ICommand {
     private CommandManager networkBrain;
@@ -15,14 +16,11 @@ public class TargetCommand implements ICommand {
 
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
-        // TODO Auto-generated method stub
-        int targetId = Integer.parseInt(payload);
-        sender.getPlayer().setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
-//        count++;
-//        
-//        if(count == logicBrain.get) {
-//        	logicBrain.getState().execute(logicBrain);
-//        	count = 0;
-//        }
+        for (Player player : logicBrain.players) {
+			if (player.getServerThread() == sender) {
+				int target = Integer.parseInt(payload);
+				player.setNightTargetId(target);
+			}
+		}
     }
 }

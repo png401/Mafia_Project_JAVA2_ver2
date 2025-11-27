@@ -26,7 +26,7 @@ public class 밤 implements IState {
 	public void execute(사회자 매니저) {
 		// 시간제한 15초
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,6 +54,13 @@ public class 밤 implements IState {
 		int mafiaTargetId = 0;
 		int doctorTargetId = 0;
 		int policeTargetId = 0;
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
 		for (Player p : 매니저.players) {
@@ -61,6 +68,7 @@ public class 밤 implements IState {
 				continue;
 
 			int target = p.getNightTargetId();
+			System.out.println("밤타겟:"+target); //디버그용
 
 			String role = p.getRole();
 			if ("mafia".equals(role)) {
@@ -69,6 +77,7 @@ public class 밤 implements IState {
 				doctorTargetId = target;
 			} else if ("police".equals(role)) {
 				policeTargetId = target;
+				System.out.println("경찰 조사 대상:"+policeTargetId +" target: "+ target);//디버그용
 				Player 피조사자 = 매니저.getPlayerById(policeTargetId);
 				if (피조사자.getRole().equals("mafia")) {
 					p.getServerThread().sendMessage("Inspect:1");
