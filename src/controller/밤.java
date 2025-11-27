@@ -22,10 +22,14 @@ public class 밤 implements IState{
 	@Override
 	public void limitTime(int time) {
 		// TODO Auto-generated method stub
-
+		int startSecond = 15; //시간제한 15초
+		
+		Thread thread = new Thread();
+		th
 	}
 
 	public void execute(사회자 매니저) {
+		
 
 		for(Player p : 매니저.players) {
 			//죽었음 행동 불가
