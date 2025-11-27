@@ -23,9 +23,6 @@ public class 밤 implements IState{
 	public void limitTime(int time) {
 		// TODO Auto-generated method stub
 		int startSecond = 15; //시간제한 15초
-		
-		Thread thread = new Thread();
-		th
 	}
 
 	public void execute(사회자 매니저) {
