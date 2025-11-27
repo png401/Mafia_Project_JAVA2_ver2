@@ -147,7 +147,7 @@ public class View2 extends JFrame {
    
    public void setImagePanel() throws IOException {
 	      img= ImageIO.read(View2.class.getResource("/image/citizen.png"));
-	      bgPanel = new ImagePanel(img);     
+	      bgPanel = new ImagePanel(img);
 	      bgPanel.setBounds(12,10,778+10,481+10); //기존 textArea크기보다 조금 더 크게
 	      bgPanel.setLayout(null);
 	      
