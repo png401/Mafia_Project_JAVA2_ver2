@@ -106,8 +106,10 @@ public class View2 extends JFrame {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
 	            // TODO Auto-generated method stub
-	            JTextField input = (JTextField) e.getSource();	           
-	            clientManager.sendMessage("Message:"+input.getText());	            
+	            JTextField input = (JTextField) e.getSource();	 
+	            String inputString = input.getText();
+	            clientManager.sendMessage("Message:"+inputString);	     
+	            System.out.println("뷰에서 메세지 보냄:"+ inputString);//디버그용
 	            input.setText("");
 	            input.requestFocus();
 	         }
