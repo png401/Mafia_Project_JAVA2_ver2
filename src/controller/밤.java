@@ -33,8 +33,8 @@ public class 밤 implements IState{
 			//skill이 null이면 넘어감
 			if(p.skill == null) continue;
 
-			int targetId = askTargetId(p, 매니저);
-			p.skill.skill(p, targetId);
+			//int targetId = askTargetId(p, 매니저);
+			//p.skill.skill(p, targetId);
 		}
 
 		nightResult(매니저);
@@ -46,34 +46,34 @@ public class 밤 implements IState{
 
 	}
 
-	private int askTargetId(Player self, 사회자 매니저) {
-		while(true) {
-			System.out.println("\n현재 생존자 목록:");
-			for(Player p : 매니저.players) {
-				if(p.is_alive) {
-					System.out.println("ID " + p.id + " - " + p.nickname + " (" + p.getRole() + ")");
-				}
-			}
-
-			System.out.print("[" + self.getRole() + " " + self.nickname
-                    + "] 대상 ID를 입력하세요: ");
-
-			int targetId = sc.nextInt();
-
-			Player target = 매니저.getPlayerById(targetId);
-
-			if (target == null) {
-                System.out.println("존재하지 않는 ID입니다. 다시 입력해주세요.");
-                continue;
-            }
-            if (!target.is_alive) {
-                System.out.println("이미 사망한 플레이어입니다. 다시 입력해주세요.");
-                continue;
-            }
-
-            return targetId;
-		}
-	}
+//	private int askTargetId(Player self, 사회자 매니저) {
+//		while(true) {
+//			System.out.println("\n현재 생존자 목록:");
+//			for(Player p : 매니저.players) {
+//				if(p.is_alive) {
+//					System.out.println("ID " + p.id + " - " + p.nickname + " (" + p.getRole() + ")");
+//				}
+//			}
+//
+//			System.out.print("[" + self.getRole() + " " + self.nickname
+//                    + "] 대상 ID를 입력하세요: ");
+//
+//			int targetId = sc.nextInt();
+//
+//			Player target = 매니저.getPlayerById(targetId);
+//
+//			if (target == null) {
+//                System.out.println("존재하지 않는 ID입니다. 다시 입력해주세요.");
+//                continue;
+//            }
+//            if (!target.is_alive) {
+//                System.out.println("이미 사망한 플레이어입니다. 다시 입력해주세요.");
+//                continue;
+//            }
+//
+//            return targetId;
+//		}
+//	}
 
 	private void nightResult(사회자 매니저) {
 		int mafiaTargetId=0;
