@@ -16,20 +16,11 @@ public class TargetCommand implements ICommand {
 
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
-        // TODO Auto-generated method stub
         int targetId = Integer.parseInt(payload);
-        System.out.println("서버가 받은 타켓:"+targetId);
 
-        // 디버깅용
-        Player p = sender.getPlayer();
-        System.out.println("[TargetCommand] 수정 중인 Player 객체 주소: " + System.identityHashCode(p));
-
-        p.setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
-//        count++;
-//        
-//        if(count == logicBrain.get) {
-//        	logicBrain.getState().execute(logicBrain);
-//        	count = 0;
-//        }
+        if (sender.getPlayer() != null) {
+            sender.getPlayer().setNightTargetId(targetId);
+            System.out.println("[서버] " + sender.getPlayer().nickname + " -> 타겟 " + targetId + " 설정완료");
+        }
     }
 }
