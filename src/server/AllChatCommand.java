@@ -16,14 +16,16 @@ public class AllChatCommand implements ICommand {
 	public void execute(ServerThread sender, String payload, IState currentState) {
 		// TODO Auto-generated method stub
 		// 토론 상태일 때만 실행됨.
-		if(currentState instanceof 토론) {		
-			//죽으면 뷰에서 막기로
-			if(sender.getPlayer().is_alive) {
-				networkBrain.broadcastAll(sender.getPlayer().nickname + ": " + payload);
-			} 
-		} else {
-			sender.sendMessage("채팅은 토론 상태에서만 할 수 있습니다.");
-		}
+		networkBrain.broadcastAll("Message:"+sender.getPlayer().nickname + ": " + payload);
+//		if(currentState instanceof 토론) {		
+//			//죽으면 뷰에서 막기로
+//			
+//			if(sender.getPlayer().is_alive) {
+//				networkBrain.broadcastAll("Message:"+sender.getPlayer().nickname + ": " + payload);
+//			} 
+//		} else {
+//			sender.sendMessage("채팅은 토론 상태에서만 할 수 있습니다.");
+//		}
 	}
 
 }
