@@ -17,12 +17,12 @@ public class TargetCommand implements ICommand {
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
 
-        for (Player player : logicBrain.players) {
-			if (player.getServerThread() == sender) {
-				int target = Integer.parseInt(payload);
-				player.setNightTargetId(target);
-			}
-		}
+        int targetId = Integer.parseInt(payload);
+
+        if (sender.getPlayer() != null) {
+            sender.getPlayer().setNightTargetId(targetId);
+            System.out.println("[서버] " + sender.getPlayer().nickname + " -> 타겟 " + targetId + " 설정완료");
+        }
 
     }
 }

@@ -132,6 +132,10 @@ public class 사회자 {
 		return null;
 	}
 	
+	public void getNight() {
+		
+	}
+	
 	public void start() {
 		init_game();
 		
