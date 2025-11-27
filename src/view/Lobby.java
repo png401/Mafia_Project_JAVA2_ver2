@@ -139,7 +139,7 @@ public class Lobby extends JFrame {
 
 	//Start 시퀀스의 끝
 	public void start() throws IOException {
-		setView(new View2());
+		setView(new View2(clientManager));
 		getView().setVisible(true);	
 		dispose();
 	}		

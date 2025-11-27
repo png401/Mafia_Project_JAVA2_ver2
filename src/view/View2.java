@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import client.ClientManager;
 import model.Player;
 
 import javax.swing.JTextArea;
@@ -48,9 +49,11 @@ public class View2 extends JFrame {
    private JButton skillButton;
    private JLabel roleName;
    private JLabel roleImage;
+   
+   private ClientManager clientManager;
 
    private DefaultListModel<String> players;
-         
+       
    public View2() throws IOException{
       
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);      
@@ -68,20 +71,8 @@ public class View2 extends JFrame {
       inputField = new JTextField();
       inputField.setBounds(12, 508, 673, 21);
       contentPane.add(inputField);
-      inputField.setColumns(10);
-      
-      inputField.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            JTextField input = (JTextField) e.getSource();
-            chatArea.append(input.getText() + '\n');
-            chatArea.setCaretPosition(chatArea.getDocument().getLength());
-            input.setText("");
-         }
-      }); 
-      
+      inputField.setColumns(10);      
+            
       enterButton = new JButton("ENTER");
       enterButton.setBounds(697, 508, 93, 21);
       contentPane.add(enterButton);
@@ -106,10 +97,33 @@ public class View2 extends JFrame {
       setImagePanel();
    }
    
+   public View2(ClientManager clientManager) throws IOException {
+	   this();
+	   this.clientManager = clientManager;
+	   
+	   inputField.addActionListener(new ActionListener() {
+	         
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	            // TODO Auto-generated method stub
+	            JTextField input = (JTextField) e.getSource();	           
+	            clientManager.sendMessage("Message:"+input.getText());	            
+	            input.setText("");
+	            input.requestFocus();
+	         }
+	      }); 
+   }
 
    public void setPlayersModel(DefaultListModel<String> players) {
       this.players = players;
       playerList.setModel(players);
+   }
+   
+   public void allChat(String message) {	 
+	   chatArea.append(message + '\n');
+	   chatArea.setCaretPosition(chatArea.getDocument().getLength());
+	   
+	   contentPane.repaint();
    }
 
    //사용자의 role에 따라 다르게 나와야함. 예외처리는 throws로 .
@@ -147,7 +161,7 @@ public class View2 extends JFrame {
    
    public void setImagePanel() throws IOException {
 	      img= ImageIO.read(View2.class.getResource("/image/citizen.png"));
-	      bgPanel = new ImagePanel(img);     
+	      bgPanel = new ImagePanel(img);
 	      bgPanel.setBounds(12,10,778+10,481+10); //기존 textArea크기보다 조금 더 크게
 	      bgPanel.setLayout(null);
 	      
