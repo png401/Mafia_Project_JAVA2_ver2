@@ -1,14 +1,15 @@
-import controller.사회자;
+import client.ClientManager;
 import view.Lobby;
 
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//Clientmanager clientManager = new ClientManager(lobby);
+		// TODO Auto-generated method stub		
+		ClientManager clientManager = new ClientManager();
 		
-		Lobby lobby = new Lobby();
+		Lobby lobby = new Lobby(clientManager);
+		clientManager.setLobby(lobby);
 		lobby.setVisible(true);
 	}
-
+	
 }

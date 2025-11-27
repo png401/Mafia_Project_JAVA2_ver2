@@ -8,7 +8,9 @@ public class Player {
 	private String role;
 	public boolean is_alive = true;
 	public ISkill skill = null;
+	public String skillName = null;
 	
+	//transient가 뭘까 지워도 되는걸까
 	private transient ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id
@@ -22,6 +24,10 @@ public class Player {
 
 	public String getRole() {
 		return role;
+	}
+
+	public String getSkillName() {
+		return skillName;
 	}
 
 	public void setRole(String role) {

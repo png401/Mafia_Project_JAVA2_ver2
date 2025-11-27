@@ -63,15 +63,19 @@ public class RoleFactory {
 			switch(role) {
 			case "mafia":
 				p.skill = new Kill();
+				p.skillName = "kill";
 				break;
 			case "doctor":
 				p.skill = new Heal();
+				p.skillName = "heal";
 				break;
 			case "police":
 				p.skill = new Inspect();
+				p.skillName = "Inspect";
 				break;
 			default:
 				p.skill = null;
+				p.skillName = null;
 			}			
 			
 		}

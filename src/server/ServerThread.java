@@ -19,8 +19,7 @@ public class ServerThread extends Thread {
     public ServerThread(Socket socket, CommandManager cm) {
         this.socket = socket;
         this.networkBrain = cm;
-    }
-    
+    }    
     
     // 서버가 플레이어의 역할, 생사여부 등을 확인할 때 사용하기 위해 만들었습니다.
     public void setPlayer(Player player) { // 사회자한테 받은 플레이어 등록.

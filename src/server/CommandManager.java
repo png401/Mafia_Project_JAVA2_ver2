@@ -28,8 +28,6 @@ public class CommandManager {
     public synchronized void handleNewConnection(ServerThread clientThread) {
         allClients.add(clientThread);
         System.out.println("[CommandManager] 새 연결. 총 " + allClients.size() + "명");
-        // 첫 접속에서 해당 클라이언트에게 닉네임 물어보기
-        //clientThread.sendMessage("서버에 접속했습니다. 게임에서 사용하실 닉네임을 입력해주세요: ");
     }
 
     public synchronized void handleDisconnect(ServerThread clientThread) {
@@ -61,7 +59,7 @@ public class CommandManager {
         } else {
             // Start 명령어일 시 모든 클라이언트에게 게임이 시작되었다고 알려주기.
         	broadcastAll("Start:");
-            logicBrain.init_game();
+            logicBrain.start();
         }
     }
 
