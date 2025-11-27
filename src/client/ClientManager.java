@@ -74,8 +74,9 @@ public class ClientManager {
         	lobby.getView().setPlayersModel(players);
         }
         // Case 4: 채팅 메시지 등 그 외 처리
-        else {
-            // 예: lobby.appendChat(message); 와 같이 구현 가능
+        else if (message.startsWith("Message:")){
+        	String chatMessage = message.substring(8);
+        	lobby.getView().allChat(chatMessage);
         }
     }
 
