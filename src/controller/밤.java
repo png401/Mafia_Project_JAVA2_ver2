@@ -24,7 +24,7 @@ public class 밤 implements IState {
 	}
 
 	public void execute(사회자 매니저) {
-		// 시간제한 15초
+		// 시간제한 30초
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e) {
@@ -45,6 +45,8 @@ public class 밤 implements IState {
 		
 		nightResult(매니저);
 
+
+
 		// 다음 밤 위해 초기화
 		for (Player p : 매니저.players) {
 			p.setNightTargetId(0);
@@ -57,6 +59,7 @@ public class 밤 implements IState {
 		int doctorTargetId = 0;
 		int policeTargetId = 0;
 
+<<<<<<< HEAD
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -65,11 +68,25 @@ public class 밤 implements IState {
 		}
 		
 		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
+=======
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
+>>>>>>> 5f120b9a8f7e5b2d7baa4ef6e823cc372f43ec99
 		for (Player p : 매니저.players) {
 			if (!p.is_alive)
 				continue;
 
+			// 디버깅용
+			System.out.println("[밤 결과] 리스트에 있는 Player(" + p.nickname + ") 객체 주소: " + System.identityHashCode(p));
+
 			int target = p.getNightTargetId();
+			System.out.println("밤타겟:"+target); // 디버깅용
 
 			String role = p.getRole();
 			if ("mafia".equals(role)) {
@@ -78,6 +95,7 @@ public class 밤 implements IState {
 				doctorTargetId = target;
 			} else if ("police".equals(role)) {
 				policeTargetId = target;
+				System.out.println("경찰 조사 대상:"+policeTargetId+" target: "+target);
 				Player 피조사자 = 매니저.getPlayerById(policeTargetId);
 				if (피조사자.getRole().equals("mafia")) {
 					p.getServerThread().sendMessage("Inspect:1");
