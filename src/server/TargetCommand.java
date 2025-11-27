@@ -16,5 +16,6 @@ public class TargetCommand implements ICommand {
         // TODO Auto-generated method stub
         int targetId = Integer.parseInt(payload);
         sender.getPlayer().setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
+
     }
 }
