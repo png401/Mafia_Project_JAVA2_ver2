@@ -26,7 +26,7 @@ public class 밤 implements IState {
 	public void execute(사회자 매니저) {
 		// 시간제한 15초
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +40,9 @@ public class 밤 implements IState {
 //			
 //			p.skill.skill(p, targetId);
 //		}
-
+		
+		
+		
 		nightResult(매니저);
 
 		// 다음 밤 위해 초기화
@@ -55,6 +57,13 @@ public class 밤 implements IState {
 		int doctorTargetId = 0;
 		int policeTargetId = 0;
 
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
 		for (Player p : 매니저.players) {
 			if (!p.is_alive)
