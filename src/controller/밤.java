@@ -26,7 +26,7 @@ public class 밤 implements IState {
 	public void execute(사회자 매니저) {
 		// 시간제한 15초
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
