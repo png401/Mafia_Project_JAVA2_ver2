@@ -19,7 +19,7 @@ public class TargetCommand implements ICommand {
         // TODO Auto-generated method stub
     	
         int targetId = Integer.parseInt(payload);
-<<<<<<< HEAD
+
         
         // 네트워크 쪽 플레이어 (이건 ServerThread가 들고 있는 Player)
         Player netPlayer = sender.getPlayer();
@@ -29,7 +29,7 @@ public class TargetCommand implements ICommand {
         
         System.out.println("타겟:"+targetId);
         logicPlayer.setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
-=======
+
         System.out.println("서버가 받은 타켓:"+targetId);
 
         // 디버깅용
@@ -37,7 +37,6 @@ public class TargetCommand implements ICommand {
         System.out.println("[TargetCommand] 수정 중인 Player 객체 주소: " + System.identityHashCode(p));
 
         p.setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
->>>>>>> 5f120b9a8f7e5b2d7baa4ef6e823cc372f43ec99
 //        count++;
 //        
 //        if(count == logicBrain.get) {

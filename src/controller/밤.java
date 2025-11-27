@@ -59,7 +59,6 @@ public class 밤 implements IState {
 		int doctorTargetId = 0;
 		int policeTargetId = 0;
 
-<<<<<<< HEAD
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -68,7 +67,6 @@ public class 밤 implements IState {
 		}
 		
 		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
-=======
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -77,7 +75,6 @@ public class 밤 implements IState {
 
 
         // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
->>>>>>> 5f120b9a8f7e5b2d7baa4ef6e823cc372f43ec99
 		for (Player p : 매니저.players) {
 			if (!p.is_alive)
 				continue;
