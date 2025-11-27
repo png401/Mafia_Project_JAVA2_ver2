@@ -9,7 +9,7 @@ import java.net.Socket;
 import controller.사회자;
 
 public class ServerManager {
-	public static final int PORT = 50023;
+	public static final int PORT = 50023;	
 
 	public static void main(String[] args) {
 		ServerSocket serverSocket = null;
@@ -39,4 +39,5 @@ public class ServerManager {
 	private static void consoleLog(String log) {
 		System.out.println("[server " + Thread.currentThread().getId() + "] " + log);
 	}
+	
 }

@@ -2,54 +2,27 @@ package client;
 
 import java.io.IOException;
 
-import controller.사회자;
-import model.Player;
+import javax.swing.DefaultListModel;
+
 import view.Lobby;
 
 public class ClientManager {
-
     private ClientThread clientThread;
     private Lobby lobby;
-    private String myName;
-    //private 사회자 사회자 = controller.사회자.getInstance();
 
-    public String getMyName() {
-		return myName;
+	public void setLobby(Lobby lobby) {
+		this.lobby = lobby;
 	}
-
-	private Player me; 
-        
-	public void setMe(Player me) {
-		this.me = me;
-	}
-	
-	
-	public ClientManager(Lobby lobby) {
-    	this();
-    	this.lobby = lobby;
-    }
 
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.61.93", 50023, this);
+            clientThread = new ClientThread("10.240.5.13", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
         }
     }
-
-    // 로비 생성 시 자신의 로비와 연결
-    /*
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
-    }*/
-
-    public void setMyName(String nickname) {
-    	this.myName = nickname;
-    	//사회자.addLobby(lobby);
-    }
-
 
     // 서버로 메세지 전송
     public void sendMessage(String message) {
@@ -61,10 +34,8 @@ public class ClientManager {
     }
 
     // 서버에게서 받은 메세지 처리
-    public void handleMessage(String message) {
+    public void handleMessage(String message) throws IOException {
         System.out.println("[Client 수신]: " + message);
-
-        //if (lobby == null) return;
 
         // Case 1: 플레이어 입장 (서버가 "Join:닉네임"을 보냄)
         if (message.startsWith("Join:")) {
@@ -79,14 +50,30 @@ public class ClientManager {
             // 로비 화면을 게임 화면으로 전환
             lobby.start();
         }
-        
-        else if (message.startsWith("ROLE:")) {
+        // Case 3: 직업 배정 (사회자가 "Role:직업"을 보냄)
+        else if (message.startsWith("Role:")) {
         	String role = message.substring(5);
         	System.out.println("내 역할: "+role);
         	lobby.getView().setRoleView(role);
         }
-        
-        // Case 3: 채팅 메시지 등 그 외 처리
+        else if (message.startsWith("Skill:")) {
+        	String skill = message.substring(6);
+        	System.out.println("내 역할: "+skill);
+        	lobby.getView().setSkillButton(skill);
+        }
+        //Case 4: playerList 처리
+        else if (message.startsWith("Players:")) {
+        	String playersMessage = message.substring(8);
+        	String[] playersMessageSplit = playersMessage.split(";");
+
+        	DefaultListModel<String> players = new DefaultListModel<String>();
+        	for (String string : playersMessageSplit) {
+				players.addElement(string);
+			}
+
+        	lobby.getView().setPlayersModel(players);
+        }
+        // Case 4: 채팅 메시지 등 그 외 처리
         else {
             // 예: lobby.appendChat(message); 와 같이 구현 가능
         }
@@ -96,4 +83,5 @@ public class ClientManager {
     public void onDisconnected() {
         System.out.println("서버와의 연결이 종료되었습니다.");
     }
+
 }

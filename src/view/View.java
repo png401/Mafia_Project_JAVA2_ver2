@@ -1,6 +1,4 @@
 package view;
-import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -39,23 +37,6 @@ public class View extends JFrame {
 
 	private DefaultListModel<String> enteredPlayer;
 	public List <Player> players;
-
-	/**
-	 * Lobby에서 View를 만들 예정
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					View frame = new View();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the frame.
@@ -108,13 +89,9 @@ public class View extends JFrame {
 		contentPane.add(playerList);
 		
 		skillField = new JTextField();
-		skillField.setBounds(817, 508, 75, 21);
+		skillField.setBounds(817, 508, 42, 21);
 		contentPane.add(skillField);
 		skillField.setColumns(10);
-		
-		skillButton = new JButton("skill name");
-		skillButton.setBounds(906, 508, 48, 21);
-		contentPane.add(skillButton);
 	}
 
 	public void setPlayersModel(DefaultListModel<String> enteredPlayer) {
@@ -139,6 +116,13 @@ public class View extends JFrame {
 		roleName.setBounds(817, 480, 127, 15);
 		contentPane.add(roleName);
 
+		contentPane.repaint();
+	}	
+	public void setSkillButton(String skill) {
+		skillButton = new JButton(skill);
+		skillButton.setBounds(863, 508, 91, 21);
+		contentPane.add(skillButton);
+		
 		contentPane.repaint();
 	}
 

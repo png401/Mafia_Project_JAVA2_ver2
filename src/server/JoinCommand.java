@@ -13,18 +13,18 @@ public class JoinCommand implements ICommand{
 		this.logicBrain=logic;
 	}
 
-	// 클라이언트가 들어오면 닉네임을 받아서 Player 객체 생성
+	
 	@Override
 	public void execute(ServerThread sender, String payload, IState currentState) {
 		// TODO Auto-generated method stub
 
-		// Player 객체를 사회자한테 받아서 Lobby에 닉네임을 broadcast하기
+		// 클라이언트가 들어오면 닉네임을 받아서 Player 객체 생성
 		Player newPlayer = logicBrain.createNewPlayer(payload);
+		//ServerThread와 맵핑
 		sender.setPlayer(newPlayer);
 		newPlayer.setServerThread(sender);
 		
-		//logicBrain.createNewPlayer(payload);
-		
+		// 닉네임을 broadcast하기
 		networkBrain.broadcastAll("Join:"+payload); // 여기서 payload 플레이어의 닉네임
 	}
 

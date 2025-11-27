@@ -1,5 +1,15 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows
+# IntelliJ output folder
+out/
+
+# Visual Paradigm settings
+.vpprefdata/
+
+# Lock files
+*.lock
+.lock
+
 # IntelliJ
 .idea/
 *.iml
