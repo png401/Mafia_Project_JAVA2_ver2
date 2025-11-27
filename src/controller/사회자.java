@@ -25,7 +25,10 @@ public class 사회자 {
 	public int dayCount=0;
 	
 	private int killedID=0;
-	private int healedID=0;
+
+	public void setKilledID(int killedID) {
+		this.killedID = killedID;
+	}
 	
 	public static synchronized 사회자 getInstance() {
 		if(매니저 == null) {
@@ -134,7 +137,7 @@ public class 사회자 {
 		
         while(true) {
         	this.set_state(new 밤());
-        	//this.gameState.execute(매니저);
+        	this.gameState.execute(매니저);
         	checkEnd();      	
         	
         	this.set_state(new 토론());
