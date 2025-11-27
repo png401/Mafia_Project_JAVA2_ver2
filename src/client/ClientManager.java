@@ -78,6 +78,14 @@ public class ClientManager {
         	String chatMessage = message.substring(8);
         	lobby.getView().allChat(chatMessage);
         }
+        // 
+        else if (message.startsWith("Inspect:")) {
+        	String result = message.substring(8);
+        	if (result.equals("1"))
+        		lobby.getView().allChat("======================조사결과, 마피아입니다======================");
+        	else if (result.equals("0")) 
+        		lobby.getView().allChat("======================조사결과, 마피아가 아닙니다======================");
+        }
     }
 
     // 연결 종료 시 처리
