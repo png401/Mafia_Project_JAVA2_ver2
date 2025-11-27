@@ -18,13 +18,11 @@ public class TargetCommand implements ICommand {
         // TODO Auto-generated method stub
         int targetId = Integer.parseInt(payload);
         sender.getPlayer().setNightTargetId(targetId); // Player의 객체의 NightTargetId 변경
-        count++;
-        System.out.println("targetId 받음: "+targetId);
-        System.out.println("count: "+count);
-        
-        if(count == 3) {
-        	logicBrain.getState().execute(logicBrain);
-        	count = 0;
-        }
+//        count++;
+//        
+//        if(count == logicBrain.get) {
+//        	logicBrain.getState().execute(logicBrain);
+//        	count = 0;
+//        }
     }
 }
