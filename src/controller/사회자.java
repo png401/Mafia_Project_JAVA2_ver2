@@ -138,19 +138,19 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();
         	
-        	//밤의 결과를 날릴 부분
-        	if(killedID == healedID) {
-        		System.out.println("[결과] 의사가 보호. 아무도 안 죽음.");
-        		return;
-        	}
-        	
-        	Player target = 매니저.getPlayerById(killedID);
-        	
-        	if(target != null && target.is_alive) {
-        		target.is_alive = false;
-        		매니저.ghosts.add(target);
-        		System.out.println("[결과] "+target.nickname+"이 사망함.");
-        	}
+//        	//밤의 결과를 날릴 부분
+//        	if(killedID == healedID) {
+//        		System.out.println("[결과] 의사가 보호. 아무도 안 죽음.");
+//        		return;
+//        	}
+//
+//        	Player target = 매니저.getPlayerById(killedID);
+//
+//        	if(target != null && target.is_alive) {
+//        		target.is_alive = false;
+//        		매니저.ghosts.add(target);
+//        		System.out.println("[결과] "+target.nickname+"이 사망함.");
+//        	}
         	
         	this.set_state(new 토론());
         	this.gameState.execute(매니저);

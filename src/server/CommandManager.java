@@ -22,6 +22,7 @@ public class CommandManager {
         this.commandMap.put("Start", null);
         this.commandMap.put("Join", new JoinCommand(this, logicBrain));
         this.commandMap.put("Message", new AllChatCommand(this, logicBrain));
+        this.commandMap.put("Target", new TargetCommand(this, logicBrain));
         this.commandMap.put("Mafia_message", new MafiaChatCommand(this, logicBrain));
     }
 
