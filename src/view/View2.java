@@ -43,7 +43,6 @@ public class View2 extends JFrame {
    private JTextArea chatArea;
    private JScrollPane chatAreaScroll;  
    private JTextField inputField;
-   private JButton enterButton;
    private JTextField skillField;
    private JList playerList;
    private JButton skillButton;
@@ -69,13 +68,9 @@ public class View2 extends JFrame {
       contentPane.setLayout(null);
            
       inputField = new JTextField();
-      inputField.setBounds(12, 508, 673, 21);
+      inputField.setBounds(12, 508, 788, 21);
       contentPane.add(inputField);
-      inputField.setColumns(10);      
-            
-      enterButton = new JButton("ENTER");
-      enterButton.setBounds(697, 508, 93, 21);
-      contentPane.add(enterButton);
+      inputField.setColumns(10);
 
       playerList = new JList<Player>();
       playerList.setBounds(817, 10, 137, 323);
@@ -90,7 +85,7 @@ public class View2 extends JFrame {
       skillField = new JTextField();
       skillField.setBounds(817, 508, 42, 21);
       contentPane.add(skillField);
-      skillField.setColumns(10);      
+      skillField.setColumns(10);           
            
       /////////////////////////////////////////////////////////////////////   
   
@@ -114,6 +109,18 @@ public class View2 extends JFrame {
 	            input.requestFocus();
 	         }
 	      }); 
+	   
+	   skillField.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JTextField input = (JTextField) e.getSource();	
+				String targetId = input.getText();
+				clientManager.sendMessage("Target:"+targetId);
+				input.setText("");
+			}
+		});
    }
 
    public void setPlayersModel(DefaultListModel<String> players) {
