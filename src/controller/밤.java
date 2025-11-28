@@ -50,7 +50,7 @@ public class 밤 implements IState {
 
         // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
 		for (Player p : 매니저.players) {
-			if (!p.is_alive)
+			if (!p.getIs_alive())
 				continue;
 
 			int target = p.getNightTargetId();
@@ -68,7 +68,7 @@ public class 밤 implements IState {
 				System.out.println("경찰 조사 대상:"+policeTargetId +" target: "+ target);//디버그용
 
 				// 0인지 체크하는 걸 추가했음
-				if (policeTargetId == 0) {
+				if (policeTargetId == -1) {
 					p.getServerThread().sendMessage("System:시간 내에 대상을 지목하지 못했습니다.");
 					continue;
 				}
@@ -91,24 +91,24 @@ public class 밤 implements IState {
 
 
 		// 마피아가 지목해서 사망했으면
-		if (mafiaTargetId != 0) {
+		if (mafiaTargetId != -1) {
 			Player 사망자 = 매니저.getPlayerById(mafiaTargetId);
-			if (사망자 != null && 사망자.is_alive) {
+			if (사망자 != null && 사망자.getIs_alive()) {
                 // 의사랑 마피아랑 똑같은 애 지목하면
                 if (mafiaTargetId == doctorTargetId) {
                     매니저.setKilledID(0);
-                    String msg = "System:" + "[밤 결과] "+사망자.id + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
+                    String msg = "System:" + "[밤 결과] "+사망자.getId() + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                     return;
                 }
                 else {
-                    사망자.is_alive = false;
+                    사망자.setIs_alive(false);
                     매니저.ghosts.add(사망자);
-                    매니저.setKilledID(사망자.id);
-                    String msg = "System:" + "[밤 결과] "+ 사망자.id + "번 플레이어가 사망했습니다.";
+                    매니저.setKilledID(사망자.getId());
+                    String msg = "System:" + "[밤 결과] "+ 사망자.getId() + "번 플레이어가 사망했습니다.";
                     //Jlist 업데이트
-                    매니저.getCommandManager().broadcastAll("List:"+(사망자.id));
+                    매니저.getCommandManager().broadcastAll("List:"+(사망자.getId()));
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                 }
