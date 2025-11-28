@@ -65,34 +65,34 @@ public class MafiaChatView extends JFrame {
         JButton mafiaEnterButton = new JButton("ENTER");
         mafiaEnterButton.setBounds(275, 511, 95, 23);
         contentPane.add(mafiaEnterButton);
-        
+
         JLabel noticeLabel = new JLabel("아이디가 더 큰 마피아가 입력한 타겟이 사망합니다");
         noticeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         noticeLabel.setForeground(new Color(255, 0, 0));
         noticeLabel.setBounds(12, 10, 358, 15);
         contentPane.add(noticeLabel);
-        
-                mafiaChatArea = new JTextArea();
-                contentPane.add(mafiaChatArea);
-                mafiaChatArea.setBounds(12, 35, 358, 467);
+
+        mafiaChatArea = new JTextArea();
+        scrollPane.add(mafiaChatArea);
+        mafiaChatArea.setBounds(12, 35, 358, 467);
 
     }
 
     public MafiaChatView(ClientManager clientManager) {
         this();
         this.clientManager = clientManager;
-        
+
         ActionListener sendAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String msg = mafiaInputField.getText();
-                
+
                 // 빈 값 전송 방지
-                if(msg.trim().isEmpty()) return;
+                if (msg.trim().isEmpty()) return;
 
                 // 서버로 "Mafia_message:내용" 보냄
                 clientManager.sendMessage("Mafia_message:" + msg);
-                
+
                 // 입력창 비우기
                 mafiaInputField.setText("");
                 mafiaInputField.requestFocus();
