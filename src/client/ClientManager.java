@@ -20,7 +20,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.113.45", 50023, this);
+            clientThread = new ClientThread("10.240.13.180", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -100,10 +100,6 @@ public class ClientManager {
         else if (message.startsWith("System:")) {
             String sysMsg = message.substring(7);
             lobby.getView().allChat("======================" + sysMsg+ "======================"); // 채팅창에 출력
-        }
-        else if (message.startsWith("Vote:")){
-        	lobby.getView().changeButtonText("vote");
-        	
         }
         else if (message.startsWith("List:")) {
         	String id = message.substring(5);
