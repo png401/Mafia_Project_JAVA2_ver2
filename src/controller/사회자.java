@@ -31,7 +31,7 @@ public class 사회자 {
 	
 	private int killedID=0;
 	
-	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0));
+	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0));
 
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;

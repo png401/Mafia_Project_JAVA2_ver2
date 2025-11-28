@@ -123,8 +123,5 @@ public class 밤 implements IState {
 				System.out.println("[결과] 마피아가 지목한 대상이 유효하지 않습니다.");
 			}
 		}
-
-
 	}
-
 }

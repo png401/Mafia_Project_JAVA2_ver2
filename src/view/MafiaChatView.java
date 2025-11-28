@@ -53,10 +53,8 @@ public class MafiaChatView extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        mafiaChatArea = new JTextArea();
-        scrollPane = new JScrollPane(mafiaChatArea);
-        mafiaChatArea.setBounds(12, 10, 358, 478);
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(12, 35, 358, 467);
         contentPane.add(scrollPane);
 
         mafiaInputField = new JTextField();
@@ -73,6 +71,10 @@ public class MafiaChatView extends JFrame {
         noticeLabel.setForeground(new Color(255, 0, 0));
         noticeLabel.setBounds(12, 10, 358, 15);
         contentPane.add(noticeLabel);
+        
+                mafiaChatArea = new JTextArea();
+                contentPane.add(mafiaChatArea);
+                mafiaChatArea.setBounds(12, 35, 358, 467);
 
     }
 
