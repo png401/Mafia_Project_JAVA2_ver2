@@ -149,6 +149,8 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();      	
         	
+        	dayCount++;
+        	
         	this.set_state(new 토론());
         	this.gameState.execute(매니저);
         	//Server.execute(Player player);
