@@ -48,6 +48,7 @@ public class View2 extends JFrame {
    private JTextField skillField;
    private JList playerList;
    private JButton skillButton;
+   private JButton voteButton;
    private JLabel roleName;
    private JLabel roleImage;
    
@@ -69,9 +70,14 @@ public class View2 extends JFrame {
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
       contentPane.setLayout(null);
+      
+      //윈도우빌더에 보여라
+      voteButton = new JButton("vote");
+      voteButton.setBounds(709, 508, 91, 21);
+      contentPane.add(voteButton);
            
       inputField = new JTextField();
-      inputField.setBounds(12, 508, 788, 21);
+      inputField.setBounds(12, 508, 647, 21);
       contentPane.add(inputField);
       inputField.setColumns(10);
 
@@ -106,7 +112,7 @@ public class View2 extends JFrame {
       contentPane.add(playerList); 
       
       skillField = new JTextField();
-      skillField.setBounds(817, 508, 42, 21);
+      skillField.setBounds(664, 508, 42, 21);
       contentPane.add(skillField);
       skillField.setColumns(10);           
            
@@ -184,6 +190,11 @@ public class View2 extends JFrame {
       contentPane.repaint();
    }
    
+   public void changeButtonText(String text) {
+	   skillButton.setText(text);
+	   contentPane.repaint();
+   }
+   
    public void updateList(int id) {
 	   deadIndices.add(id);
 	   playerList.repaint();
@@ -194,6 +205,7 @@ public class View2 extends JFrame {
    BufferedImage img ;
    ImagePanel bgPanel ;
    JPanel overlay;
+   private JTextField textField;
    /////////////////////////////////////////////////////////////////////////////
    
    public void setImagePanel() throws IOException {
@@ -228,6 +240,11 @@ public class View2 extends JFrame {
 	      bgPanel.add(overlay);
 	      overlay.add(chatAreaScroll);
 	      contentPane.add(bgPanel);
+	      
+	      textField = new JTextField();
+	      textField.setColumns(10);
+	      textField.setBounds(817, 508, 42, 21);
+	      contentPane.add(textField);
    }
    
    ////////////////////////////////////////////////////////////////

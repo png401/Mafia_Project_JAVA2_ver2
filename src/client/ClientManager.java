@@ -21,7 +21,7 @@ public class ClientManager {
         // 서버 연결
         try {
 
-            clientThread = new ClientThread("10.240.13.180", 50023, this);
+            clientThread = new ClientThread("10.240.113.45", 50023, this);
 
             clientThread.start();
         } catch (IOException e) {
@@ -104,7 +104,8 @@ public class ClientManager {
             lobby.getView().allChat("======================" + sysMsg+ "======================"); // 채팅창에 출력
         }
         else if (message.startsWith("Vote:")){
-        	lobby.getView().setSkillButton("vote");
+        	lobby.getView().changeButtonText("vote");
+        	
         }
         else if (message.startsWith("List:")) {
         	String id = message.substring(5);

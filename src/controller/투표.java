@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.Collections;
+import java.util.Iterator;
+
 import model.Player;
 
 public class 투표 implements IState {
@@ -26,18 +29,27 @@ public class 투표 implements IState {
 		voteResult(매니저);
 		
 		// 다음 투표 위해 초기화
-		for (int i = 0; i < 매니저.voteResult.length; i++) {
-			매니저.voteResult[i] = 0;
+		for (int i = 0; i < 매니저.voteResult.size(); i++) {
+			매니저.voteResult.set(i, 0);
 		}
 		
 	}
 	
 	private void voteResult(사회자 매니저) {
-		int killedID = 0;
-		for (int i = 0; i < 매니저.voteResult.length; i++) {
-			if(매니저.voteResult[i] >= 매니저.voteResult[killedID]) killedID = i;
-		}
-		if(매니저.voteResult[killedID] == 0 || 매니저.voteResult[killedID] == 매니저.voteResult[0]) {
+		int max = 0;
+		
+		max = Collections.max(매니저.voteResult);
+		Integer killedID = 매니저.voteResult.indexOf(max);
+		
+		// 최대 득표자수 찾기
+	    int topCandidates = 0;
+	    for (int i = 0; i < 매니저.voteResult.size(); i++) {
+	        if (매니저.voteResult.get(i) == max) {
+	            topCandidates++; 
+	        }
+	    }
+	    
+		if(max == 0 || topCandidates > 1) {
 			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] 아무도 사망하지 않았습니다.");		
 		}
 		else {
