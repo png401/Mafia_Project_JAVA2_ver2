@@ -72,7 +72,7 @@ public class 사회자 {
 	public void set_state(IState state) {
 		this.gameState = state;
 		if(state!=null) {
-		System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
+			System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
 		}
 	}
 	
