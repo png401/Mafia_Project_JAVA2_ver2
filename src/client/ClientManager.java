@@ -18,7 +18,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.15.10", 50023, this);
+            clientThread = new ClientThread("10.240.13.180", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
