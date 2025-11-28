@@ -6,7 +6,7 @@ public class 토론 implements IState{
 		매니저.getCommandManager().broadcastAll("System:"+"DAY "+(매니저.dayCount+1)+" 토론이 시작되었습니다. 토론시간은 5분 주어집니다");
 		
 		try {
-			Thread.sleep(300000);
+			Thread.sleep(180000);//3분
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

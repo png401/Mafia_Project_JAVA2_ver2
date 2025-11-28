@@ -38,8 +38,10 @@ public class Lobby extends JFrame {
 
 	private View2 view;
 	private ClientManager clientManager;
-	
+
 	private String nickname;
+	private JLabel ipLabel;
+	private JTextField ipField;
 
 	/**
 	 * Create the frame.
@@ -62,7 +64,7 @@ public class Lobby extends JFrame {
 		startButton.setFont(new Font("굴림", Font.PLAIN, 50));
 		startButton.setBounds(312, 395, 334, 102);
 		contentPane.add(startButton);
-		startButton.setEnabled(false);		
+		startButton.setEnabled(false);
 
 		playerTextLabel = new JLabel("입장한 플레이어");
 		playerTextLabel.setFont(new Font("굴림", Font.PLAIN, 30));
@@ -91,33 +93,54 @@ public class Lobby extends JFrame {
 		noticeTextLabel.setBounds(359, 158, 112, 15);
 		contentPane.add(noticeTextLabel);
 
-	}	
+		ipLabel = new JLabel("IP를 입력하세요");
+		ipLabel.setBounds(359, 133, 112, 15);
+		contentPane.add(ipLabel);
+
+		ipField = new JTextField();
+		ipField.setBounds(483, 130, 106, 21);
+		contentPane.add(ipField);
+		ipField.setColumns(10);
+
+	}
 
 	public Lobby(ClientManager clientManager) {
 		// TODO Auto-generated constructor stub
 		this();
 		this.clientManager = clientManager;
 
-		//닉네임 입력받기
-		nicknameInputField.addActionListener(new ActionListener() { 			
+		// 닉네임 입력받기
+		nicknameInputField.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {				
-				JTextField nicknameField = (JTextField) e.getSource(); 	
+			public void actionPerformed(ActionEvent e) {
+				JTextField nicknameField = (JTextField) e.getSource();
 				nickname = nicknameField.getText();
 				nicknameField.setText("");
 
-				//Join 시퀀스 시작
-				clientManager.sendMessage("Join:" + nickname);						
+				// Join 시퀀스 시작
+				clientManager.sendMessage("Join:" + nickname);
 			}
 		});
 
-		//시작하기 버튼 누르면
+		// 시작하기 버튼 누르면
 		startButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {				
-				//Start 시퀀스 시작
+			public void actionPerformed(ActionEvent e) {
+				// Start 시퀀스 시작
 				clientManager.sendMessage("Start:");
+			}
+		});
+		
+		//ip 입력받기
+		ipField.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JTextField ipField = (JTextField) e.getSource();
+				String ip = ipField.getText();
+				clientManager.setIp(ip);
 			}
 		});
 	}
@@ -130,20 +153,19 @@ public class Lobby extends JFrame {
 		this.view = view;
 	}
 
-	//Join 시퀀스의 끝
+	// Join 시퀀스의 끝
 	public void newPlayerEntered(String nickname) {
 		enteredPlayer.addElement(nickname);
 
-		if(enteredPlayer.getSize() >= 4) {
+		if (enteredPlayer.getSize() >= 4) {
 			startButton.setEnabled(true);
 		}
 	}
 
-	//Start 시퀀스의 끝
+	// Start 시퀀스의 끝
 	public void start() throws IOException {
 		setView(new View2(clientManager, nickname));
-		getView().setVisible(true);	
+		getView().setVisible(true);
 		dispose();
-	}		
-
+	}
 }

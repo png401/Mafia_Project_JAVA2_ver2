@@ -28,22 +28,6 @@ public class MafiaChatView extends JFrame {
     private ClientManager clientManager;
 
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MafiaChatView frame = new MafiaChatView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
      * Create the frame.
      */
     public MafiaChatView() {

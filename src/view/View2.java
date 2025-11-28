@@ -127,7 +127,7 @@ public class View2 extends JFrame {
 		this();
 		this.clientManager = clientManager;
 
-		myNameLabel = new JLabel(nickname);
+		myNameLabel = new JLabel("Nickname");
 		myNameLabel.setForeground(new Color(0, 0, 0));
 		myNameLabel.setBackground(new Color(255, 255, 0));
 		myNameLabel.setBounds(12, 10, 102, 21);
@@ -241,7 +241,7 @@ public class View2 extends JFrame {
 		chatArea.setBounds(12, 10, 778, 481);
 		chatArea.setOpaque(false);
 		chatAreaScroll = new JScrollPane(chatArea);
-		chatAreaScroll.setBounds(12, 10, 778, 481);
+		chatAreaScroll.setBounds(0, 0, 788, 457);
 		chatAreaScroll.setOpaque(false);
 		chatAreaScroll.getViewport().setOpaque(false);
 
