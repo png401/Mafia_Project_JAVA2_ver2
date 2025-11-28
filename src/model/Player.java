@@ -9,8 +9,7 @@ public class Player {
 	public boolean is_alive = true;
 	public ISkill skill = null;
 	public String skillName = null;
-	
-	//transient가 뭘까 지워도 되는걸까
+
 	private ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id

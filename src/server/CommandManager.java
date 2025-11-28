@@ -33,9 +33,6 @@ public class CommandManager {
 
     public synchronized void handleDisconnect(ServerThread clientThread) {
         allClients.remove(clientThread);
-        //퇴장 알림 nickname 없이 쓰는 걸로 고쳐야함
-        //System.out.println("[CommandManager] 연결 해제: " + clientThread.getPlayer().nickname + ". 남은 인원 " + allClients.size() + "명");
-        //broadcastAll(clientThread.getPlayer().nickname + "님이 퇴장했습니다."); // 모든 유저에게 퇴장 알림
     }
 
     // 클라이언트가 보내는 메세지 처리 메소드

@@ -19,7 +19,7 @@ public class AllChatCommand implements ICommand {
 		if(currentState instanceof 토론) {					
 			if(sender.getPlayer().is_alive) {
 				networkBrain.broadcastAll("Message:"+sender.getPlayer().nickname + ": " + payload);
-			} 
+			}
 		} else {
 			sender.sendMessage("채팅은 살아있는 사람만 토론 상태에서만 할 수 있습니다.");
 		}
