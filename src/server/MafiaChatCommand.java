@@ -17,13 +17,12 @@ public class MafiaChatCommand implements ICommand {
     public void execute(ServerThread sender, String payload, IState currentState) {
         // TODO Auto-generated method stub
         // 밤 상태에만 채팅 가능
-    	networkBrain.broadcastToMafia(sender.getPlayer().nickname + ": " + payload);
     	
-//        if (currentState instanceof 밤) {
-//            if (sender.getPlayer().getRole().equals("mafia")) {
-//                networkBrain.broadcastToMafia(sender.getPlayer().nickname + ": " + payload);
-//            }
-//        }
+        if (currentState instanceof 밤) {
+            if (sender.getPlayer().getRole().equals("mafia")) {
+                networkBrain.broadcastToMafia(sender.getPlayer().nickname + ": " + payload);
+            }
+        }
     }
 
 }
