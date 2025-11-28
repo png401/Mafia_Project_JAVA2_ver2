@@ -164,7 +164,7 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();      	
         	
-        	dayCount++;
+
         	
         	this.set_state(new 토론());
         	this.gameState.execute(매니저);
@@ -173,8 +173,8 @@ public class 사회자 {
         	this.set_state(new 투표());
         	this.gameState.execute(매니저);
         	checkEnd();
-        	
 
+			dayCount++;
         }
 	}
 
