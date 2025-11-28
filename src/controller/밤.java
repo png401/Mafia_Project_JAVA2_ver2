@@ -101,24 +101,35 @@ public class 밤 implements IState {
 			}
 		}
 
-		// 의사랑 마피아랑 똑같은 애 지목하면
-		if (mafiaTargetId != 0 && mafiaTargetId == doctorTargetId) {
-			매니저.setKilledID(0);
-			return;
-		}
+
 
 		// 마피아가 지목해서 사망했으면
 		if (mafiaTargetId != 0) {
 			Player 사망자 = 매니저.getPlayerById(mafiaTargetId);
 			if (사망자 != null && 사망자.is_alive) {
-				사망자.is_alive = false;
-				매니저.ghosts.add(사망자);
-				매니저.players.remove(사망자.id - 1);
-				매니저.setKilledID(사망자.id);
-			} else {
+                // 의사랑 마피아랑 똑같은 애 지목하면
+                if (mafiaTargetId == doctorTargetId) {
+                    매니저.setKilledID(0);
+                    String msg = "System:" + 사망자.id + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
+                    System.out.println(msg); // 서버 로그
+                    매니저.getCommandManager().broadcastAll(msg);
+                    return;
+                }
+                else {
+                    사망자.is_alive = false;
+                    매니저.ghosts.add(사망자);
+                    매니저.players.remove(사망자.id - 1);
+                    매니저.setKilledID(사망자.id);
+                    String msg = "System:이번 밤에 " + 사망자.id + "번 플레이어가 사망했습니다.";
+                    System.out.println(msg); // 서버 로그
+                    매니저.getCommandManager().broadcastAll(msg);
+                }
+			}
+            else {
 				System.out.println("[결과] 마피아가 지목한 대상이 유효하지 않습니다.");
 			}
 		}
+
 
 	}
 

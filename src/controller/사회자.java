@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import model.Player;
+import server.CommandManager;
 import server.ServerThread;
 
 public class 사회자 {
@@ -21,7 +22,10 @@ public class 사회자 {
 	public Map<Integer, Player> playersById = new HashMap<>();
 	public Map<String, Player> playersByNickname = new HashMap<>();
 	public List <Player> ghosts = new ArrayList<>();
-	
+
+    //통신 매니저 저장소
+    private CommandManager commandManager;
+
 	public int dayCount=0;
 	
 	private int killedID=0;
@@ -36,6 +40,16 @@ public class 사회자 {
 		}
 		return 매니저;
 	}
+
+    // Setter: ServerManager에서 호출
+    public void setCommandManager(CommandManager commandManager) {
+        this.commandManager = commandManager;
+    }
+
+    // Getter: 밤.java 등에서 호출
+    public CommandManager getCommandManager() {
+        return this.commandManager;
+    }
 	
 	public void addPlayer(Player p) {
 		players.add(p);

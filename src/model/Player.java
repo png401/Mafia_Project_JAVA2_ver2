@@ -16,7 +16,7 @@ public class Player {
 	//이 플레이어가 밤에 지목한 타겟id
 	private volatile int nightTargetId;
 	private volatile int voteTargetId;
-	
+
 	public Player(String nickname, int id) {
 		// TODO Auto-generated constructor stub
 		this.nickname = nickname;
