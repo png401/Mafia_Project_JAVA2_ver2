@@ -96,11 +96,6 @@ public class 사회자 {
 		return playerList;
 	}
 	
-	public void notifyAll(String message) {
-		// 나중에 소켓 브로드캐스트로 대체
-        System.out.println("[공지] " + message);
-	}
-	
 	public void checkEnd() {
 		int 생존마피아 = 0;
 		int 생존시민 = 0;
@@ -113,12 +108,12 @@ public class 사회자 {
 		}
 		
 		if(생존마피아==0) {
-			notifyAll("마피아가 모두 검거됐습니다. 시민 승리!");
+			//notifyAll("마피아가 모두 검거됐습니다. 시민 승리!");
 			System.exit(0);
 		}
 		
 		if(생존마피아>=생존시민) {
-			notifyAll("마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
+			//notifyAll("마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
 			System.exit(0);
 		}
 	}
