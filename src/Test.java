@@ -10,6 +10,5 @@ public class Test {
 		Lobby lobby = new Lobby(clientManager);
 		clientManager.setLobby(lobby);
 		lobby.setVisible(true);
-	}
-	
+	}	
 }

@@ -101,10 +101,6 @@ public class ClientManager {
             String sysMsg = message.substring(7);
             lobby.getView().allChat("======================" + sysMsg+ "======================"); // 채팅창에 출력
         }
-        else if (message.startsWith("Vote:")){
-        	lobby.getView().changeButtonText("vote");
-        	
-        }
         else if (message.startsWith("List:")) {
         	String id = message.substring(5);
         	int intId = Integer.parseInt(id);
