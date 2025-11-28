@@ -1,4 +1,9 @@
 package controller;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import model.Player;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -15,6 +20,7 @@ public class 투표 implements IState {
 
 	@Override
 	public void execute(사회자 매니저) {
+
 		// TODO Auto-generated method stub
 		매니저.getCommandManager().broadcastAll("Vote:");
 		매니저.getCommandManager().broadcastAll("System:"+"투표가 시작되었습니다. 30초 안에 마피아로 의심되는 플레이어의 ID를 입력해주세요");

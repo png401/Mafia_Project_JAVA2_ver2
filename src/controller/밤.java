@@ -32,7 +32,7 @@ public class 밤 implements IState {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		nightResult(매니저);
 
 		// 다음 밤 위해 초기화
@@ -54,7 +54,7 @@ public class 밤 implements IState {
 			e.printStackTrace();
 		}
 
-		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
+        // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
 		for (Player p : 매니저.players) {
 			if (!p.is_alive)
 				continue;
