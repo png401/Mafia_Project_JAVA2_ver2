@@ -18,13 +18,7 @@ public class ClientManager {
 	}
 
     public ClientManager() {
-        // 서버 연결
-        try {
-            clientThread = new ClientThread("10.240.13.180", 50023, this);
-            clientThread.start();
-        } catch (IOException e) {
-            System.err.println("서버 연결 실패: " + e.getMessage());
-        }
+       
     }
 
     // 서버로 메세지 전송
@@ -120,5 +114,15 @@ public class ClientManager {
     public void onDisconnected() {
         System.out.println("서버와의 연결이 종료되었습니다.");
     }
+
+	public void setIp(String ip) {
+		 // 서버 연결
+        try {
+            clientThread = new ClientThread(ip, 50023, this);
+            clientThread.start();
+        } catch (IOException e) {
+            System.err.println("서버 연결 실패: " + e.getMessage());
+        }		
+	}
 
 }
