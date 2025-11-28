@@ -43,9 +43,9 @@ public class 밤 implements IState {
 	}
 
 	private void nightResult(사회자 매니저) {
-		int mafiaTargetId = 0;
-		int doctorTargetId = 0;
-		int policeTargetId = 0;
+		int mafiaTargetId = -1;
+		int doctorTargetId = -1;
+		int policeTargetId = -1;
 		
 		try {
 			Thread.sleep(5000);
@@ -123,8 +123,5 @@ public class 밤 implements IState {
 				System.out.println("[결과] 마피아가 지목한 대상이 유효하지 않습니다.");
 			}
 		}
-
-
 	}
-
 }

@@ -31,7 +31,7 @@ public class 사회자 {
 	
 	private int killedID=0;
 	
-	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0));
+	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0));
 
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;
@@ -93,6 +93,11 @@ public class 사회자 {
 	//Start 받으면
 	public void init_game() {
 		System.out.println("=====마피아 게임 시작=====");
+
+		// dayCount가 2부터 시작해서 초기화 추가.
+		this.dayCount = 0;
+		this.killedID = 0;
+		this.ghosts.clear();
 			
 		roleFactory.randomRole(players);
 		
