@@ -24,7 +24,6 @@ public class CommandManager {
         this.commandMap.put("Message", new AllChatCommand(this, logicBrain));
         this.commandMap.put("Target", new TargetCommand(this, logicBrain));
         this.commandMap.put("Mafia_message", new MafiaChatCommand(this, logicBrain));
-        this.commandMap.put("Vote", new VoteCommand(this, logicBrain));
     }
 
     public synchronized void handleNewConnection(ServerThread clientThread) {
