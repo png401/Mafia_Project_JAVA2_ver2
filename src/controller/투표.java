@@ -46,6 +46,8 @@ public class 투표 implements IState {
             매니저.ghosts.add(사망자);
             매니저.players.remove(사망자.id - 1);
 			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] "+(killedID+1)+"번 플레이어가 투표로 사망했습니다.");
+			//Jlist 업데이트
+            매니저.getCommandManager().broadcastAll("List:"+(사망자.id-1));
 		}
 			
 	}

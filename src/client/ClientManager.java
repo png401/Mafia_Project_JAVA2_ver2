@@ -94,6 +94,11 @@ public class ClientManager {
         else if (message.startsWith("Vote:")){
         	lobby.getView().setSkillButton("vote");
         }
+        else if (message.startsWith("List:")) {
+        	String id = message.substring(5);
+        	int intId = Integer.parseInt(id);
+        	lobby.getView().updateList(intId);
+        }
     }
 
     // 연결 종료 시 처리
