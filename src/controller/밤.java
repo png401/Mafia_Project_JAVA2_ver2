@@ -24,22 +24,14 @@ public class 밤 implements IState {
 	}
 
 	public void execute(사회자 매니저) {
+		매니저.getCommandManager().broadcastAll("System:"+"밤이 시작되었습니다. 30초 안에 각자 능력을 사용할 플레이어의 ID를 입력해주세요");
 		// 시간제한 15초
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(15000);//일단 TEST를 위해 15초
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-//		for(Player p : 매니저.players) {
-//			//죽었음 행동 불가
-//			if(!p.is_alive) continue;
-//			//skill이 null이면 넘어감
-//			if(p.skill == null) continue;
-//			
-//			p.skill.skill(p, targetId);
-//		}
 
 		nightResult(매니저);
 
@@ -111,7 +103,7 @@ public class 밤 implements IState {
                 // 의사랑 마피아랑 똑같은 애 지목하면
                 if (mafiaTargetId == doctorTargetId) {
                     매니저.setKilledID(0);
-                    String msg = "System:" + 사망자.id + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
+                    String msg = "System:" + "[밤 결과] "+사망자.id + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                     return;
@@ -121,7 +113,7 @@ public class 밤 implements IState {
                     매니저.ghosts.add(사망자);
                     매니저.players.remove(사망자.id - 1);
                     매니저.setKilledID(사망자.id);
-                    String msg = "System:이번 밤에 " + 사망자.id + "번 플레이어가 사망했습니다.";
+                    String msg = "System:" + "[밤 결과] "+ 사망자.id + "번 플레이어가 사망했습니다.";
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                 }

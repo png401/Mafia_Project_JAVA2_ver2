@@ -1,7 +1,9 @@
 package server;
 
 import controller.IState;
+import controller.밤;
 import controller.사회자;
+import controller.투표;
 import model.Player;
 
 public class TargetCommand implements ICommand {
@@ -16,13 +18,16 @@ public class TargetCommand implements ICommand {
 
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
-
-        int targetId = Integer.parseInt(payload);
-
-        if (sender.getPlayer() != null) {
-            sender.getPlayer().setNightTargetId(targetId);
-            System.out.println("[서버] " + sender.getPlayer().nickname + " -> 타겟 " + targetId + " 설정완료");
-        }
-
+    	int targetId = Integer.parseInt(payload);
+    	
+    	if(currentState instanceof 밤) {
+            if (sender.getPlayer() != null) {
+                sender.getPlayer().setNightTargetId(targetId);
+                System.out.println("[서버] " + sender.getPlayer().nickname + " -> 타겟 " + targetId + " 설정완료");
+            }
+    	}
+    	else if(currentState instanceof 투표) {
+    		logicBrain.voteResult[(targetId-1)]++;
+    	}
     }
 }
