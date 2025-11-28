@@ -60,7 +60,9 @@ public class CommandManager {
         } else {
             // Start 명령어일 시 모든 클라이언트에게 게임이 시작되었다고 알려주기.
         	broadcastAll("Start:");
-            new Thread(() -> logicBrain.start()).start();
+
+        	new Thread(()->logicBrain.start()).start();
+            //logicBrain.start();
         }
     }
 
@@ -76,10 +78,10 @@ public class CommandManager {
     public void broadcastToMafia(String message) {
         synchronized (allClients) {
             for (ServerThread client : allClients) {
-                /*if (client.getPlayer().getRole().equals("MAFIA")) {
-                    client.sendMessage(message);
-                }*/
-            	client.sendMessage(message);
+                // 플레이어가 존재하고, 직업이 마피아인 경우에만 전송
+                if (client.getPlayer() != null && "mafia".equals(client.getPlayer().getRole())) {
+                    client.sendMessage("Mafia_message:" + message);
+                }
             }
         }
     }
