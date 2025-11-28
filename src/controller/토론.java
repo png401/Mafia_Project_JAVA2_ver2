@@ -2,17 +2,11 @@ package controller;
 
 public class 토론 implements IState{
 
-	@Override
-	public void limitTime(int time) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void execute(사회자 매니저) {
 		매니저.getCommandManager().broadcastAll("System:"+"DAY "+(매니저.dayCount+1)+" 토론이 시작되었습니다. 토론시간은 5분 주어집니다");
 		
 		try {
-			Thread.sleep(30000);//일단 TEST를 위해 15초
+			Thread.sleep(300000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
