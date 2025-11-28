@@ -27,7 +27,7 @@ public class 밤 implements IState {
 		매니저.getCommandManager().broadcastAll("System:"+"밤이 시작되었습니다. 30초 안에 각자 능력을 사용할 플레이어의 ID를 입력해주세요");
 		// 시간제한 15초
 		try {
-			Thread.sleep(15000);//일단 TEST를 위해 15초
+			Thread.sleep(30000);//일단 TEST를 위해 15초
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
