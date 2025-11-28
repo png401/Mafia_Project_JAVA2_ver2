@@ -127,7 +127,7 @@ public class View2 extends JFrame {
 		this();
 		this.clientManager = clientManager;
 
-		myNameLabel = new JLabel("Nickname");
+		myNameLabel = new JLabel(nickname);
 		myNameLabel.setForeground(new Color(0, 0, 0));
 		myNameLabel.setBackground(new Color(255, 255, 0));
 		myNameLabel.setBounds(12, 10, 102, 21);
