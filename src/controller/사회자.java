@@ -84,7 +84,7 @@ public class 사회자 {
 	}
 		
 	public Player createNewPlayer(String nickname) {
-		Player newPlayer = roleFactory.createPlayer(nickname, players.size()+1);
+		Player newPlayer = roleFactory.createPlayer(nickname, players.size());
 		addPlayer(newPlayer);
 		return newPlayer;
 	}

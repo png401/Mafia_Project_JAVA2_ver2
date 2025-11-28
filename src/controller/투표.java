@@ -41,13 +41,12 @@ public class 투표 implements IState {
 			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] 아무도 사망하지 않았습니다.");		
 		}
 		else {
-			Player 사망자 = 매니저.getPlayerById(killedID+1);
+			Player 사망자 = 매니저.getPlayerById(killedID);
 			사망자.is_alive = false;
             매니저.ghosts.add(사망자);
-            매니저.players.remove(사망자.id - 1);
-			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] "+(killedID+1)+"번 플레이어가 투표로 사망했습니다.");
+			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] "+(killedID)+"번 플레이어가 투표로 사망했습니다.");
 			//Jlist 업데이트
-            매니저.getCommandManager().broadcastAll("List:"+(사망자.id-1));
+            매니저.getCommandManager().broadcastAll("List:"+(사망자.id));
 		}
 			
 	}

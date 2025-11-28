@@ -110,6 +110,7 @@ public class ClientManager {
         	String id = message.substring(5);
         	int intId = Integer.parseInt(id);
         	lobby.getView().updateList(intId);
+        }
         else if (message.startsWith("Mafia_message:")) {
             String chat = message.substring(14); 
             
