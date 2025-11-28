@@ -29,6 +29,8 @@ public class 사회자 {
 	public int dayCount=0;
 	
 	private int killedID=0;
+	
+	public int[] voteResult = {0,0,0,0,0,0};
 
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;
@@ -127,12 +129,12 @@ public class 사회자 {
 		}
 		
 		if(생존마피아==0) {
-			notifyAll("마피아가 모두 검거됐습니다. 시민 승리!");
+			commandManager.broadcastAll("System:"+"마피아가 모두 검거됐습니다. 시민 승리!");
 			System.exit(0);
 		}
 		
 		if(생존마피아>=생존시민) {
-			notifyAll("마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
+			commandManager.broadcastAll("System:"+"마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
 			System.exit(0);
 		}
 	}
@@ -144,6 +146,10 @@ public class 사회자 {
 			}
 		}
 		return null;
+	}
+	
+	public void getNight() {
+		
 	}
 	
 	public void start() {

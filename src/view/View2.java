@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import client.ClientManager;
-import model.Player;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -72,7 +71,7 @@ public class View2 extends JFrame {
       contentPane.add(inputField);
       inputField.setColumns(10);
 
-      playerList = new JList<Player>();
+      playerList = new JList<String>();
       playerList.setBounds(817, 10, 137, 323);
       playerList.setVisibleRowCount(6);
 
