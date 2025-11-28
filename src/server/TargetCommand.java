@@ -18,6 +18,7 @@ public class TargetCommand implements ICommand {
 
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
+
     	int targetId = Integer.parseInt(payload);
     	
     	if(currentState instanceof 밤) {

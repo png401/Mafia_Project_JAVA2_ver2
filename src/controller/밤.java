@@ -32,7 +32,7 @@ public class 밤 implements IState {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		nightResult(매니저);
 
 		// 다음 밤 위해 초기화
@@ -54,7 +54,7 @@ public class 밤 implements IState {
 			e.printStackTrace();
 		}
 
-		// 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
+        // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
 		for (Player p : 매니저.players) {
 			if (!p.is_alive)
 				continue;
@@ -111,11 +111,10 @@ public class 밤 implements IState {
                 else {
                     사망자.is_alive = false;
                     매니저.ghosts.add(사망자);
-                    매니저.players.remove(사망자.id - 1);
                     매니저.setKilledID(사망자.id);
                     String msg = "System:" + "[밤 결과] "+ 사망자.id + "번 플레이어가 사망했습니다.";
                     //Jlist 업데이트
-                    매니저.getCommandManager().broadcastAll("List:"+(사망자.id-1));
+                    매니저.getCommandManager().broadcastAll("List:"+(사망자.id));
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                 }

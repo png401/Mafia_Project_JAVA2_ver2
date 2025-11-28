@@ -11,10 +11,11 @@ public class Player {
 	public String skillName = null;
 	
 	//transient가 뭘까 지워도 되는걸까
-	private transient ServerThread serverThread;
+	private ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id
 	private volatile int nightTargetId;
+	private volatile int voteTargetId;
 
 	public Player(String nickname, int id) {
 		// TODO Auto-generated constructor stub
@@ -50,6 +51,14 @@ public class Player {
 	public void setServerThread(ServerThread serverThread) {
         this.serverThread = serverThread;
     }
+
+	public int getVoteTargetId() {
+		return voteTargetId;
+	}
+
+	public void setVoteTargetId(int voteTargetId) {
+		this.voteTargetId = voteTargetId;
+	}
 
 	
 }
