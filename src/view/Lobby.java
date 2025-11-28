@@ -141,7 +141,7 @@ public class Lobby extends JFrame {
 
 	//Start 시퀀스의 끝
 	public void start() throws IOException {
-		setView(new View2(clientManager));
+		setView(new View2(clientManager, nickname));
 		getView().setVisible(true);	
 		dispose();
 	}		
