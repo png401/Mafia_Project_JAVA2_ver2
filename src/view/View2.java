@@ -71,13 +71,17 @@ public class View2 extends JFrame {
       setContentPane(contentPane);
       contentPane.setLayout(null);
       
-      //윈도우빌더에 보여라
       voteButton = new JButton("vote");
       voteButton.setBounds(709, 508, 91, 21);
       contentPane.add(voteButton);
            
+      voteField = new JTextField();
+      voteField.setColumns(10);
+      voteField.setBounds(660, 508, 42, 21);
+      contentPane.add(voteField);
+      
       inputField = new JTextField();
-      inputField.setBounds(12, 508, 647, 21);
+      inputField.setBounds(12, 508, 631, 21);
       contentPane.add(inputField);
       inputField.setColumns(10);
 
@@ -112,7 +116,7 @@ public class View2 extends JFrame {
       contentPane.add(playerList); 
       
       skillField = new JTextField();
-      skillField.setBounds(664, 508, 42, 21);
+      skillField.setBounds(812, 508, 42, 21);
       contentPane.add(skillField);
       skillField.setColumns(10);           
            
@@ -147,6 +151,18 @@ public class View2 extends JFrame {
 				JTextField input = (JTextField) e.getSource();	
 				String targetId = input.getText();
 				clientManager.sendMessage("Target:"+targetId);
+				input.setText("");
+			}
+		});
+	   
+	   voteField.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JTextField input = (JTextField) e.getSource();	
+				String voteId = input.getText();
+				clientManager.sendMessage("Target:"+voteId);
 				input.setText("");
 			}
 		});
@@ -205,7 +221,7 @@ public class View2 extends JFrame {
    BufferedImage img ;
    ImagePanel bgPanel ;
    JPanel overlay;
-   private JTextField textField;
+   private JTextField voteField;
    /////////////////////////////////////////////////////////////////////////////
    
    public void setImagePanel() throws IOException {
@@ -241,10 +257,7 @@ public class View2 extends JFrame {
 	      overlay.add(chatAreaScroll);
 	      contentPane.add(bgPanel);
 	      
-	      textField = new JTextField();
-	      textField.setColumns(10);
-	      textField.setBounds(817, 508, 42, 21);
-	      contentPane.add(textField);
+	      
    }
    
    ////////////////////////////////////////////////////////////////
