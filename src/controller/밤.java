@@ -114,6 +114,8 @@ public class 밤 implements IState {
                     매니저.players.remove(사망자.id - 1);
                     매니저.setKilledID(사망자.id);
                     String msg = "System:" + "[밤 결과] "+ 사망자.id + "번 플레이어가 사망했습니다.";
+                    //Jlist 업데이트
+                    매니저.getCommandManager().broadcastAll("List:"+(사망자.id-1));
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
                 }

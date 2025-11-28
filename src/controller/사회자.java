@@ -137,6 +137,8 @@ public class 사회자 {
 			commandManager.broadcastAll("System:"+"마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
 			System.exit(0);
 		}
+		
+		
 	}
 
 	public Player player_ID(int id) {

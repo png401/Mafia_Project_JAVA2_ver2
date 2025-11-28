@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,7 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -51,6 +54,7 @@ public class View2 extends JFrame {
    private ClientManager clientManager;
 
    private DefaultListModel<String> players;
+   private Set<Integer> deadIndices = new HashSet<>();
        
    public View2() throws IOException{
       
@@ -74,10 +78,30 @@ public class View2 extends JFrame {
       playerList = new JList<String>();
       playerList.setBounds(817, 10, 137, 323);
       playerList.setVisibleRowCount(6);
+      
+      playerList.setCellRenderer(new DefaultListCellRenderer() {
+    	    @Override
+    	    public Component getListCellRendererComponent(
+    	            JList<?> list, Object value, int index,
+    	            boolean isSelected, boolean cellHasFocus) {
 
-      DefaultListCellRenderer centerRenderer = new DefaultListCellRenderer();
-      centerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
-      playerList.setCellRenderer(centerRenderer);
+    	        JLabel label = (JLabel) super.getListCellRendererComponent(
+    	                list, value, index, isSelected, cellHasFocus);
+
+    	        label.setHorizontalAlignment(SwingConstants.CENTER); // 가운데 정렬
+    	        
+    	        if (deadIndices.contains(index)) {
+    	        	label.setForeground(Color.GRAY);
+    	            label.setBackground(new Color(220, 220, 220)); // 흐린 회색 배경
+    	            label.setOpaque(true);   
+    	        } else {
+    	        	label.setForeground(Color.BLACK);
+    	            label.setBackground(Color.WHITE);
+    	            label.setOpaque(true);
+    	        }
+    	        return label;
+    	    }
+    	});  
       
       contentPane.add(playerList); 
       
@@ -158,6 +182,11 @@ public class View2 extends JFrame {
       contentPane.add(skillButton);
       
       contentPane.repaint();
+   }
+   
+   public void updateList(int id) {
+	   deadIndices.add(id);
+	   playerList.repaint();
    }
    
    ////////////////////////////////////////////////////////////////////////////
