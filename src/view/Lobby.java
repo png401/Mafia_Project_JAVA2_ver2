@@ -38,6 +38,8 @@ public class Lobby extends JFrame {
 
 	private View2 view;
 	private ClientManager clientManager;
+	
+	private String nickname;
 
 	/**
 	 * Create the frame.
@@ -101,7 +103,7 @@ public class Lobby extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				JTextField nicknameField = (JTextField) e.getSource(); 	
-				String nickname = nicknameField.getText();
+				nickname = nicknameField.getText();
 				nicknameField.setText("");
 
 				//Join 시퀀스 시작
@@ -139,7 +141,7 @@ public class Lobby extends JFrame {
 
 	//Start 시퀀스의 끝
 	public void start() throws IOException {
-		setView(new View2(clientManager));
+		setView(new View2(clientManager, nickname));
 		getView().setVisible(true);	
 		dispose();
 	}		
