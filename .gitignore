@@ -1,7 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows
+# Build System Output Folders (주로 Maven / Gradle 사용 시 생성)
+target/  # Maven 빌드 결과물이 저장되는 폴더
+build/   # Gradle 빌드 결과물이 저장되는 폴더
+
 # IntelliJ output folder
 out/
+classes/
 
 # Visual Paradigm settings
 .vpprefdata/
