@@ -17,7 +17,7 @@ public class 투표 implements IState {
 		매니저.getCommandManager().broadcastAll("System:"+"투표가 시작되었습니다. 30초 안에 마피아로 의심되는 플레이어의 ID를 입력해주세요");
 		
 		try {
-			Thread.sleep(15000);//일단 TEST를 위해 15초
+			Thread.sleep(30000);//일단 TEST를 위해 15초
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
