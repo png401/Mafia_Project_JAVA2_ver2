@@ -3,9 +3,12 @@ package view;
 import client.ClientManager;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -17,6 +20,7 @@ public class MafiaChatView extends JFrame {
     private JPanel contentPane;
     private JTextField mafiaInputField;
     private JTextArea mafiaChatArea;
+    private JScrollPane scrollPane;
 
     private ClientManager clientManager;
 
@@ -48,6 +52,7 @@ public class MafiaChatView extends JFrame {
         contentPane.setLayout(null);
 
         mafiaChatArea = new JTextArea();
+        scrollPane = new JScrollPane(mafiaChatArea);
         mafiaChatArea.setBounds(12, 10, 358, 478);
         contentPane.add(mafiaChatArea);
 
@@ -65,6 +70,25 @@ public class MafiaChatView extends JFrame {
     public MafiaChatView(ClientManager clientManager) {
         this();
         this.clientManager = clientManager;
+        
+        ActionListener sendAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String msg = mafiaInputField.getText();
+                
+                // 빈 값 전송 방지
+                if(msg.trim().isEmpty()) return;
+
+                // 서버로 "Mafia_message:내용" 보냄
+                clientManager.sendMessage("Mafia_message:" + msg);
+                
+                // 입력창 비우기
+                mafiaInputField.setText("");
+                mafiaInputField.requestFocus();
+            }
+        };
+
+        mafiaInputField.addActionListener(sendAction);
     }
 
     // 서버에서 온 마피아 채팅을 화면에 띄어주기

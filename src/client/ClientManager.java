@@ -106,6 +106,14 @@ public class ClientManager {
         else if (message.startsWith("Vote:")){
         	lobby.getView().setSkillButton("vote");
         }
+        else if (message.startsWith("Mafia_message:")) {
+            String chat = message.substring(14); 
+            
+            // 마피아 창이 켜져있으면 채팅 추가
+            if (mafiaChatView != null) {
+                mafiaChatView.mafiaChat(chat);
+            }
+        }
     }
 
     // 연결 종료 시 처리
