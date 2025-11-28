@@ -62,20 +62,20 @@ public class RoleFactory {
 
 			switch(role) {
 			case "mafia":
-				p.setSkill(new Kill());
-				p.setSkillName("kill");
+				p.skill = new Kill();
+				p.skillName = "kill";
 				break;
 			case "doctor":
-				p.setSkill(new Heal());
-				p.setSkillName("heal");
+				p.skill = new Heal();
+				p.skillName = "heal";
 				break;
 			case "police":
-				p.setSkill(new Inspect());
-				p.setSkillName("Inspect");
+				p.skill = new Inspect();
+				p.skillName = "Inspect";
 				break;
 			default:
-				p.setSkill(null);
-				p.setSkillName("null");
+				p.skill = null;
+				p.skillName = null;
 			}			
 			
 		}

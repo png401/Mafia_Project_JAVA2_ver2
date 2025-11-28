@@ -56,8 +56,8 @@ public class 사회자 {
 	
 	public void addPlayer(Player p) {
 		players.add(p);
-		playersById.put(p.getId(), p);
-		playersByNickname.put(p.getNickname(), p);
+		playersById.put(p.id, p);
+		playersByNickname.put(p.nickname, p);
 	}
 	
 	public Player getPlayerById(int id) {
@@ -112,7 +112,7 @@ public class 사회자 {
 	public String playersMessage() {
 		String playerList = "";
 		for (Player player : players) {
-			playerList = playerList + player.getId() +" " + player.getNickname() + ";";
+			playerList = playerList + player.id +" " + player.nickname + ";";
 		}
 		return playerList;
 	}
@@ -122,7 +122,7 @@ public class 사회자 {
 		int 생존시민 = 0;
 		
 		for(Player p : players) {
-			if(p.getIs_alive() == false) continue;//죽은 애 쓰루
+			if(p.is_alive == false) continue;//죽은 애 쓰루
 			
 			if("mafia".equals(p.getRole())) 생존마피아++;
 			else 생존시민++;
@@ -144,7 +144,7 @@ public class 사회자 {
 
 	public Player player_ID(int id) {
 		for(Player p : players) {
-			if(p.getId() == id) {
+			if(p.id == id) {
 				return p;
 			}
 		}
