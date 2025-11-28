@@ -5,11 +5,13 @@ import java.io.IOException;
 import javax.swing.DefaultListModel;
 
 import view.Lobby;
+import view.MafiaChatView;
 import view.View2;
 
 public class ClientManager {
     private ClientThread clientThread;
     private Lobby lobby;
+    private MafiaChatView mafiaChatView;
     
 	public void setLobby(Lobby lobby) {
 		this.lobby = lobby;
@@ -18,7 +20,9 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.113.45", 50023, this);
+
+            clientThread = new ClientThread("10.240.13.180", 50023, this);
+
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -56,6 +60,14 @@ public class ClientManager {
         	String role = message.substring(5);
         	System.out.println("내 역할: "+role);
         	lobby.getView().setRoleView(role);
+
+            // 직업이 마피아면 마피아 채팅창 따로 또 띄우기
+            if ("mafia".equals(role)) { // 문자열 비교 주의 ("mafia"인지 "MAFIA"인지 서버랑 맞추세요)
+                if (mafiaChatView == null) {
+                    mafiaChatView = new MafiaChatView(this);
+                    mafiaChatView.setVisible(true);
+                }
+            }
         }
         else if (message.startsWith("Skill:")) {
         	String skill = message.substring(6);
@@ -93,6 +105,14 @@ public class ClientManager {
         }
         else if (message.startsWith("Vote:")){
         	lobby.getView().setSkillButton("vote");
+        }
+        else if (message.startsWith("Mafia_message:")) {
+            String chat = message.substring(14); 
+            
+            // 마피아 창이 켜져있으면 채팅 추가
+            if (mafiaChatView != null) {
+                mafiaChatView.mafiaChat(chat);
+            }
         }
     }
 

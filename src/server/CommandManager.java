@@ -78,10 +78,10 @@ public class CommandManager {
     public void broadcastToMafia(String message) {
         synchronized (allClients) {
             for (ServerThread client : allClients) {
-                /*if (client.getPlayer().getRole().equals("MAFIA")) {
-                    client.sendMessage(message);
-                }*/
-            	client.sendMessage(message);
+                // 플레이어가 존재하고, 직업이 마피아인 경우에만 전송
+                if (client.getPlayer() != null && "mafia".equals(client.getPlayer().getRole())) {
+                    client.sendMessage("Mafia_message:" + message);
+                }
             }
         }
     }
