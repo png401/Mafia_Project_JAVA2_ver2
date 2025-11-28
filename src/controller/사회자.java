@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class 사회자 {
 	
 	private int killedID=0;
 	
-	public int[] voteResult = {0,0,0,0,0,0};
+	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0));
 
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;

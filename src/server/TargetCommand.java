@@ -27,7 +27,7 @@ public class TargetCommand implements ICommand {
             }
     	}
     	else if(currentState instanceof 투표) {
-    		logicBrain.voteResult[(targetId-1)]++;
+    		logicBrain.voteResult[(targetId)]++;
     	}
     }
 }
