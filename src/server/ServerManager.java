@@ -17,7 +17,9 @@ public class ServerManager {
 		// 두 개의 브레인을 가짐 (일단 이렇게 구현하고 나중에 리팩토링할 때 수정해봅시다.)
 		사회자 logicBrain = 사회자.getInstance();
 		CommandManager networkBrain = new CommandManager(logicBrain);
-		
+
+        logicBrain.setCommandManager(networkBrain);
+
 		try {
 			serverSocket = new ServerSocket();
 

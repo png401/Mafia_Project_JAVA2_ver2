@@ -5,11 +5,12 @@ import java.io.IOException;
 import javax.swing.DefaultListModel;
 
 import view.Lobby;
+import view.View2;
 
 public class ClientManager {
     private ClientThread clientThread;
     private Lobby lobby;
-
+    
 	public void setLobby(Lobby lobby) {
 		this.lobby = lobby;
 	}
@@ -17,7 +18,7 @@ public class ClientManager {
     public ClientManager() {
         // 서버 연결
         try {
-            clientThread = new ClientThread("10.240.165.152", 50023, this);
+            clientThread = new ClientThread("10.240.15.10", 50023, this);
             clientThread.start();
         } catch (IOException e) {
             System.err.println("서버 연결 실패: " + e.getMessage());
@@ -85,6 +86,10 @@ public class ClientManager {
         		lobby.getView().allChat("======================조사결과, 마피아입니다======================");
         	else if (result.equals("0")) 
         		lobby.getView().allChat("======================조사결과, 마피아가 아닙니다======================");
+        }
+        else if (message.startsWith("System:")) {
+            String sysMsg = message.substring(7);
+            lobby.getView().allChat("[결과] " + sysMsg); // 채팅창에 출력
         }
     }
 
