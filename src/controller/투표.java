@@ -105,6 +105,7 @@ public class 투표 implements IState {
 		
 		votedMax.is_alive = false;
 		매니저.ghosts.add(votedMax);
+		매니저.players.remove(votedMax);
 		
 		System.out.println("[투표 결과] " + votedMax.nickname + " 님이 사망했습니다.");
         System.out.println(votedMax.nickname+"의 직업은 " + votedMax.getRole()+"입니다.");
