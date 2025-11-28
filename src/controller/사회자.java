@@ -95,7 +95,6 @@ public class 사회자 {
 		System.out.println("=====마피아 게임 시작=====");
 
 		// dayCount가 2부터 시작해서 초기화 추가.
-		this.dayCount = 0;
 		this.killedID = 0;
 		this.ghosts.clear();
 			
@@ -164,8 +163,6 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();      	
         	
-        	dayCount++;
-        	
         	this.set_state(new 토론());
         	this.gameState.execute(매니저);
         	//Server.execute(Player player);
@@ -174,6 +171,7 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();
         	
+        	dayCount++;     	
 
         }
 	}
