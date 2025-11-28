@@ -169,7 +169,7 @@ public class 사회자 {
         	this.gameState.execute(매니저);
         	checkEnd();
         	
-        	dayCount++;
+
         }
 	}
 

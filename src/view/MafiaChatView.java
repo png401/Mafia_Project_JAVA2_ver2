@@ -13,6 +13,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class MafiaChatView extends JFrame {
 
@@ -54,7 +57,7 @@ public class MafiaChatView extends JFrame {
         mafiaChatArea = new JTextArea();
         scrollPane = new JScrollPane(mafiaChatArea);
         mafiaChatArea.setBounds(12, 10, 358, 478);
-        contentPane.add(mafiaChatArea);
+        contentPane.add(scrollPane);
 
         mafiaInputField = new JTextField();
         mafiaInputField.setBounds(12, 512, 251, 21);
@@ -64,6 +67,12 @@ public class MafiaChatView extends JFrame {
         JButton mafiaEnterButton = new JButton("ENTER");
         mafiaEnterButton.setBounds(275, 511, 95, 23);
         contentPane.add(mafiaEnterButton);
+        
+        JLabel noticeLabel = new JLabel("아이디가 더 큰 마피아가 입력한 타겟이 사망합니다");
+        noticeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        noticeLabel.setForeground(new Color(255, 0, 0));
+        noticeLabel.setBounds(12, 10, 358, 15);
+        contentPane.add(noticeLabel);
 
     }
 
