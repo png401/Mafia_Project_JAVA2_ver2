@@ -61,8 +61,8 @@ public class CommandManager {
             // Start 명령어일 시 모든 클라이언트에게 게임이 시작되었다고 알려주기.
         	broadcastAll("Start:");
 
-        	new Thread(()->logicBrain.start()).start();
-            //logicBrain.start();
+        	new Thread(() -> logicBrain.start()).start();
+
         }
     }
 

@@ -18,6 +18,7 @@ public class TargetCommand implements ICommand {
 
     @Override
     public void execute(ServerThread sender, String payload, IState currentState) {
+
     	int targetId = Integer.parseInt(payload);
     	
     	if(currentState instanceof 밤) {
@@ -27,7 +28,7 @@ public class TargetCommand implements ICommand {
             }
     	}
     	else if(currentState instanceof 투표) {
-    		logicBrain.voteResult[(targetId)]++;
+    		logicBrain.voteResult.set(targetId, logicBrain.voteResult.get(targetId)+1);
     	}
     }
 }
