@@ -6,7 +6,7 @@ import model.Player;
 
 public class 밤 implements IState {
 
-	private int healedID = 0;
+	/*private int healedID = 0;
 	private int killedID = 0;
 
 	public void setKilledID(int killedID) {
@@ -15,7 +15,7 @@ public class 밤 implements IState {
 
 	public void setHealedID(int healedID) {
 		this.healedID = healedID;
-	}
+	}*/
 
 	public void execute(사회자 매니저) {
 		매니저.getCommandManager().broadcastAll("System:"+"밤이 시작되었습니다. 30초 안에 각자 능력을 사용할 플레이어의 ID를 입력해주세요");
@@ -31,7 +31,7 @@ public class 밤 implements IState {
 
 		// 다음 밤 위해 초기화
 		for (Player p : 매니저.players) {
-			p.setNightTargetId(0);
+			p.setNightTargetId(-1);
 		}
 
 	}
@@ -96,7 +96,7 @@ public class 밤 implements IState {
 			if (사망자 != null && 사망자.getIs_alive()) {
                 // 의사랑 마피아랑 똑같은 애 지목하면
                 if (mafiaTargetId == doctorTargetId) {
-                    매니저.setKilledID(0);
+                    매니저.setKilledID(-1);
                     String msg = "System:" + "[밤 결과] "+사망자.getId() + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
                     System.out.println(msg); // 서버 로그
                     매니저.getCommandManager().broadcastAll(msg);
