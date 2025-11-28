@@ -141,6 +141,8 @@ public class Lobby extends JFrame {
 				JTextField ipField = (JTextField) e.getSource();
 				String ip = ipField.getText();
 				clientManager.setIp(ip);
+				ipField.setText("");
+				ipField.setEnabled(false);
 			}
 		});
 	}
