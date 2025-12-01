@@ -14,8 +14,7 @@ public class Player {
 	private ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id
-	private volatile int nightTargetId;
-	private volatile int voteTargetId;
+	private volatile int nightTargetId=-1;
 
 	public Player(String nickname, int id) {
 		// TODO Auto-generated constructor stub
