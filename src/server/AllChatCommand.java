@@ -17,8 +17,8 @@ public class AllChatCommand implements ICommand {
 		// TODO Auto-generated method stub
 		// 토론 상태일 때만 실행됨.
 		if(currentState instanceof 토론) {					
-			if(sender.getPlayer().getIs_alive()) {
-				networkBrain.broadcastAll("Message:"+sender.getPlayer().getNickname() + ": " + payload);
+			if(sender.getPlayer().is_alive) {
+				networkBrain.broadcastAll("Message:"+sender.getPlayer().nickname + ": " + payload);
 			} 
 		} else {
 			sender.sendMessage("채팅은 살아있는 사람만 토론 상태에서만 할 수 있습니다.");

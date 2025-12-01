@@ -20,7 +20,7 @@ public class MafiaChatCommand implements ICommand {
     	
         if (currentState instanceof 밤) {
             if (sender.getPlayer().getRole().equals("mafia")) {
-                networkBrain.broadcastToMafia(sender.getPlayer().getNickname() + ": " + payload);
+                networkBrain.broadcastToMafia(sender.getPlayer().nickname + ": " + payload);
             }
         }
     }
