@@ -3,24 +3,24 @@ package model;
 import server.ServerThread;
 
 public class Player {
-	public String nickname;
-	public int id;
+	private String nickname;
+	private int id;
 	private String role;
-	public boolean is_alive = true;
-	public ISkill skill = null;
-	public String skillName = null;
+	private boolean is_alive = true;
+	private ISkill skill = null;
+	private String skillName = null;
 	
 	//transient가 뭘까 지워도 되는걸까
 	private ServerThread serverThread;
 	
 	//이 플레이어가 밤에 지목한 타겟id
-	private volatile int nightTargetId;
-	private volatile int voteTargetId;
+	private volatile int nightTargetId=-1;
+	//private volatile int voteTargetId;
 
 	public Player(String nickname, int id) {
 		// TODO Auto-generated constructor stub
-		this.nickname = nickname;
-		this.id = id;
+		this.setNickname(nickname);
+		this.setId(id);
 	}
 
 	public String getRole() {
@@ -52,12 +52,40 @@ public class Player {
         this.serverThread = serverThread;
     }
 
-	public int getVoteTargetId() {
-		return voteTargetId;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setVoteTargetId(int voteTargetId) {
-		this.voteTargetId = voteTargetId;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public boolean getIs_alive() {
+		return is_alive;
+	}
+
+	public void setIs_alive(boolean is_alive) {
+		this.is_alive = is_alive;
+	}
+
+	public ISkill getSkill() {
+		return skill;
+	}
+
+	public void setSkill(ISkill skill) {
+		this.skill = skill;
+	}
+
+	public void setSkillName(String skillName) {
+		this.skillName = skillName;
 	}
 
 	
