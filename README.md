@@ -23,10 +23,12 @@
 <br>
 
 ## 🎥 Demo Video (시연 영상)
-실제 게임 플레이 영상입니다.
-
-[![마피아 게임 시연 영상](https://github.com/user-attachments/assets/e18a322f-33a1-4cd0-a70e-b5ae84746c8f)](https://youtu.be/2KPie1dfZIw)
-
+<div align="center">
+  <p>실제 게임 플레이 영상입니다. 아래 이미지를 클릭하면 유튜브로 이동합니다!</p>
+  <a href="https://youtu.be/2KPie1dfZIw">
+    <img src="https://github.com/user-attachments/assets/e18a322f-33a1-4cd0-a70e-b5ae84746c8f" alt="마피아 게임 시연 영상" />
+  </a>
+</div>
 
 <br>
 
