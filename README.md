@@ -54,7 +54,11 @@
 
 ### 2. Class Diagram
 *(아키텍처 다이어그램 이미지가 있다면 여기에 넣으세요)*
-![Architecture](이미지경로/architecture.png)
+<img width="2086" height="881" alt="Server" src="https://github.com/user-attachments/assets/4e765098-064c-406a-919d-d64426663cd9" />
+<img width="1047" height="824" alt="Client" src="https://github.com/user-attachments/assets/6cb3d3f7-0fa8-45d9-b7fa-250d95121581" />
+<img width="1432" height="1435" alt="model controller" src="https://github.com/user-attachments/assets/76d528a9-47b3-4b4e-b66e-a59eeb166abb" />
+<img width="1191" height="1174" alt="View" src="https://github.com/user-attachments/assets/fd768ac2-3b77-4e78-837b-3c7039498bd9" />
+
 -> 여기에 uml 넣어주시면 감사... 제가 넣을려니까 화진이 너무 안 좋아요...
 
 
