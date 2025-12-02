@@ -65,18 +65,34 @@
 * **Strategy Pattern**: `Playr Role`에 따른 `skill` 구현.
 
 ### 2. Class Diagram
-* **Server**
-<img width="2086" height="881" alt="Server" src="https://github.com/user-attachments/assets/4e765098-064c-406a-919d-d64426663cd9" />
+<details>
+<summary>👀 클래스 다이어그램 펼쳐보기 (Click)</summary>
 
-* **Client**
-<img width="1047" height="824" alt="Client" src="https://github.com/user-attachments/assets/6cb3d3f7-0fa8-45d9-b7fa-250d95121581" />
+<br>
 
-* **Model & Controller**
-<img width="1432" height="1435" alt="model controller" src="https://github.com/user-attachments/assets/76d528a9-47b3-4b4e-b66e-a59eeb166abb" />
+**1. Server**
 
-* **View**
-<img width="1191" height="1174" alt="View" src="https://github.com/user-attachments/assets/fd768ac2-3b77-4e78-837b-3c7039498bd9" />
+<img src="https://github.com/user-attachments/assets/4e765098-064c-406a-919d-d64426663cd9" width="700" />
 
+<br><br>
+
+**2. Client**
+
+<img src="https://github.com/user-attachments/assets/6cb3d3f7-0fa8-45d9-b7fa-250d95121581" width="700" />
+
+<br><br>
+
+**3. Model & Controller**
+
+<img src="https://github.com/user-attachments/assets/76d528a9-47b3-4b4e-b66e-a59eeb166abb" width="700" />
+
+<br><br>
+
+**4. View**
+
+<img src="https://github.com/user-attachments/assets/fd768ac2-3b77-4e78-837b-3c7039498bd9" width="700" />
+
+</details>
 
 ### 3. Package Structure
 ```text
@@ -86,3 +102,15 @@ src
 ├── controller      # 게임 로직 (사회자, IState, 밤/낮/투표 구현체)
 ├── model           # 데이터 모델 (Player)
 └── view            # UI (Lobby, View2, MafiaChatView)
+```
+
+<br>
+
+## 📝 Dev Log (개발 회고)
+프로젝트 진행 과정과 팀원들의 소감을 담은 기술 블로그입니다.
+* 🔗 박남규
+* 🔗 신윤하
+* 🔗 이현경
+* 🔗 장은서
+
+<br>
