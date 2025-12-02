@@ -7,6 +7,7 @@ import model.Player;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import model.Player;
 
@@ -28,38 +29,37 @@ public class 투표 implements IState {
 		voteResult(매니저);
 		
 		// 다음 투표 위해 초기화
-		for (int i = 0; i < 매니저.voteResult.size(); i++) {
-			매니저.voteResult.set(i, 0);
-		}
+		매니저.resetVotes();
 		
 	}
 	
 	private void voteResult(사회자 매니저) {
-		int max = 0;
-		
-		max = Collections.max(매니저.voteResult);
-		Integer killedID = 매니저.voteResult.indexOf(max);
-		
-		// 최대 득표자수 찾기
-	    int topCandidates = 0;
-	    for (int i = 0; i < 매니저.voteResult.size(); i++) {
-	        if (매니저.voteResult.get(i) == max) {
-	            topCandidates++; 
-	        }
-	    }
-	    
-		if(max == 0 || topCandidates > 1) {
-			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] 아무도 사망하지 않았습니다.");		
-		}
-		else {
-			Player 사망자 = 매니저.getPlayerById(killedID);
-			사망자.setIs_alive(false);
-            매니저.ghosts.add(사망자);
-			매니저.getCommandManager().broadcastAll("System:"+"[투표 결과] "+(killedID)+"번 플레이어가 투표로 사망했습니다.");
-			//Jlist 업데이트
-            매니저.getCommandManager().broadcastAll("List:"+(사망자.getId()));
-		}
-			
-	}
+		List<Integer> votes = 매니저.getVoteResult();
 
+        int max = Collections.max(votes);
+        Integer killedID = votes.indexOf(max);
+
+        // 최대 득표자 수 찾기
+        int topCandidates = 0;
+        for (int i = 0; i < votes.size(); i++) {
+            if (votes.get(i) == max) {
+                topCandidates++;
+            }
+        }
+
+        if (max == 0 || topCandidates > 1) {
+            매니저.getCommandManager().broadcastAll(
+                "System:" + "[투표 결과] 아무도 사망하지 않았습니다."
+            );
+        } else {
+            Player 사망자 = 매니저.getPlayerById(killedID);
+            사망자.setIs_alive(false);
+            매니저.addGhost(사망자);
+            매니저.getCommandManager().broadcastAll(
+                "System:" + "[투표 결과] " + killedID + "번 플레이어가 투표로 사망했습니다."
+            );
+            // JList 업데이트
+            매니저.getCommandManager().broadcastAll("List:" + 사망자.getId());
+        }
+    }
 }

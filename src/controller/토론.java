@@ -3,7 +3,7 @@ package controller;
 public class 토론 implements IState{
 
 	public void execute(사회자 매니저) {
-		매니저.getCommandManager().broadcastAll("System:"+"DAY "+(매니저.dayCount+1)+" 토론이 시작되었습니다. 토론시간은 3분 주어집니다");
+		매니저.getCommandManager().broadcastAll("System:"+"DAY "+(매니저.getDayCount()+1)+" 토론이 시작되었습니다. 토론시간은 3분 주어집니다");
 		
 		try {
 			Thread.sleep(180000);//3분

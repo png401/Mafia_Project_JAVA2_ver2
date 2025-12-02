@@ -30,92 +30,48 @@ public class 밤 implements IState {
 		nightResult(매니저);
 
 		// 다음 밤 위해 초기화
-		for (Player p : 매니저.players) {
+		for (Player p : 매니저.getPlayers()) {
 			p.setNightTargetId(0);
 		}
+		매니저.resetNightActions();
 
 	}
 
-	private void nightResult(사회자 매니저) {
-		int mafiaTargetId = -1;
-		int doctorTargetId = -1;
-		int policeTargetId = -1;
-		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    private void nightResult(사회자 매니저) {
 
-        // 각 역할별로 이번 밤에 누굴 골랐는지 모은다.
-		for (Player p : 매니저.players) {
-			if (!p.getIs_alive())
-				continue;
+        // 1) 각 플레이어의 스킬에게 할 일 시킴.
+        for (Player p : 매니저.getPlayers()) {
+            if (!p.getIs_alive()) continue;
+            if (p.getSkill() == null) continue;
 
-			int target = p.getNightTargetId();
+            p.getSkill().skill(p, 매니저);
+        }
 
-			System.out.println("밤타겟:"+target); //디버그용
+        // 2) 스킬들이 manager에 등록해둔 결과만 가지고 마무리 처리
+        int mafiaTargetId = 매니저.getMafiaTargetId();
+        int doctorTargetId = 매니저.getDoctorTargetId();
 
-			String role = p.getRole();
-			if ("mafia".equals(role)) {
-				mafiaTargetId = target;
-			} else if ("doctor".equals(role)) {
-				doctorTargetId = target;
-			} else if ("police".equals(role)) {
-				policeTargetId = target;
+        if (mafiaTargetId != -1) {
+            Player 사망자 = 매니저.getPlayerById(mafiaTargetId);
+            if (사망자 != null && 사망자.getIs_alive()) {
 
-				System.out.println("경찰 조사 대상:"+policeTargetId +" target: "+ target);//디버그용
-
-				// 0인지 체크하는 걸 추가했음
-				if (policeTargetId == -1) {
-					p.getServerThread().sendMessage("System:시간 내에 대상을 지목하지 못했습니다.");
-					continue;
-				}
-
-
-				Player 피조사자 = 매니저.getPlayerById(policeTargetId);
-				if (피조사자 != null) {
-					if (피조사자.getRole().equals("mafia")) {
-						p.getServerThread().sendMessage("Inspect:1");
-					} else {
-						p.getServerThread().sendMessage("Inspect:0");
-					}
-				} else {
-					System.out.println("경찰: 잘못된 대상을 지목했습니다.");
-				}
-
-			}
-		}
-
-
-
-		// 마피아가 지목해서 사망했으면
-		if (mafiaTargetId != -1) {
-			Player 사망자 = 매니저.getPlayerById(mafiaTargetId);
-			if (사망자 != null && 사망자.getIs_alive()) {
-                // 의사랑 마피아랑 똑같은 애 지목하면
                 if (mafiaTargetId == doctorTargetId) {
                     매니저.setKilledID(0);
-                    String msg = "System:" + "[밤 결과] "+사망자.getId() + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
-                    System.out.println(msg); // 서버 로그
+                    String msg = "System:[밤 결과] " + 사망자.getId()
+                        + "번 플레이어가 공격당했지만 의사의 치료로 생존했습니다!";
                     매니저.getCommandManager().broadcastAll(msg);
                     return;
-                }
-                else {
+                } else {
                     사망자.setIs_alive(false);
-                    매니저.ghosts.add(사망자);
+                    매니저.addGhost(사망자);
                     매니저.setKilledID(사망자.getId());
-                    String msg = "System:" + "[밤 결과] "+ 사망자.getId() + "번 플레이어가 사망했습니다.";
-                    //Jlist 업데이트
-                    매니저.getCommandManager().broadcastAll("List:"+(사망자.getId()));
-                    System.out.println(msg); // 서버 로그
+                    매니저.getCommandManager().broadcastAll("List:" + 사망자.getId());
+                    String msg = "System:[밤 결과] " + 사망자.getId() + "번 플레이어가 사망했습니다.";
                     매니저.getCommandManager().broadcastAll(msg);
                 }
-			}
-            else {
-				System.out.println("[결과] 마피아가 지목한 대상이 유효하지 않습니다.");
-			}
-		}
-	}
+            } else {
+                System.out.println("[결과] 마피아가 지목한 대상이 유효하지 않습니다.");
+            }
+        }
+    }
 }

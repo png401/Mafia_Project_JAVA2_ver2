@@ -16,27 +16,32 @@ public class 사회자 {
 	private static 사회자 매니저;
 	private 사회자() {};
 	
-	IState gameState = null;
-	RoleFactory roleFactory = new RoleFactory();
+	private IState gameState = null;
+	private RoleFactory roleFactory = new RoleFactory();
 	
-	public List <Player> players = new ArrayList<>();
-	public Map<Integer, Player> playersById = new HashMap<>();
-	public Map<String, Player> playersByNickname = new HashMap<>();
-	public List <Player> ghosts = new ArrayList<>();
+	private List <Player> players = new ArrayList<>();
+	private Map<Integer, Player> playersById = new HashMap<>();
+	private Map<String, Player> playersByNickname = new HashMap<>();
+	private List <Player> ghosts = new ArrayList<>();
 
     //통신 매니저 저장소
     private CommandManager commandManager;
 
-	public int dayCount=0;
+	private int dayCount=0;
 	
 	private int killedID=0;
 	
-	public List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0));
+	// 타겟 필드
+	private int mafiaTargetId = -1;
+	private int doctorTargetId = -1;
+	private List<Integer> voteResult = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0));
 
+	
 	public void setKilledID(int killedID) {
 		this.killedID = killedID;
 	}
 	
+	//사회자 싱글톤
 	public static synchronized 사회자 getInstance() {
 		if(매니저 == null) {
 			매니저 = new 사회자();
@@ -53,7 +58,8 @@ public class 사회자 {
     public CommandManager getCommandManager() {
         return this.commandManager;
     }
-	
+    
+    ///Player 관련
 	public void addPlayer(Player p) {
 		players.add(p);
 		playersById.put(p.getId(), p);
@@ -71,8 +77,13 @@ public class 사회자 {
 	public List<Player> getPlayers() {
 		return players;
 	}
-
-	public void set_state(IState state) {
+	
+	public void addGhost(Player p) {
+	    ghosts.add(p);
+	}
+	
+	//State 관련
+	public void setState(IState state) {
 		this.gameState = state;
 		if(state!=null) {
 			System.out.println("=========="+this.gameState.getClass().getSimpleName()+"==========");
@@ -83,6 +94,26 @@ public class 사회자 {
 		// TODO Auto-generated method stub
 		return this.gameState;
 	}
+	
+	//투표 관련
+	public void addVote(int targetId) {
+	    if (targetId < 0 || targetId >= voteResult.size()) {
+	        System.out.println("[경고] 잘못된 투표 targetId: " + targetId);
+	        return;
+	    }
+	    voteResult.set(targetId, voteResult.get(targetId) + 1);
+	}
+	
+	// 투표 결과 읽기용 (조회)
+	public List<Integer> getVoteResult() {
+	    return voteResult;
+	}
+	
+	public void resetVotes() {
+	    for (int i = 0; i < voteResult.size(); i++) {
+	        voteResult.set(i, 0);
+	    }
+	}
 		
 	public Player createNewPlayer(String nickname) {
 		Player newPlayer = roleFactory.createPlayer(nickname, players.size());
@@ -91,7 +122,7 @@ public class 사회자 {
 	}
 	
 	//Start 받으면
-	public void init_game() {
+	public void initGame() {
 		System.out.println("=====마피아 게임 시작=====");
 
 		// dayCount가 2부터 시작해서 초기화 추가.
@@ -138,11 +169,9 @@ public class 사회자 {
 			commandManager.broadcastAll("System:"+"마피아와 시민의 수가 같아졌습니다. 마피아 승리!");
 			System.exit(0);
 		}
-		
-		
 	}
 
-	public Player player_ID(int id) {
+	public Player playerID(int id) {
 		for(Player p : players) {
 			if(p.getId() == id) {
 				return p;
@@ -151,30 +180,50 @@ public class 사회자 {
 		return null;
 	}
 	
-	public void getNight() {
-		
-	}
-	
 	public void start() {
-		init_game();
+		initGame();
 		
         while(true) {
-        	this.set_state(new 밤());
+        	this.setState(new 밤());
         	this.gameState.execute(매니저);
         	checkEnd();      	
         	
-        	this.set_state(new 토론());
+        	this.setState(new 토론());
         	this.gameState.execute(매니저);
         	//Server.execute(Player player);
         	
-        	this.set_state(new 투표());
+        	this.setState(new 투표());
         	this.gameState.execute(매니저);
         	checkEnd();
         	
-        	dayCount++;     	
+        	dayCount = getDayCount() + 1;     	
 
         }
 	}
+
+	public void registerMafiaKill(int targetId) {
+	    this.mafiaTargetId = targetId;
+	}
+
+	public void registerDoctorHeal(int targetId) {
+	    this.doctorTargetId = targetId;
+	}
+
+	public int getMafiaTargetId() { return mafiaTargetId; }
+	public int getDoctorTargetId() { return doctorTargetId; }
+
+	// 밤이 끝날 때 초기화
+	public void resetNightActions() {
+	    mafiaTargetId = -1;
+	    doctorTargetId = -1;
+	}
+
+	public int getDayCount() {
+		return dayCount;
+	}
+
+	
+
 
 }
 
