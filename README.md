@@ -47,13 +47,13 @@
 ### 1. Design Patterns
 이 프로젝트는 유지보수와 확장성을 위해 다양한 디자인 패턴을 적용했습니다.
 
-* **MVC Pattern**: Model, View, Client 구조 설계.
+* **MVC Pattern**: `Model`, `View`, `Client` 구조 설계.
 * **Singleton Pattern**: 게임의 전체 흐름을 관리하는 `사회자(Controller)` 객체를 유일하게 유지.
 * **State Pattern**: 게임의 상태(`밤`, `토론`, `투표`)를 객체화하여, 복잡한 `if-else` 없이 상태별 행동(`execute`)을 관리.
 * **Command Pattern**: 클라이언트의 요청(`Join`, `Start`, `Message`, `Mafia_message`, `Target`, `System`)을 캡슐화하여 `CommandManager`가 처리하도록 구조화.
 * **Observer Pattern**: Swing UI 이벤트 리스너 처리에 활용.
-* **Factory Method Pattern**: Playr model 생성을 RoleFactory에 위임.
-* **Strategy Pattern**: Playr Role에 따른 skill 구현.
+* **Factory Method Pattern**: `Playr model` 생성을 `RoleFactory`에 위임.
+* **Strategy Pattern**: `Playr Role`에 따른 `skill` 구현.
 
 ### 2. Class Diagram
 * **Server**
