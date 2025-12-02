@@ -110,7 +110,7 @@ src
 프로젝트 진행 과정과 팀원들의 소감을 담은 기술 블로그입니다.
 * 🔗 박남규
 * 🔗 신윤하: https://shinyunha.tistory.com/27 
-* 🔗 이현경
+* 🔗 이현경: [https://velog.io/@eluda/Java-마피아-게임-프로젝트-후기](https://velog.io/@eluda/Java-%EB%A7%88%ED%94%BC%EC%95%84-%EA%B2%8C%EC%9E%84-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
 * 🔗 장은서
 
 <br>
