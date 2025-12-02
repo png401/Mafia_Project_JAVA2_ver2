@@ -84,7 +84,8 @@
 
 **3. Model & Controller**
 
-<img src="https://github.com/user-attachments/assets/76d528a9-47b3-4b4e-b66e-a59eeb166abb" width="700" />
+<img width="1483" height="1645" alt="controller model" src="https://github.com/user-attachments/assets/a234550d-cc12-4164-a92a-ae139ead434d" />
+
 
 <br><br>
 
