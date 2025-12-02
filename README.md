@@ -53,13 +53,13 @@
 * **Observer Pattern**: Swing UI 이벤트 리스너 처리에 활용.
 
 ### 2. Class Diagram
-* **Singleton Pattern**
+* **Server**
 <img width="2086" height="881" alt="Server" src="https://github.com/user-attachments/assets/4e765098-064c-406a-919d-d64426663cd9" />
-* **Singleton Pattern**
+* **Client**
 <img width="1047" height="824" alt="Client" src="https://github.com/user-attachments/assets/6cb3d3f7-0fa8-45d9-b7fa-250d95121581" />
-* **Singleton Pattern**
+* **Model & Controller**
 <img width="1432" height="1435" alt="model controller" src="https://github.com/user-attachments/assets/76d528a9-47b3-4b4e-b66e-a59eeb166abb" />
-* **Singleton Pattern**
+* **View**
 <img width="1191" height="1174" alt="View" src="https://github.com/user-attachments/assets/fd768ac2-3b77-4e78-837b-3c7039498bd9" />
 
 
